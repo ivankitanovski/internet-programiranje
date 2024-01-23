@@ -12,28 +12,28 @@
 
 # Решение
 ```html
-<!DOCTYPE html>
+
+<!doctype html>
 <html>
-<head>
-</head>
-<body>
-<script type="text/javascript">
-var a = prompt("Vnesete vrednost za 'a'");
-var b = prompt("Vnesete vrednost za 'b'");
-a = parseInt(a); // konvertira vo string vo broj
-b = parseInt(b); // ima i parseFloat() za decimalni broevi
-if (!isNaN(a) && !isNaN(b)) { // proveruva dali se broevi
-	if(a>b) {
-	   document.write("Vrednosta na maksimumot e " + a);
-	}
-	else {
-	   document.write("Vrednosta na maksimumot e " + b);
-	}
-} else {
-	document.write("Ne ste vnesile cel broj!")
-}
-</script>
-</body>
+  <head> </head>
+  <body>
+    <script type="text/javascript">
+      let a = prompt("Vnesete vrednost za 'a'");
+      let b = prompt("Vnesete vrednost za 'b'");
+      a = parseInt(a); // ковенртира string во број
+      b = parseInt(b); // има и parseFloat() за децимални броеви
+      if (!isNaN(a) && !isNaN(b)) {
+        // проверува дали се броеви
+        if (a > b) {
+          document.write("Vrednosta na maksimumot e " + a);
+        } else {
+          document.write("Vrednosta na maksimumot e " + b);
+        }
+      } else {
+        document.write("Ne ste vnesile cel broj!");
+      }
+    </script>
+  </body>
 </html>
 
 ```
