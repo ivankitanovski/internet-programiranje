@@ -13,28 +13,28 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta lang="mk" charset="UTF-8">
     <script type="text/javascript">
       function generate() {
-        let broj = document.getElementById("broj").value;
+        let broj = document.getElementById("broj").value; // ги земаме вредностите од полињата
         let dolnaGranica = document.getElementById("dolna").value;
         let gornaGranica = document.getElementById("gorna").value;
         let divZaPechatenje = document.getElementById("broevi");
-        
+
         let randomArr = [];
-        
-        broj = parseInt(broj);
+
+        broj = parseInt(broj); // се парсираат влезовите
         dolnaGranica = parseInt(dolnaGranica);
         gornaGranica = parseInt(gornaGranica);
-        
+
         for (let i = 0; i < broj; i++) {
-          randomArr.push(Math.floor(Math.random() * (gornaGranica + 1 - dolnaGranica) + dolnaGranica));
+          randomArr.push(Math.floor(Math.random() * (gornaGranica + 1 - dolnaGranica) + dolnaGranica)); // се додаваат елементи на низата со функцијата push();
         }
-        
-        randomArr = randomArr.sort((a, b) => a - b);
-        
+
+        randomArr = randomArr.sort((a, b) => a - b); // Се става компаратор израз во функцијата за се сортира според integer вредноста, а не според ASCII
+
         divZaPechatenje.innerHTML = "Рандом броевите кои се генерираа се:"
-        
+
         for (let i = 0; i < broj; i++) {
           divZaPechatenje.innerHTML += randomArr[i] + " ";
         }
@@ -55,5 +55,6 @@
     <div id="broevi">Рандом броевите кои се генерираа се:</div>
   </body>
 </html>
+
 
 ```
