@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Зад. 7</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+
+    <h2>Кликнете копче!</h2>
+    <input onkeydown="detectTheKey(event)" placeholder="Кликни тука!">
+    <script>
+
+        function detectTheKey(event)
+        {
+           let pressedKey=event.key;
+           alert("Key Pressed: "+pressedKey);
+        }
+    </script>
+</body>
