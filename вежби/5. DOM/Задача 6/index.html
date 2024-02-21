@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Зад. 6</title>
+    <style>
+        label{
+            display: block;
+            vertical-align: top;
+            margin:10px;
+            margin-left: 0px;
+        }
+    </style>
+</head>
+<body>
+<h2>TODO List:</h2>
+<div>
+    <label>Take the dog for a walk</label><input type="checkbox" onclick="doneTask(this)">
+</div>
+<div>
+    <label>Go to gym</label><input type="checkbox" onclick="doneTask(this)">
+</div>
+<div>
+    <label>Make yourself dinner!</label><input type="checkbox" onclick="doneTask(this)">
+</div>
+<div>
+    <label>Read 30 pages before going to sleep</label><input type="checkbox" onclick="doneTask(this)">
+</div>
+<div>
+    <label>Drink 2 liters of water</label><input type="checkbox" onclick="doneTask(this)">
+</div>
+<script>
+    function doneTask(element)
+    {
+        // го зимаме елементот
+        let task=element.previousElementSibling;
+        // ставаме зелена боја и прашуваме колку време било потребно
+        task.parentNode.style.backgroundColor='green';
+        let time=prompt("How much time were you needed, in Hours?");
+        // ги поставуваме саатите.
+        let p=document.createElement('p');
+        p.innerHTML="Time needed: " + time +" hours";
+        element.parentNode.append(p);
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Зад. 10</title>
+    <style>
+    label{
+        margin-right: 10px;
+    }
+    button{
+        margin-top: 20px;
+    }
+    </style>
+</head>
+<body>
+   <div>
+       <label>Внеси 7 броја, oдделени со запирка(без празно место): </label><input type="text" id="broevi">
+   </div>
+    <button onclick="generate()">Генерирај</button>
+   <div id="tocniBrojcinja">
+
+   </div>
+    <script>
+        //бројач за тоа колку броеви се погодени!
+        var counter=0;
+        function generate()
+        {
+            //проверка дали корисникот внел броеви!
+            let vnes=document.getElementById('broevi');
+            if(vnes.value==='')
+            {
+                alert("Мораш првен да внесеш броеви!!!");
+                return;
+            }
+            //проверка дали се внесени 7 броеви!
+            let broeviVnes=vnes.value.split(",");
+            if(broeviVnes.length<7)
+            {
+                alert("Мора да внесеш 7 броеви за да играш!")
+                return;
+            }
+            //креираме p елемент се со цел да ги ставиме генерираните бројчиња
+            let p=document.createElement("p");
+            let text=document.createTextNode("");
+            //генерираме 7  броеви
+            for(let i=0;i<7;i++)
+            {
+                text.appendData(Math.floor(Math.random()*42).toString());
+                // за да немаме на последниот број запирка
+                if(i===6)
+                {
+                    continue;
+                }
+                text.appendData(",");
+            }
+            // ги лепиме
+            p.append(text);
+            document.getElementById('tocniBrojcinja').appendChild(p);
+            console.log(text);
+            // проверка колку од внесените елементи се исти со генерираните
+            let broeviGenerirani=p.innerHTML.split(",");
+            let flag=0;
+            for(let i=0;i<broeviVnes.length;i++)
+            {
+                for(let j=0;j<broeviGenerirani.length;j++)
+                {
+                    if(broeviVnes[i]===broeviGenerirani[j]) {
+                        counter++;
+                    }
+                }
+            }
+            //проверка колку броеви се погодени
+            if(counter===0)
+            {
+                alert("Не погодивте ниту еден број, обидете се повторно(CTRL+R)!");
+                p.innerHTML="";
+                document.getElementById("tocniBrojcinja").removeChild("p");
+            }else{
+                alert("Погодивте "+counter+" броеви. Честитки!!")
+            }
+
+
+
+
+        }
+
+    </script>
+</body>

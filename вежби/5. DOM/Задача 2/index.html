@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Задача 2</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <img src="img/tazno.png" alt="tazno" onmouseover="changeHappy()" onmouseout="changeSad()">
+    <script>
+        //Функција за да се насмее глувчето, кога го галиш
+        function changeHappy()
+        {
+           document.getElementsByTagName('img')[0].src='img/srekjno.png'
+        }
+        //Функција за да се натажи коа нема да го галиш(коа кје го тргнеш маусот)
+        function changeSad()
+        {
+            document.getElementsByTagName('img')[0].src='img/tazno.png'
+        }
+    </script>
+</body>

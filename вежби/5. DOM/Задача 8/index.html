@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Зад. 8</title>
+    <style>
+        label{
+            width: 300px;
+            margin-bottom: 10px;
+        }
+        input{
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <label>Боја: </label><input type="text" placeholder="Внеси боја!(одделени со запирка)" id="color">
+</div>
+<div>
+    <label>Ширина и Висина: </label><input type="text" placeholder="Внеси ширина и висина!" id="dimenzii">
+</div>
+<button onclick="dodadi()">Креирај ДИВ-ови</button>
+<div id="dodavaj"></div>
+<script>
+    //функција за превземање на инфромациите и додавање на дивовите
+    function dodadi()
+    {
+        let boja=document.getElementById("color").value;
+        let boi=boja.split(",");
+        let dimenzii=document.getElementById("dimenzii").value;
+        for(let i=0;i<boi.length;i++)
+        {
+            napraviDiv(boi[i], dimenzii)
+        }
+
+    }
+    //фунцкија за креиранје на дивовите, бидејки евентЛистенер не се понаша добро во фор циклус
+    function napraviDiv(boja, dimenzii)
+    {
+        let newDiv=document.createElement("div");
+        newDiv.style.backgroundColor=boja;
+        newDiv.style.width=dimenzii+"px";
+        newDiv.style.display="inline";
+        newDiv.style.marginRight="10px";
+        newDiv.style.height=dimenzii+"px";
+        newDiv.textContent = boja;
+        //додавање на опции онмоусеовер и онмоусеоут се со цел да се менува динамично позадината!
+        newDiv.addEventListener("mouseover", function(){
+            changeBackground(boja);
+        });
+        newDiv.addEventListener("mouseout", function(){
+            changeBackground("white");
+        });
+        document.getElementById("dodavaj").appendChild(newDiv);
+    }
+    function changeBackground(boja)
+    {
+        document.body.style.backgroundColor=boja;
+    }
+</script>
+</body>
+</html>
