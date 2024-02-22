@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      label {
+        margin: 10px;
+      }
+
+      button {
+        margin: 10px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      td {
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+    <script>
+      let klienti = [];
+      let termini = [];
+
+      function zakazhi() {
+        let ime = document.getElementById("ime").value;
+        let termin = document.getElementById("kalendar").value;
+
+        let tabela = document.getElementById("tabelaZakazhani");
+
+        if (termini.findIndex((x) => x === termin) !== -1) {
+          alert("Terminot e vekje zafaten!");
+          return;
+        }
+        if (klienti.findIndex((x) => x === termin) !== -1) {
+          alert("Klientot ima zakazhano termin!");
+          return;
+        }
+
+        klienti.push(ime);
+        termini.push(termin);
+
+        tabela.innerHTML +=
+          "<tr><td>" +
+          ime +
+          "</td>\n" +
+          "<td>" +
+          termin.slice(0, 10) +
+          "</td>\n" +
+          "<td>" +
+          termin.slice(11) +
+          "</td>\n" +
+          "<td><button onclick='finish(this)'>Завршен</button></td>\n" +
+          "<td><button onclick='remove(this)'>Избриши</button></td></tr>\n";
+      }
+
+      function finish(ref, ime) {
+        ref.parentNode.parentNode.style.background = "green"; // преку style.background можеме да ги менуваме својствата на елементот
+        let indexToRem = klienti.findIndex((x) => x === ime);
+        klienti.splice(indexToRem, 1); // го бришеме клиентот од листата за да овозможиме повторно да закаже термин
+        termini.splice(indexToRem, 1);
+      }
+
+      function remove(ref, ime) {
+        let row = ref.parentNode.parentNode; // пристапуваме до родителот на копчето, што е td, па потоа до родителот на td, што е tr
+        row.parentNode.removeChild(row); // родителот на tr e самата табела, па со пристап до табелата, можеме да бришеме нејзини деца, во овој случај самиот ред
+        let indexToRem = klienti.findIndex((x) => x === ime);
+        klienti.splice(indexToRem, 1); // го бришеме клиентот од листата за да овозможиме повторно да закаже термин
+        termini.splice(indexToRem, 1);
+      }
+    </script>
+  </head>
+  <body>
+    <div><label for="ime">Име</label><input type="text" id="ime" /></div>
+    <div>
+      <label for="kalendar">Термин:</label>
+      <input type="datetime-local" id="kalendar" />
+    </div>
+    <div>
+      <button onclick="zakazhi();">Закажи термин</button>
+    </div>
+    <table id="tabelaZakazhani">
+      <thead>
+        <th>Име</th>
+        <th>Ден</th>
+        <th>Време</th>
+        <th>Завршено</th>
+        <th>Избриши</th>
+      </thead>
+    </table>
+  </body>
+</html>

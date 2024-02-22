@@ -1,0 +1,189 @@
+# Задача 9
+
+**Оваа задача е дополнување на претходната!!**
+
+Да се додаде копче преку кое ќе се генерира извештај за продажбата на лековите.
+При креирањето на извештајот потребно е да се користат методите за обработка на низи.
+
+Пример за извештај:
+
+![image](img/screen1.png)
+
+# Решение
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      label {
+        margin: 10px;
+      }
+
+      fieldset {
+        display: inline;
+      }
+
+      button {
+        margin: 10px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      td {
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+
+    <script>
+      let lekovi = [];
+      let ceni = [];
+      let kolicini = [];
+      let antibiotikBools = [];
+
+      function dodadiLek() {
+        let tabela = document.getElementById("tabelalek"); // ви вчитуваме полињата
+        let ime = document.getElementById("ime").value;
+        let kolicina = parseInt(document.getElementById("kolicina").value);
+        let cena = parseInt(document.getElementById("cena").value);
+
+        let antibiotik = document.getElementsByName("antibiotik");
+
+        if (!ime || !kolicina || !cena) {
+          // правиме проверка за полињата
+          alert("Ne se vneseni site polinja!");
+          return;
+        }
+
+        if (antibiotik[0].checked) {
+          // проверуваме дали е антибиотик
+          antibiotik = true;
+        } else {
+          antibiotik = false;
+        }
+
+        let id = lekovi.findIndex((x) => x === ime); // доколку го има лекот во листата на лекови, ќе се врати неговиот индекс, но доколку го нема, id ќе биде -1
+
+        if (id !== -1) {
+          kolicini[id] += kolicina;
+        } else {
+          lekovi.push(ime);
+          kolicini.push(kolicina);
+          ceni.push(cena);
+          antibiotikBools.push(antibiotik);
+        }
+
+        tabela.innerHTML =
+          "<tr>\n" +
+          "<th>Име</th>\n" +
+          "<th>Количина</th>\n" +
+          "<th>Антибиотик?</th>\n" +
+          "<th>Цена</th>\n" +
+          "<th>Вкупна цена</th>\n" +
+          "<th>Заработка</th>\n" +
+          "<th>Вкупна заработка</th>\n" +
+          "</tr>";
+
+        for (let i = 0; i < lekovi.length; i++) {
+          // за ажурирање на податоците од почеток се креира целата табела
+          let zarabotka = antibiotikBools[i] ? ceni[i] * 0.2 : ceni[i] * 0.15; // со тернарен оператор ? одредуваме дали цената ќе се множи со 0.2 или 0.15
+          tabela.innerHTML +=
+            "<tr>\n" +
+            "<td>" +
+            lekovi[i] +
+            "</td>\n" +
+            "<td>" +
+            kolicini[i] +
+            "</td>\n" +
+            "<td>" +
+            antibiotikBools[i] +
+            "</td>\n" +
+            "<td>" +
+            ceni[i] +
+            " </td>\n" +
+            "<td>" +
+            kolicini[i] * ceni[i] +
+            "</td>\n" +
+            "<td>" +
+            zarabotka.toPrecision(5) +
+            "</td>\n" +
+            "<td>" +
+            (zarabotka * kolicini[i]).toPrecision(5) +
+            " </td>\n" +
+            "</tr>";
+        }
+      }
+
+      // Додадена функција за генерирање на извештај
+      function generirajIzveshtaj() {
+        let zarabotki = [];
+        let vkupniCeni = [];
+
+        for (let i = 0; i < lekovi.length; i++) {
+          // ги пресметуваме заработките и прометот од продажбата на секој лек
+          let zarabotka =
+            (antibiotikBools[i] ? ceni[i] * 0.2 : ceni[i] * 0.15) * kolicini[i];
+          let vkupnaCena = ceni[i] * kolicini[i];
+          zarabotki.push(zarabotka);
+          vkupniCeni.push(vkupnaCena);
+        }
+
+        let izveshtaj = document.getElementById("izveshtaj");
+        izveshtaj.innerHTML += "Број на уникатни лекови: " + lekovi.length;
+        izveshtaj.innerHTML +=
+          "<br>Број на продадени антибиотици: " +
+          antibiotikBools.filter((x) => x === true).length; // ги филтрираме за да добиеме број на антибиотици
+        izveshtaj.innerHTML +=
+          "<br>Број на останати лекови: " +
+          antibiotikBools.filter((x) => x === false).length;
+        izveshtaj.innerHTML +=
+          "<br>Број на продадени кутии: " +
+          kolicini.reduce((sum, lek) => sum + lek, 0);
+        izveshtaj.innerHTML +=
+          "<br>Просечна цена на лек: " +
+          ceni.reduce((sum, lek) => sum + lek, 0) / ceni.length; // делиме со бројот на елементи за да најдеме која е просечната цена
+        izveshtaj.innerHTML +=
+          "<br>Промет: " + vkupniCeni.reduce((sum, lek) => sum + lek, 0);
+        izveshtaj.innerHTML +=
+          "<br>Вкупна заработка: " +
+          zarabotki.reduce((sum, lek) => sum + lek, 0);
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <label for="ime">Име на лекот</label><input type="text" id="ime" />
+    </div>
+    <div>
+      <label for="kolicina">Продадена количина</label
+      ><input type="text" id="kolicina" />
+    </div>
+    <div><label for="cena">Цена</label><input type="text" id="cena" /></div>
+    <fieldset>
+      <legend>Антибиотик?</legend>
+      <div>
+        <input type="radio" id="da" name="antibiotik" value="da" />
+        <label for="da">Да</label>
+
+        <input type="radio" id="ne" name="antibiotik" value="ne" />
+        <label for="da">Не</label>
+      </div>
+    </fieldset>
+    <div>
+      <button onclick="dodadiLek();">Додади</button>
+    </div>
+
+    <table id="tabelalek"></table>
+
+    <button onclick="generirajIzveshtaj();">Генерирај извештај</button>
+    <div id="izveshtaj"></div>
+  </body>
+</html>
+```

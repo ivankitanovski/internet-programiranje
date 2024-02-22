@@ -1,21 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <script>
-      function mapToCubic() {
-        let broevi = document.getElementById("broevi").value; // ги земаме вредностите од полињата
-        let addDiv = document.getElementById("addHere");
-        broevi = broevi.split(",");
-
-        broevi = broevi.map((x) => parseInt(x)).map((x) => Math.pow(x, 3)); // прво се мапираат во integer, а потоа се мапираат во кубниот производ
-        addDiv.innerHTML = broevi;
-      }
+      let broevi = prompt("Внеси ги броевите:");
+      broevi = broevi.split(";");
+      let sum = broevi
+        .map((x) => parseInt(x))
+        .reduce((sum, num) => sum + num ** 2, 0); // num ** 2 е еквивалентно со Math.pow(num, 2), 0 е иницијалната вредност на акумулаторот.
+      console.log(sum);
     </script>
   </head>
-  <body>
-    <div><label for="broevi"></label><input type="text" id="broevi" /></div>
-    <button onclick="mapToCubic()">Мапирај</button>
-    <div id="addHere"></div>
-  </body>
+  <body></body>
 </html>
