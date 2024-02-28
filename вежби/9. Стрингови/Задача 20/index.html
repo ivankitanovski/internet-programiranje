@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      var urlString = prompt("Внесете URL:");
+
+      if (
+        (urlString.startsWith("http://") || urlString.startsWith("https://")) &&
+        (urlString.endsWith(".com") ||
+          urlString.endsWith(".mk") ||
+          urlString.endsWith(".gov") ||
+          urlString.endsWith(".edu") ||
+          urlString.endsWith(".net"))
+      ) {
+        alert("Внесениот URL е валиден.");
+      } else {
+        alert("Внесениот URL НЕ е валиден.");
+      }
+    </script>
+  </body>
+</html>
