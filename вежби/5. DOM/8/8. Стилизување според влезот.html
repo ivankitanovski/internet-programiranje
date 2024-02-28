@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стилизување според влезот</title>
+    <style>
+        .block {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            display: inline-block;
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+<select id="numberDropdown">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+</select>
+
+<select id="colorDropdown">
+    <option value="red">Црвена</option>
+    <option value="blue">Сина</option>
+    <option value="green">Зелена</option>
+    <option value="yellow">Жолта</option>
+    <option value="orange">Портокалова</option>
+    <option value="purple">Виолетова</option>
+    <option value="pink">Розова</option>
+    <option value="brown">Кафеава</option>
+    <option value="gray">Сиво</option>
+</select>
+
+<button onclick="colorSelectedBlock()">Обои го блокот</button>
+
+<div id="blocksContainer">
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+</div>
+
+<script>
+    function colorSelectedBlock() {
+        var num = parseInt(document.getElementById("numberDropdown").value);
+        var color = document.getElementById("colorDropdown").value;
+        var blocks = document.getElementsByClassName("block");
+
+        blocks[num - 1].style.backgroundColor = color;
+    }
+</script>
+
+</body>
+</html>

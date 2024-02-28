@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ДОМ Дрво и пишување</title>
+</head>
+<style>
+    body > div{
+        display: grid;
+        grid-template-columns: 250px 250px 250px;
+        grid-gap: 10px;
+        margin: 10px;
+    }
+    div > div{
+        border: 1px solid black;
+        padding: 10px;
+    }
+</style>
+<body>
+    <div>
+        <div>
+            <p>Име: <span>18</span></p>
+            <p>Возраст: <span>Виктор</span></p>
+            <p>Емаил: <span>viktor@gmail.com</span></p>
+        </div>
+        <div>
+            <p>Име: <span>aleksandar@outlook.com</span></p>
+            <p>Возраст: <span>19</span></p>
+            <p>Емаил: <span>Александар</span></p>
+        </div>
+        <div>
+            <p>Име: <span>ana@gmail.com</span></p>
+            <p>Возраст: <span>Ана</span></p>
+            <p>Емаил: <span>20</span></p>
+        </div>
+
+        <div>
+            <p>Име: <span>21</span></p>
+            <p>Возраст: <span>marija@gmail.com</span></p>
+            <p>Емаил: <span>Марија</span></p>
+        </div>
+        <div>
+            <p>Име: <span>22</span></p>
+            <p>Возраст: <span>emili@gmail.com</span></p>
+            <p>Емаил: <span>Емили</span></p>
+        </div>
+        <div>
+            <p>Име: <span>Кристијан</span></p>
+            <p>Возраст: <span>kristijan@hotmail.com</span></p>
+            <p>Емаил: <span>23</span></p>
+        </div>
+    </div>
+    <button onclick="fix()">Поправи</button>
+</body>
+<script>
+    function fix(){
+        let div = document.getElementsByTagName("div")[0];
+        let cards = div.getElementsByTagName("div");
+
+         /*
+           Наместо "for" циклусот, ќе користиме "forEach".
+           За тоа, треба да ја претвориме листата во низа.
+         */
+
+        let cardsArray = Array.from(cards);
+
+        cardsArray.forEach(function (card) {
+            let paragraphs = card.getElementsByTagName("p");
+            let paragraphsArray = Array.from(paragraphs);
+            let contents = [];
+
+            paragraphsArray.forEach(function (paragraph) {
+                let text = paragraph.getElementsByTagName("span")[0].innerHTML;
+                contents.push(text);
+            });
+
+            contents.forEach(function (content) {
+                let age = parseInt(content);
+                if(!isNaN(age)) {
+                    let span = paragraphsArray.at(1).getElementsByTagName("span")[0];
+                    span.innerHTML = age;
+                }
+                else if(content.includes("@")){
+                    let span = paragraphsArray.at(2).getElementsByTagName("span")[0];
+                    span.innerHTML = content;
+                }
+                else{
+                    let span = paragraphsArray.at(0).getElementsByTagName("span")[0];
+                    span.innerHTML = content;
+                }
+            });
+        });
+    }
+</script>
+</html>

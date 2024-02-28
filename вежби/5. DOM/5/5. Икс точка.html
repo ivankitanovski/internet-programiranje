@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Икс точка</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 2px;
+    }
+    .cell {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Tic Tac Toe</h1>
+
+<div id="board"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const board = document.getElementById('board');
+    const cells = [];
+
+    // Create the cells for the board
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.row = i;
+        cell.dataset.col = j;
+        cell.addEventListener('click', cellClickHandler);
+        board.appendChild(cell);
+        cells.push(cell);
+      }
+    }
+
+    let currentPlayer = 'X';
+    let moves = 0;
+    let gameOver = false;
+
+    function cellClickHandler() {
+      if (gameOver || this.textContent !== '') return;
+
+      const row = parseInt(this.dataset.row);
+      const col = parseInt(this.dataset.col);
+      this.textContent = currentPlayer;
+      moves++;
+
+      if (checkWinner(row, col)) {
+        alert(`Player ${currentPlayer} wins!`);
+        gameOver = true;
+      } if (moves === 9) {
+        alert('It\'s a draw!');
+        gameOver = true;
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      }
+    }
+
+    function checkWinner(row, col) {
+      // Check row
+      if (cells[row * 3].textContent === currentPlayer &&
+              cells[row * 3 + 1].textContent === currentPlayer &&
+              cells[row * 3 + 2].textContent === currentPlayer) {
+        return true;
+      }
+      // Check column
+      if (cells[col].textContent === currentPlayer &&
+              cells[col + 3].textContent === currentPlayer &&
+              cells[col + 6].textContent === currentPlayer) {
+        return true;
+      }
+      // Check diagonals
+      if ((cells[0].textContent === currentPlayer &&
+                      cells[4].textContent === currentPlayer &&
+                      cells[8].textContent === currentPlayer) ||
+              (cells[2].textContent === currentPlayer &&
+                      cells[4].textContent === currentPlayer &&
+                      cells[6].textContent === currentPlayer)) {
+        return true;
+      }
+      return false;
+    }
+  });
+</script>
+
+</body>
+</html>
