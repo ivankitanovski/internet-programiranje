@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Задача 4</title>
+  <style>
+      input{
+          width: 210px;
+          height: 20px;
+          margin: 2px;
+      }
+  </style>
+</head>
+<body>
+
+<span>Е-маил адреса: </span><input type="text" id="email"><br>
+<button onclick="test()">Тест</button><br>
+<b><span>Излез: </span><span id="izlez"></span></b>
+
+<script>
+
+    let test = () => {
+        let emailAddr = document.getElementById("email").value;
+        let izlezElem = document.getElementById("izlez");
+
+        let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if(regex.test(emailAddr)) izlezElem.innerText = "Валидна е-маил адреса";
+        else izlezElem.innerText = "Невалидна е-маил адреса";
+        // [^\s@]+ - првите карактери се различни од @ или празно место
+        // @ - после нив следи @
+        // [^\s@]+ - карактерите после @ се различни од @ или празно место.
+        // \. - после карактерите следи точка.
+        // [^\s@]+ - после точката следат карактери што се различни од @ или празно место и со $ се означува крајот
+
+    }
+</script>
+</body>
+</html>
