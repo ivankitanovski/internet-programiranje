@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Average</title>
+</head>
+<body>
+<script>
+    let n = prompt("Големина на низа: ")
+    let arr = [n] // се креира низа со должина n
+    for (let i = 0; i < n; i++) {
+        arr[i] = parseInt(prompt(i + ": ")) // се внесуваат елементите од низата
+    }
+    average(arr, n) // повик до функцијата која ќе го пресмета резултатот
+
+    function average(arr, n) {
+        let sum = 0
+        for (let i = 0; i < n; i++) {
+            sum += arr[i] // се собираат елементите од низата во една сума
+        }
+        alert(sum / n) // се прикажува резултатот
+    }
+</script>
+</body>
+</html>
