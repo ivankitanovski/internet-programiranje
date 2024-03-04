@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Факториел со рекурзија</title>
+</head>
+<body>
+<script>
+    let n = prompt("Внесете број")
+    n = parseInt(n) // внесот се парсира во број
+    if (isNaN(n)) alert("Инвалиден внес. Внесете цел број.")
+    else {
+        alert(factorial(n)) // повик на функцијата за резултат
+    }
+
+    function factorial(n) {
+        if (n === 1) return 1 // ако n == 1 тогаш се престанува рекурзијата
+        return n * factorial(n - 1) // n се множи рекурзивно со секој број кој е за едем помал од претходниот
+    }
+</script>
+</body>
+</html>
