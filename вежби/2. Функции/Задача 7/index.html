@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Скратување на стринг</title>
+</head>
+<body>
+<script>
+    let str = prompt("Внесете стринг")
+    let length = parseInt(prompt("Внесете должина за кратење")) // се парсира должината
+    if (isNaN(length)) alert("Невалидна должина. Внесете цел број") // ако должината не е цел бр. се престанува програмата
+    else alert(truncateString(str, length)) // се печати резултатот од функцијата за решение
+
+    function truncateString(str, length) {
+        if (str.length <= length) return str // ако должината на стрингот е помала/еднаква на дадената должина се враќа самиот стринг
+        else return str.substring(0, length) + '...' // во спротивно се крати стрингот до соодветната должина и се додаваат три точки
+    }
+</script>
+</body>
+</html>
