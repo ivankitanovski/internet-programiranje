@@ -1,0 +1,83 @@
+# Интернет програмирање
+
+# Настани
+
+# Задача 6
+
+Со помош на Javascript направете 2 листи, да може со помош на drag and drop да се префрлуват елементи од првата во втората листа.
+
+![IMAGE](images/1.png) ![IMAGE](images/2.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #list1,
+      #list2 {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 10px;
+        border: 1px solid #000;
+        width: 100px;
+      }
+
+      #list1 li,
+      #list2 li {
+        margin: 5px;
+        padding: 5px;
+        width: 90px;
+      }
+
+      body {
+        display: flex;
+        justify-content: space-around;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- се поставува draggable и ondragstart event на li елементите за да може да манипулираме со истите -->
+    <ul id="list1">
+      <li draggable="true" ondragstart="drag(event)">Item 1</li>
+      <li draggable="true" ondragstart="drag(event)">Item 2</li>
+      <li draggable="true" ondragstart="drag(event)">Item 3</li>
+      <li draggable="true" ondragstart="drag(event)">Item 4</li>
+      <li draggable="true" ondragstart="drag(event)">Item 5</li>
+    </ul>
+
+    <!-- се поставува ondrop и ondragover event на ul елементот за да може да да ги префрлуваме елементите -->
+    <ul id="list2" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <li>Drop here</li>
+    </ul>
+
+    <script>
+      function drag(ev) {
+        // се поставува dataTransfer објектот на event објектот
+        ev.dataTransfer.setData("text", ev.target.innerText);
+      }
+
+      // се спречува default-то однесување на event-от
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+
+        // се земаат податоците од dataTransfer објектот
+        var data = ev.dataTransfer.getData("text");
+
+        // се креира нов li елемент и се додава на ul елементот
+        var node = document.createElement("li");
+        var textnode = document.createTextNode(data);
+        node.appendChild(textnode);
+        document.getElementById("list2").appendChild(node);
+      }
+    </script>
+  </body>
+</html>
+```
