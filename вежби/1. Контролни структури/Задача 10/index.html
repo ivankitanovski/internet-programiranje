@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    let number = prompt("Enter an integer number:");
+    number = parseInt(number);
+    let result = "";
+    for (let i = 0; i <= number; i++) {
+
+        // Проверка за непарно растојание
+        if (Math.abs(number - i) % 2 === 1) {
+            result += i + " ";
+        }
+    }
+
+    // Приказ на резултатот
+    alert(result);
+</script>
+</html>

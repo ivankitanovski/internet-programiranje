@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    let totalItems = prompt("Enter the total number of items:");
+    totalItems = parseInt(totalItems);
+    let totalAmount = 0;
+
+    // Внесување на износите за секоја ставка
+    for (let i = 0; i < totalItems; i++) {
+        let amount = prompt("Enter the item amount:");
+        amount = parseFloat(amount);
+        totalAmount += amount;
+    }
+
+    // Пресметка на провизијата
+    let commission = totalAmount * 0.0114;
+    commission = Math.round(commission);
+
+    // Обезбедување минимална провизија од 3 денари
+    if (commission < 3) {
+        commission = 3;
+    }
+
+    // Обезбедување максимална провизија од 300 денари
+    if (commission > 300) {
+        commission = 300;
+    }
+    console.log(commission);
+</script>
+</html>
