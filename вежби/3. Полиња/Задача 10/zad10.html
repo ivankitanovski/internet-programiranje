@@ -97,11 +97,11 @@
       }
 
       function showUsers() {
-        users.sort((a, b) => a.name.localeCompare(b.name)); //сортиеање на корисниците алфабетски според името
+        users.sort((a, b) => a.name.localeCompare(b.name)); //сортирање на корисниците според азбучен редослед според името
         let res = document.getElementById("result");
         res.innerHTML = ""; //го бребришуваме претходниот приказ на корисниците
-        users.map((user) => {
-          //секој корисник го мапираме како картичка
+        users.forEach((user) => {
+          //секој корисник го претставуваме како картичка
           let curr = document.createElement("div"); //картичката ја креираме како div
           curr.setAttribute("class", "user-card"); //додаваме класа "user-card" за да можеме да поставиме ист css на сите картички
           curr.innerHTML =
