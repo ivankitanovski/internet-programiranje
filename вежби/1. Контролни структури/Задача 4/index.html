@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Even Numbers</title>
+</head>
+<body>
+<script>
+  var n = prompt("Внеси еден цел број:")
+  if (isNaN(n)) { //Проверува дали дадената променлива НЕ Е број
+    alert("Потребно е да внесете цел број.")
+  } else {
+    for (var i = 0; i <= n; i++) {
+      if (i % 2 === 0) {
+        console.log(i)
+      }
+    }
+  }
+
+</script>
+</body>
+</html>

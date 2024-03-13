@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factorial Calculator</title>
+</head>
+<body>
+<script>
+    var a = prompt("Внеси број:")
+    var fact = 1
+    if (isNaN(a)) {
+        alert("Потребно е да внесете број!")
+    } else {
+        var tmp = parseInt(a)
+        while (tmp > 0) {
+            fact *= tmp
+            tmp--
+        }
+        alert("Факториел на бројот " + a + " e " + fact)
+    }
+</script>
+</body>
+</html>
