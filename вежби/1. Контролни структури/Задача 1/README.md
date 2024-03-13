@@ -1,39 +1,25 @@
-# Задача
+# Задача 1
 
-Да се напише програма со која ќе се отпечати максимумот од два броја чии вредности се читаат од тастатура.
+Да се напише програма во која преку prompt ќе се внесе температура
+во целзиусови степени, а потоа преку alert ќе се прикаже температурата
+во фаренхајтови. \
+Формулата за претворање е: F = (9 / 5 * C) + 32
 
-![image](img/screen1.png)
-
-![image](img/screen2.png)
-
-![image](img/screen3.png)
-
-
-
-# Решение
-```html
-
-<!doctype html>
-<html>
-  <head> </head>
-  <body>
-    <script type="text/javascript">
-      let a = prompt("Vnesete vrednost za 'a'");
-      let b = prompt("Vnesete vrednost za 'b'");
-      a = parseInt(a); // ковенртира string во број
-      b = parseInt(b); // има и parseFloat() за децимални броеви
-      if (!isNaN(a) && !isNaN(b)) {
-        // проверува дали се броеви
-        if (a > b) {
-          document.write("Vrednosta na maksimumot e " + a);
-        } else {
-          document.write("Vrednosta na maksimumot e " + b);
-        }
-      } else {
-        document.write("Ne ste vnesile cel broj!");
-      }
-    </script>
-  </body>
+~~~
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+</head>
+<body>
+<script>
+    //Преку prompt ја внесуваме температурата
+    var temp = prompt("Внеси температура во целзиусови степени:")
+    temp = parseInt(temp) //Ја парсираме температурата од String во Integer
+    var fahrenheit = (9 / 5 * temp) + 32
+    alert("Температурата во фаренхајтови е: " + fahrenheit)
+</script>
+</body>
 </html>
-
-```
+~~~

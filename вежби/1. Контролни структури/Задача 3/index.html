@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+</head>
+<body>
+<script>
+  var height = parseFloat(prompt("Внеси висина во m:")) //Парсирање на децимални броеви
+  var weight = parseInt(prompt("Внеси тежина во kg:"))
+  var bmi = weight / (height * height)
+  bmi = parseFloat(bmi)
+  if (bmi >= 18.5 && bmi <= 24.9) {
+    alert(bmi + " - Normal weight")
+  } else if (bmi >= 25.0 && bmi <= 29.9) {
+    alert(bmi + " - Overweight")
+  } else if (bmi >= 30.0) {
+    alert(bmi + " - Obese")
+  }
+</script>
+</body>
+</html>

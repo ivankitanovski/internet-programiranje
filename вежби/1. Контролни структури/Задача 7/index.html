@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfect Number</title>
+</head>
+<body>
+<script>
+  var a = parseInt(prompt("Внеси број:"))
+  var sum = 0
+  for (var i = 1; i < a; i++) {
+    if (a % i === 0) {
+      sum += i //Ако најдеме делител на бројот го додаваме во збирот
+    }
+  }
+  if (a === sum) { //Проверуваме дали збирот на делители е еднаков на внесениот број
+    alert("Бројот е совршен")
+  } else {
+    alert("Бројот не е совршен")
+  }
+</script>
+</body>
+</html>
