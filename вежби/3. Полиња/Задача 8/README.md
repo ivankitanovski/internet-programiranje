@@ -51,7 +51,7 @@ _**Да се оневозможи закажување на повеќе кли�
           alert("Terminot e vekje zafaten!");
           return;
         }
-        if (klienti.findIndex((x) => x === termin) !== -1) {
+        if (klienti.findIndex((x) => x === ime) !== -1) {
           alert("Klientot ima zakazhano termin!");
           return;
         }
