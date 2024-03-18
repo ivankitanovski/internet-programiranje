@@ -131,7 +131,7 @@
           antibiotikBools.filter((x) => x === false).length;
         izveshtaj.innerHTML +=
           "<br>Број на продадени кутии: " +
-          kolicini.reduce((sum, lek) => sum + lek, 0);
+          kolicini.reduce((sum, lek) => sum + lek, 0); // се користи reduce со акумулатор sum за да се собери бројот на продадени кутии
         izveshtaj.innerHTML +=
           "<br>Просечна цена на лек: " +
           ceni.reduce((sum, lek) => sum + lek, 0) / ceni.length; // делиме со бројот на елементи за да најдеме која е просечната цена
