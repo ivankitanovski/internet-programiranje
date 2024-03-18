@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Превртена низа</title>
+</head>
+<body>
+<script>
+    let n = prompt("Големина на низата")
+    if (isNaN(n)) alert("Внесете цел број за големина на низата.")
+    let arr = [n] // креирање на низа со големина n
+    for (let i = 0; i < n; i++) {
+        arr[i] = prompt(i) // внесување на i-тиот елемент
+    }
+    reverse(arr) // повик до функцијата која ќе ја преврти низата
+
+    function reverse(arr) {
+        alert(arr.reverse()) // се печати низата во обратен редослед
+    }
+</script>
+</body>
+</html>
