@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <title>Динамично содржина</title>
+</head>
+<body>
+<button onclick="addParagraph()">Додади оддел</button>
+<div id="content"></div>
+
+<script>
+    function addParagraph() {
+        const content = document.getElementById('content');
+        const paragraph = document.createElement('p');
+        paragraph.dataset.timestamp = new Date().getTime();
+        content.appendChild(paragraph);
+        setInterval(function() {
+            updateParagraph(paragraph);
+        }, 1000);
+    }
+
+    function updateParagraph(paragraph) {
+        const currentTime = new Date().getTime();
+        const timeAgo = calculateTimeAgo(paragraph.dataset.timestamp, currentTime);
+        paragraph.textContent = "Овој параграф е додаден " + timeAgo;
+    }
+
+    function calculateTimeAgo(timestamp, currentTime) {
+        const diffInSeconds = Math.floor((currentTime - timestamp) / 1000);
+
+        if (diffInSeconds < 60) {
+            return "пред " + diffInSeconds + " секунди";
+        } else {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return "пред " + minutes + " минути";
+        }
+    }
+</script>
+</body>
+</html>

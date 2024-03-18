@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Креирање и додавање на елементи</title>
+</head>
+<body>
+<button onclick="addItem()">Add Item</button>
+<ul id="list"></ul>
+
+<script>
+  let itemCount = 0;
+
+  function addItem() {
+    const list = document.getElementById('list');
+    const newItem = document.createElement('li');
+    itemCount++;
+    newItem.textContent = "Item " + itemCount;
+    list.appendChild(newItem);
+  }
+</script>
+</body>
+</html>

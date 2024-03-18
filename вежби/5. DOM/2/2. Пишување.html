@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пишување</title>
+</head>
+<body>
+<ul style="width: 50%;">
+    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</li>
+    <li>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</li>
+    <li>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</li>
+    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.</li>
+    <li>Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.</li>
+</ul>
+<button onclick="find()">Најдолгиот збор</button>
+</body>
+<script>
+    let clicked = false;
+    function find(){
+        let paragraphs = document.getElementsByTagName("li");
+        let paragraphsArray = Array.from(paragraphs);
+
+        if(!clicked) {
+            // Наместо textContent, можеме да користиме innerHTML
+            let longestParagraph = paragraphsArray.at(0);
+            for (let i = 0; i < paragraphsArray.length; i++) {
+                let paragraph = paragraphsArray.at(i);
+
+                if (paragraph.textContent.length > longestParagraph.textContent.length)
+                    longestParagraph = paragraph;
+                paragraph.textContent = "(" + paragraph.textContent.split(" ").length + ") " + paragraph.textContent;
+            }
+
+            // ВТОРА ОПЦИЈА
+            /*
+              "map" функцијата се користи за секој елемент во низата paragraphsArray
+              да ги додаде бројот на зборови пред текстот на секој параграф.
+            */
+            // paragraphsArray.map(paragraph => (paragraph.textContent = "(" + paragraph.textContent.split(" ").length + ") " + paragraph.textContent));
+
+            /*
+              "reduce" функцијата споредува должините на текстот на двата
+              параграфи (a и b) и го враќа параграфот со подолг текст.
+            */
+            // let longestParagraph = paragraphsArray.reduce((a, b) => (a.textContent.length > b.textContent.length ? a : b));
+
+            longestParagraph.style.backgroundColor = "red";
+            clicked = true;
+        }
+        else if(clicked){
+            for(let i = 0; i < paragraphsArray.length; i++){
+                let paragraph = paragraphsArray.at(i);
+                paragraph.style.backgroundColor = "white";
+                paragraph.textContent = paragraph.textContent.substring(5);
+            }
+            clicked = false;
+        }
+    }
+</script>
+</html>
