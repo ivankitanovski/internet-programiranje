@@ -6,7 +6,7 @@
 ![Втор елемент](/img/slika4.png)
 ![Резултат](/img/slika5.png)
 # Решение
-```angular2html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +20,11 @@
     for (let i = 0; i < n; i++) {
         arr[i] = parseInt(prompt(i+": ")) // се внесуваат елементите од низата
     }
-    average(arr, n) // повик до функцијата која ќе го пресмета резултатот
+    average(arr) // повик до функцијата која ќе го пресмета резултатот
 
-    function average(arr, n){
+    function average(arr){
         let sum = 0
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < arr.length; i++) {
             sum+=arr[i] // се собираат елементите од низата во една сума
         }
         alert(sum/n) // се прикажува резултатот

@@ -3,7 +3,7 @@
 ![Внесување на реченицата](/img/slika1.png)
 ![Решение](/img/slika2.png)
 # Решение
-```angular2html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>

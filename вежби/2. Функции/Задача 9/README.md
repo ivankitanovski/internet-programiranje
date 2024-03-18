@@ -3,7 +3,7 @@
 ![Почетна состојба](/img/slika1.png)
 ![Генерирани броеви](/img/slika2.png)
 # Почетен код
-```angular2html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +24,7 @@
 </html>
 ```
 # Решение
-```angular2html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>

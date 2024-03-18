@@ -4,7 +4,7 @@
 ![Додаден запис во табелата](/img/slika2.png)
 ![Невалиден внес](/img/slika3.png)
 # Даден код
-```angular2html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +48,7 @@
 ```
 
 # Решение
-```angular2html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>

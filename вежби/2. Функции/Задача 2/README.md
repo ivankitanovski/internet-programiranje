@@ -7,7 +7,7 @@
 ![Втор елемент](/img/slika5.png)
 ![Резултат](/img/slika6.png)
 # Решение
-```angular2html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
