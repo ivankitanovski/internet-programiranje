@@ -1,0 +1,2 @@
+- Function that takes in a string and counts the total number of vowels in the string.
+- Функција што како влезен аргумент зема string и број колку самогласки има во стрингот.

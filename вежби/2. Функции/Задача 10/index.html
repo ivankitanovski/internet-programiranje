@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nth Fibonacci Number</title>
+    <script>
+      function getNthFibonacciNumber(x) {
+        let arr = [];
+        arr[0] = 1;
+        arr[1] = 1;
+        for (let i = 2; i < x + 1; i++) {
+          arr[i] = arr[i - 1] + arr[i - 2];
+        }
+        let endDigit = x % 10;
+        if (endDigit === 1 && x !== 11) {
+          console.log("The " + x + "st fibonacci number is: " + arr.at(x - 1));
+        } else if (endDigit === 2) {
+          console.log("The " + x + "nd fibonacci number is: " + arr.at(x - 1));
+        } else {
+          console.log("The " + x + "th fibonacci number is: " + arr.at(x - 1));
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

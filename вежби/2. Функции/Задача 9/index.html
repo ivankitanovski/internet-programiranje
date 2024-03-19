@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Zig-Zag Array</title>
+    <script>
+      function toZigZagArray(arr) {
+        //Прво мора да ја соритраме почетната низа во опаѓачки редослед.
+        let sortedArr = arr.sort().reverse();
+        //Потоа правиме deep копија од низата за да чуваме две низи една сортирана во опаѓачки друга во растечќи редослед.
+        let reverseSortedArr = [];
+        for (let i = 0; i < sortedArr.length; i++) {
+          reverseSortedArr[i] = sortedArr[i];
+        }
+        sortedArr.reverse();
+
+        //Во променлива ја чуваме должината на на почетната низа arr, а креираме нова finalArr - која ке zig-zag низа
+        let limit = arr.length;
+        let finalArr = [];
+
+        //додека немаме иста должина како низата на влез, додаваме елементи
+        while (finalArr.length !== limit) {
+          finalArr.push(sortedArr.pop());
+          //if кој е потребен во случај на непарен број на елементи
+          if (finalArr.length === limit) break;
+          finalArr.push(reverseSortedArr.pop());
+        }
+        //ја печатиме низата
+        console.log(finalArr);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

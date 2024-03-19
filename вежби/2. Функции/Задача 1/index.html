@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Divisible by 6</title>
+  </head>
+  <script>
+    //На функцијата и даваме аргумент 'num' и едноставно враќаме дали бројот мод. 6 дава резултат 0.
+    function checkDivisible(num) {
+      //Со isNaN провервуаме дали аргументот е број, следно едноставна проверка.
+      if (isNaN(num)) return false;
+      return num % 6 === 0;
+    }
+
+    //Користиме window.prompt за да добиеме влез од корсникот.
+    let userInput = window.prompt("Enter a number: ");
+    //Со помош на тернарен израз даваме соодветен alert
+    alert(
+      checkDivisible(parseInt(userInput))
+        ? "Number is divisible by 6!"
+        : "Number is not divisible by 6.",
+    );
+  </script>
+  <body></body>
+</html>

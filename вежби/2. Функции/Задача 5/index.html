@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Generate Random Number</title>
+    <script>
+      function generateRandomNumber(lowerBound, upperBound) {
+        //Прво мора да го пресметаме рангот на броеви
+        let range = upperBound - lowerBound + 1;
+
+        // Generate a random number within the range and shift it to the specified bounds
+        //Math.random() генерира случајна вредност помеѓу 0 - 1 и користејќи го рангот и долната граница, гарантираме дека бројот е во тој ранг.
+        return Math.floor(Math.random() * range) + lowerBound;
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
