@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #080b06;
+            --background: #e5efe1;
+            --primary: #7faf62;
+            --secondary: #bca0ce;
+            --accent: #ba7993;
+
+
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: "Poppins", "serif";
+            box-shadow: var(--shadow);
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(101%);
+        }
+
+        button:active {
+            transform: scale(98%);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            padding: 1rem;
+        }
+
+        #phone-app {
+            width: 30%;
+            background-color: var(--background);
+            display: grid;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            grid-template-rows: 0.7fr 5fr 0.5fr;
+        }
+
+        .phone-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 3fr;
+            border-radius: 10px;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--secondary);
+        }
+
+        .accounts {
+            display: flex;
+            gap: 0.5rem;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            width: 20%;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+
+        .account:hover {
+            transform: scale(110%);
+        }
+
+        .account:active {
+            transform: scale(98%);
+        }
+
+        .active-account {
+            background-color: var(--primary);
+        }
+
+
+        .phone-header div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.1s ease;
+        }
+
+        .call-history-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.3rem;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        .call-history-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            padding: 0.5rem;
+            background-color: var(--accent);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .call-group-date {
+            padding: 0.3rem;
+            border-radius: 5px;
+        }
+
+        .call-history {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .call-entry {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            padding: 0.5rem;
+            background-color: var(--secondary);
+            border-radius: 5px;
+
+        }
+
+        .phone-footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            justify-items: center;
+            background-color: var(--accent);
+            border-radius: 10px;
+        }
+
+        .phone-footer div {
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+
+        .phone-footer div:hover {
+            transform: scale(101%);
+
+        }
+
+        .phone-footer div:nth-child(2) {
+            padding: 0.5rem;
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<main id="phone-app">
+    <header class="phone-header">
+        <h3>Phone</h3>
+        <h3>Accounts:</h3>
+        <div class="accounts">
+            <div class="account" title="example@example.com">E</div>
+        </div>
+    </header>
+    <section class="call-history-wrapper">
+        <div class="call-history-container">
+            <h4 class="call-group-date">2024-01-01</h4>
+            <div class="call-history">
+                <div class="call-entry">
+                    <div class="call-receiver">Example Name</div>
+                    <div class="call-duration">1:00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="phone-footer">
+        <div>Keypad</div>
+        <div>Recent</div>
+        <div>Contacts</div>
+    </footer>
+</main>
+
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+</script>
+</body>
+</html>

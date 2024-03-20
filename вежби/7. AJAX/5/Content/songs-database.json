@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Sorry",
+    "artist": "Justin Bieber",
+    "duration": "03:19",
+    "coverPictureURL": "https://upload.wikimedia.org/wikipedia/en/d/dc/Justin_Bieber_-_Sorry_%28Official_Single_Cover%29.png",
+    "fingerprints": ["0.475_660_2", "0.48_660_2", "0.4_600_2"]
+  },
+  {
+    "title": "Love Yourself",
+    "artist": "Justin Bieber",
+    "duration": "03:55",
+    "coverPictureURL": "https://i1.sndcdn.com/artworks-W93VxIB4kEWrzbtk-WxFOjw-t500x500.jpg",
+    "fingerprints": ["0.60_990_3", "0.43_550_3", "0.65_720_2"]
+  },
+  {
+    "title": "Baby",
+    "artist": "Justin Bieber",
+    "duration": "04:34",
+    "coverPictureURL": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d1/Babycoverart.jpg/220px-Babycoverart.jpg",
+    "fingerprints": ["0.38_689_4", "0.55_1000_3", "0.28_450_4"]
+  },
+  {
+    "title": "What Do You Mean?",
+    "artist": "Justin Bieber",
+    "duration": "03:26",
+    "coverPictureURL": "https://upload.wikimedia.org/wikipedia/en/9/9e/JustinBieberWhatDoYouMeanCover.png",
+    "fingerprints": ["0.47_700_3", "0.47_750_3", "0.55_720_2"]
+  },
+  {
+    "title": "Yummy",
+    "artist": "Justin Bieber",
+    "duration": "03:29",
+    "coverPictureURL": "https://upload.wikimedia.org/wikipedia/en/c/c3/Justin_Bieber_-_Yummy.png",
+    "fingerprints": ["0.40_526_3", "0.90_1350_4", "0.40_600_2"]
+  },
+  {
+    "title": "Time",
+    "artist": "Pink Floyd",
+    "duration": "06:54",
+    "coverPictureURL": "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
+    "fingerprints": ["0.47_720_2", "0.30_724_2", "0.28_600_4"]
+  },
+  {
+    "title": "Lepi Grome Moj",
+    "artist": "Ceca",
+    "duration": "04:36",
+    "coverPictureURL": "https://i1.sndcdn.com/artworks-000097034720-wxe7df-t500x500.jpg",
+    "fingerprints": ["0.40_520_3", "0.30_723_2", "0.28_623_4"]
+  },
+  {
+    "title": "Ni**as in Paris",
+    "artist": "Jay-Z & Kanye West",
+    "duration": "03:39",
+    "coverPictureURL": "https://lastfm.freetls.fastly.net/i/u/500x500/8450b9058e94467bc6f0bae66df3c6a8.jpg",
+    "fingerprints": ["0.38_600_4", "0.30_963_2", "0.28_456_4"]
+  }
+]

@@ -1,0 +1,76 @@
+[
+  {
+    "item": {
+      "itemName": "metal",
+      "type": "material",
+      "pictureURL": "./Content/images/metal.png"
+    },
+    "recipe": {
+      "0": "metal",
+      "powder": "bluePowder"
+    }
+  },
+  {
+    "item": {
+      "itemName": "magicalMetal",
+      "type": "material",
+      "pictureURL": "./Content/images/metal.png"
+    },
+    "recipe": {
+      "0": "mythicalMetal",
+      "powder": "bluePowder"
+    }
+  },
+  {
+    "item": {
+      "itemName": "eternalFlame",
+      "type": "material",
+      "pictureURL": "./Content/images/eternal-flame.png"
+    },
+    "recipe": {
+      "0": "eternalFlame",
+      "powder": "bluePowder"
+    }
+  },
+  {
+    "item": {
+      "itemName": "fireStaff",
+      "type": "material",
+      "pictureURL": "./Content/images/fire-staff.png"
+    },
+    "recipe": {
+      "0": "wood",
+      "1": "wood",
+      "2": "mythicalEternalFlame",
+      "3": "mythicalEternalFlame",
+      "4": "mythicalEternalFlame",
+      "5": "redPowder"
+    }
+  },
+  {
+    "item": {
+      "itemName": "sword",
+      "type": "material",
+      "pictureURL": "./Content/images/legendary-sword.png"
+    },
+    "recipe": {
+      "0": "mythicalMetal",
+      "1": "mythicalMetal",
+      "2": "mythicalMetal",
+      "3": "stone",
+      "4": "wood",
+      "5": "stone",
+      "powder": "redPowder"
+    }
+  },
+  {
+    "item": {
+      "itemName": "bluePotion",
+      "type": "powder",
+      "pictureURL": "./Content/images/blue-potion.png"
+    },
+    "recipe": {
+      "powder": "bluePowder"
+    }
+  }
+]

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #080b06;
+            --background: #e5efe1;
+            --primary: #7faf62;
+            --secondary: #bca0ce;
+            --accent: #ba7993;
+
+
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: "Poppins", "serif";
+            box-shadow: var(--shadow);
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(101%);
+        }
+
+        button:active {
+            transform: scale(98%);
+        }
+
+        body {
+            display: flex;
+            /*align-items: center;*/
+            justify-content: center;
+            height: 100vh;
+            padding: 1rem;
+        }
+
+        #phone-app {
+            width: 30%;
+            background-color: var(--background);
+            display: grid;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            grid-template-rows: 0.7fr 5fr 0.5fr;
+            /*padding: 0.5rem;*/
+        }
+
+        .phone-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 3fr;
+            /*justify-content: flex-start;*/
+            border-radius: 10px;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--secondary);
+        }
+
+        .accounts {
+            display: flex;
+            gap: 0.5rem;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            width: 20%;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+
+        .account:hover {
+            transform: scale(110%);
+        }
+
+        .account:active {
+            transform: scale(98%);
+        }
+
+        .active-account {
+            background-color: var(--primary);
+
+        }
+
+
+        .phone-header div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.1s ease;
+        }
+
+        .call-history-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.3rem;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        .call-history-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            padding: 0.5rem;
+            background-color: var(--accent);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .call-group-date {
+            /*background-color: var(--primary);*/
+            padding: 0.3rem;
+            border-radius: 5px;
+        }
+
+        .call-history {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            /*background-color: blue;*/
+
+        }
+
+        .call-entry {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            padding: 0.5rem;
+            background-color: var(--secondary);
+            border-radius: 5px;
+
+        }
+
+        .phone-footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            justify-items: center;
+            background-color: var(--accent);
+            border-radius: 10px;
+        }
+
+        .phone-footer div {
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+
+        .phone-footer div:hover {
+            transform: scale(101%);
+
+        }
+
+        .phone-footer div:nth-child(2) {
+            padding: 0.5rem;
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<main id="phone-app">
+    <header class="phone-header">
+        <h3>Phone</h3>
+        <h3>
+            Accounts:
+        </h3>
+        <div class="accounts">
+        </div>
+
+    </header>
+    <section class="call-history-wrapper">
+    </section>
+    <footer class="phone-footer">
+        <div>Keypad</div>
+        <div>Recent</div>
+        <div>Contacts</div>
+    </footer>
+</main>
+
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+
+    // Функција со која е претставен еден повик
+    class Call
+    {
+        // Податочни кој ги содржи повикот
+        callerNumber;
+        receiverNumber;
+        time;
+        duration;
+
+
+        //Конструктор на класата со кој се креира инстанца од даден JSON облик на повик
+        constructor(callJson)
+        {
+            this.callerNumber = callJson.callerNumber;
+            this.receiverNumber = callJson.receiverNumber;
+            this.time = callJson.time;
+            this.duration = callJson.duration;
+        }
+
+        // Функцијата getDuration го пресметува времето на повикот во формат минути:секунди.
+        getDuration()
+        {
+
+            const minutes = Math.floor(this.duration / 60);
+            const seconds = this.duration - (minutes * 60);
+            return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+        }
+
+        // Функија која го враќа HTML формат за приказ на деталите за повикот.
+        getHTMLFormat(mappedName)
+        {
+
+            return `<div class="call-entry">
+                        <div class="call-receiver">
+                            ${mappedName}
+                        </div>
+                        <div class="call-duration">
+                        ${this.getDuration()}
+                        </div>
+                    </div>`
+        }
+    }
+
+    class Account
+    {
+        email;
+        contactMappings;
+
+        // Конструктор за класата Account за креирање на објекти од даден JSON формат на профил
+        constructor(accountJson)
+        {
+
+            this.email = accountJson.email;
+            this.contactMappings = accountJson.savedContacts;
+        }
+
+        // Функција која го враќа името на контактот на дадениот телефонски број.
+        getNameOfContact(contactNumber)
+        {
+
+            return this.contactMappings[contactNumber];
+        }
+
+        // Функција која го враќа HTML формат за приказ на деталите за сметката.
+        getHTMLFormat()
+        {
+
+            const firstLetterOfEmail = this.email[0].toUpperCase();
+            return `<div class="account" title="${this.email}">${firstLetterOfEmail}</div>`
+        }
+    }
+
+
+    class PhoneApp
+    {
+        //Достапните профили во апликацијата
+        accounts;
+
+        //Моментално активниот профик
+        activeAccount;
+
+        //HTML елементот на моментално активниот профил
+        activeAccountElement;
+
+        //Сите разговори во апликацијата групирани по датум
+        callsByDate;
+
+        // Конструктор за класата PhoneApp
+        constructor()
+        {
+
+            this.accounts = {};
+            this.activeAccount = null;
+            this.activeAccountElement = null;
+            this.callsByDate = {};
+        }
+
+        // Метод за додавање на профил во апликацијата.
+        addAccount(account)
+        {
+            this.accounts[account.email] = account;
+            ui.accountsElement.innerHTML += account.getHTMLFormat();
+        }
+
+        // Метод за активирање на дадена профил.
+        activateAccount(accountElement)
+        {
+            //Визуелно „активирање“ на профил со додадавње на класата "active-account"
+            if (this.activeAccount)
+            {
+                this.activeAccountElement.classList.remove("active-account")
+            }
+
+            this.activeAccount = this.accounts[accountElement.title];
+            this.activeAccountElement = accountElement;
+            this.activeAccountElement.classList.add("active-account");
+
+            //Откако профил ќе се активира, прикажување на контактите според мапирањата во тој профил
+            this.renderCalls();
+        }
+
+        // Метод за вчитување на историјата на повици од дадениот JSON.
+        async fetchCallHistory()
+        {
+            const callHistoryJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/call-history.json");
+
+            //За секој датум имаме низа од повици
+            for (const callBlock of callHistoryJson)
+            {
+                this.callsByDate[callBlock.date] = [];
+            }
+
+            //Во низата се сместуваат повиците од даден датум
+            for (const callBlock of callHistoryJson)
+            {
+                for (const callJson of callBlock.calls)
+                {
+                    this.callsByDate[callBlock.date].push(new Call(callJson));
+                }
+            }
+        }
+
+        // Функција за визуелно прикажување на повиците според соодветното мапирање на активниот профил
+        renderCalls()
+        {
+
+            ui.callsElement.innerHTML = "";
+            for (const callsDate in this.callsByDate)
+            {
+                let html = `<div class="call-history-container">
+            <h4 class="call-group-date">${callsDate}</h4>
+            <div class="call-history">`
+
+                this.callsByDate[callsDate].forEach(call =>
+                {
+                    const nameOfContact = this.activeAccount.getNameOfContact(call.receiverNumber);
+                    html += call.getHTMLFormat(nameOfContact);
+                })
+
+                html += '</div></div>';
+                ui.callsElement.innerHTML += html;
+            }
+        }
+
+    }
+
+
+    //Класа во која се групирани UI елементите на апликацијата
+    class UI
+    {
+        callsElement;
+        accountsElement;
+
+        // Конструктор за класата UI
+        constructor()
+        {
+
+            this.callsElement = document.querySelector(".call-history-wrapper");
+            this.accountsElement = document.querySelector(".accounts");
+        }
+
+
+        //Дефинирање што се случува при клик на профил
+        addEventsForAccounts()
+        {
+            const accountElements = document.querySelectorAll(".account");
+            for (let accountElement of accountElements)
+            {
+                accountElement.addEventListener("click", () =>
+                {
+                    phoneApp.activateAccount(accountElement);
+                })
+            }
+        }
+    }
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+    // Функција која се повикува за почетно иницијализирање на апликацијата.
+    async function inti()
+    {
+        const accountsJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/accounts.json");
+        accountsJson.forEach(accountJson =>
+        {
+            const account = new Account(accountJson);
+            phoneApp.addAccount(account)
+        })
+
+        ui.addEventsForAccounts();
+        await phoneApp.fetchCallHistory();
+    }
+
+    //Краирање инстанци од соодветните класи
+    const phoneApp = new PhoneApp();
+    const ui = new UI();
+
+    //Повик кон функцијата
+    inti();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "0x003": {
+    "data": "  for(int i = 0; i < 10; ++i) {\n    std::cin >> num;\n    int flag = 0;\n",
+    "address": "0x003",
+    "nextDataSegment": "0x004"
+  },
+  "0x007": {
+    "data": "  std::cout << '\\nProgram Completed Successfully.';\n  return 0;\n}",
+    "address": "0x007",
+    "nextDataSegment": null
+  },
+  "0x005": {
+    "data": "    }\n    if(flag == 0)\n      primes[i] = num;\n    else\n      primes[i] = -1;\n  }\n",
+    "address": "0x005",
+    "nextDataSegment": "0x006"
+  },
+  "0x002": {
+    "data": "  std::cout << 'Enter 10 numbers:';\n",
+    "address": "0x002",
+    "nextDataSegment": "0x003"
+  },
+  "0x004": {
+    "data": "    for(int j = 2; j <= sqrt(num); ++j) {\n      if(num % j == 0) {\n        flag = 1;\n        break;\n      }\n",
+    "address": "0x004",
+    "nextDataSegment": "0x005"
+  },
+  "0x001": {
+    "data": "#include iostream \n#include cmath\nint main() {\n  int num = 0;\n  int primes[10];\n",
+    "address": "0x001",
+    "nextDataSegment": "0x002"
+  },
+  "0x006": {
+    "data": "  std::cout << 'Prime Numbers:';\n  for(int i = 0; i < 10; ++i)\n    if(primes[i] != -1)\n      std::cout << ' ' << primes[i];\n",
+    "address": "0x006",
+    "nextDataSegment": "0x007"
+  }
+}

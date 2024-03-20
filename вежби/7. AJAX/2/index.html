@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            ---text: #0c130f;
+            --background: #fbfdfc;
+            --primary: #5cb582;
+            --secondary: #9ddab7;
+            --accent: #72d49c;
+            --accent2: #a7a7e7;
+
+
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: "Poppins", "serif";
+            box-shadow: var(--shadow);
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(101%);
+        }
+
+        button:active {
+            transform: scale(98%);
+        }
+
+        .segments {
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+            flex-direction: column;
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .data-segment {
+            padding: 2rem;
+            /*text-align: center;*/
+            background-color: var(--primary);
+            border-radius: 3px;
+            white-space: pre-wrap;
+        }
+
+        .link {
+            height: 15px;
+            width: 5px;
+            background-color: var(---text);
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="segments"></div>
+<script>
+
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+    // Функција за наоѓање на првиот сегмент (сегмент без претходник)
+    function findFirstSegment(dataSegments)
+    {
+        for (let dataSegmentAddress in dataSegments)
+        {
+            const dataSegment = dataSegments[dataSegmentAddress];
+            let isFirst = true;
+            // Листај ги сите сегменти за да провериш дали dataSegment е следен сегменет на некој друг податочен сегменет
+            for (let dataSegment1Address in dataSegments)
+            {
+                const dataSegment1 = dataSegments[dataSegment1Address];
+                if (dataSegment.address === dataSegment1.nextDataSegment)
+                {
+                    isFirst = false;
+                    break;
+                }
+            }
+            // Ако е прв, врати го тековниот сегмент
+            if (isFirst) return dataSegment;
+        }
+    }
+
+    // Функција за тополошко сортирање
+    function topologicalSort(dataSegments)
+    {
+        let segment = findFirstSegment(dataSegments);
+        const sortedSegments = [];
+
+        // Додавај ги сегментите во низата додека следниот сегмент не биде null
+        while (segment.nextDataSegment !== null)
+        {
+            sortedSegments.push(segment);
+            segment = dataSegments[segment.nextDataSegment];
+        }
+        return sortedSegments;
+    }
+
+    // Функција за прикажување на сегментите
+    function renderSegments(segments)
+    {
+        segments.forEach(segment =>
+        {
+            segmentsElement.innerHTML += `<div class="data-segment">${segment.data}</div>
+        <div class="link"></div>`;
+        });
+
+        // Избриши го последниот елемент (непотребна врска)
+        const lastChild = segmentsElement.children[segmentsElement.children.length - 1];
+        segmentsElement.removeChild(lastChild);
+    }
+
+    // Функција за обработка на сегментите
+    async function processSegments()
+    {
+        // Земи ги сегментите од JSON
+        const dataSegments = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/data-segments.json");
+
+        // Тополошко сортирање на сегментите
+        const sortedSegments = topologicalSort(dataSegments);
+
+        // Прикажи ги сортираните сегменти
+        renderSegments(sortedSegments);
+    }
+
+    // Променлива за HTML елементот каде ќе бидат прикажани сегментите
+    const segmentsElement = document.querySelector(".segments");
+
+    // Обработи ги сегментите
+    processSegments();
+
+
+</script>
+</body>
+</html>

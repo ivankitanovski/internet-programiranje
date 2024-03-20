@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            ---text: #0c130f;
+            --background: #fbfdfc;
+            --primary: #5cb582;
+            --secondary: #9ddab7;
+            --accent: #72d49c;
+            --accent2: #a7a7e7;
+
+
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: "Poppins", "serif";
+            box-shadow: var(--shadow);
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(101%);
+        }
+
+        button:active {
+            transform: scale(98%);
+        }
+
+        body
+        {
+            padding: 1rem;
+        }
+
+        #to-dos
+        {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem;
+            height: 100vh;
+            padding: 1rem;
+            background-color: var(--background);
+            justify-content: center;
+        }
+        .to-do
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--secondary);
+            box-shadow: var(--shadow);
+            width: 20%;
+            text-align: center;
+            min-height: 35vh;
+        }
+        .to-do-title
+        {
+            font-weight: 700;
+            background-color: var(--accent);
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+        h3
+        {
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+<h3>TODOs:</h3>
+<main id="to-dos">
+    <div class="to-do">
+        <div class="to-do-title">Task Title</div>
+        <div class="to-do-description">Description</div>
+        <div class="to-do-priority">Priority: Priority</div>
+        <div class="to-do-date">Date: Date</div>
+        <div class="to-do-completeness">Completed: true</div>
+    </div>
+</main>
+
+<script>
+
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+</script>
+</body>
+</html>

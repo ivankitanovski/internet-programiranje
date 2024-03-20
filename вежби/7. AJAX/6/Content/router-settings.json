@@ -1,0 +1,31 @@
+{
+  "hostname": "RouterX",
+  "enteringInterface": {
+    "id": "FastEthernet0/1",
+    "ip": "192.168.1.1"
+  },
+  "interfaces": {
+    "FastEthernet0/2": "192.168.2.1",
+    "FastEthernet0/3": "192.168.3.1",
+    "FastEthernet0/4": "192.168.4.1"
+  },
+  "routingTable": {
+    "192.168.1.10": {
+      "nextHop": "192.168.2.2",
+      "interface": "FastEthernet0/2"
+    },
+    "192.168.1.20": {
+      "nextHop": "192.168.3.2",
+      "interface": "FastEthernet0/3"
+    },
+    "192.168.1.30": {
+      "nextHop": "192.168.4.2",
+      "interface": "FastEthernet0/4"
+    }
+  },
+  "arpTable": {
+    "192.168.2.2": "00:1A:2B:3C:4D:5E",
+    "192.168.3.2": "00:5E:4D:3C:2B:1A",
+    "192.168.4.2": "01:A2:B3:C4:D5:E6"
+  }
+}

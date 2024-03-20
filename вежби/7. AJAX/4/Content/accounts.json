@@ -1,0 +1,50 @@
+[
+  {
+    "email": "john.doe@gmail.com",
+    "savedContacts": {
+      "123-456-7890": "Father",
+      "789-012-3456": "Mother",
+      "456-789-0123": "Brother",
+      "987-654-3210": "Sister",
+      "222-333-4444": "Eve A1",
+      "777-888-9999": "Chris A1",
+      "333-444-5555": "Sara A1",
+      "555-666-7777": "Mike A1",
+      "999-000-1111": "Alex A1",
+      "888-999-0000": "Emily Old",
+      "111-222-3333": "Dave Roof Tile Kocani"
+    }
+  },
+  {
+    "email": "angele.mrtvakoska@gmail.com",
+    "savedContacts": {
+      "456-789-0123": "Kire Stip",
+      "987-654-3210": "Aleksandra Zabolekarka",
+      "123-456-7890": "Dragoslav Petroski",
+      "555-666-7777": "Mitko Star Broj",
+      "888-999-0000": "Emilija Nov Broj",
+      "111-222-3333": "Davidovki Majstor Kocani Eftino",
+      "777-888-9999": "Kiko Star Poznanik Veles",
+      "333-444-5555": "Sara T-mobile",
+      "999-000-1111": "Aleksandar Profesor",
+      "222-333-4444": "Eve Altaberka",
+      "789-012-3456": "Tetka Miroslava A1"
+    }
+  },
+  {
+    "email": "snezana.tupurkoska@gmail.com",
+    "savedContacts": {
+      "111-222-3333": "Cicko Davidovki",
+      "333-444-5555": "Sara Nokti",
+      "555-666-7777": "Mitko Tetin",
+      "777-888-9999": "Kiko Pazardzija",
+      "999-000-1111": "Tato",
+      "888-999-0000": "Emi",
+      "123-456-7890": "Dragi Dragce Generacija",
+      "789-012-3456": "Svekrva mi Nov Broj",
+      "456-789-0123": "Kire Avtomehanicar Stip",
+      "987-654-3210": "Maticna Zabolekarka",
+      "222-333-4444": "Cupeto od Prilep Pivofest 2009"
+    }
+  }
+]

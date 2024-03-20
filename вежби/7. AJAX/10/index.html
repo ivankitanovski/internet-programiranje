@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #081d1c;
+            --background: #dbe8e8;
+            --primary: #3cc7bc;
+            --secondary: #e092a5;
+            --accent: #d3b366;
+
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: "Poppins", "serif";
+            box-shadow: var(--shadow);
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(101%);
+        }
+
+        button:active {
+            transform: scale(98%);
+        }
+
+
+        #crafting-app {
+            display: grid;
+            min-height: 100vh;
+            background-color: var(--background);
+            grid-template-rows: 1fr 2fr 2fr;
+            padding: 0.3rem;
+        }
+
+        #crafting-app header {
+            font-size: 3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .crafting-main {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr 2fr;
+        }
+
+        .buttons-tab {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        #clear-items {
+            font-size: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .crafting-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            padding: 0.3rem;
+            gap: 0.3rem;
+            border-radius: 3px;
+        }
+
+        .crafting-slot {
+            background-color: var(--primary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .crafting-slot:active {
+            opacity: 85%;
+        }
+
+        .additional-crafting-slots {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 4rem 1rem;
+            gap: 4rem;
+            /*align-items: center;*/
+        }
+
+        #powder-slot {
+            border: 5px dashed var(--secondary);
+        }
+
+        .controls-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+        }
+
+        .materials-and-powders {
+            display: grid;
+            grid-template-rows: 1.5fr 3fr;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .powders {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .materials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .powder-slot {
+            background-color: var(--secondary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .powder-slot:active {
+            opacity: 85%;
+        }
+
+        #powder-slot {
+            background-color: var(--primary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #powder-slot:active {
+            opacity: 85%;
+        }
+
+        #result-item-slot {
+            background-color: var(--primary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #result-item-slot:active {
+            opacity: 85%;
+        }
+
+        .material-slot {
+            background-color: var(--accent);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .material-slot:active {
+            opacity: 85%;
+        }
+
+
+        .crafted-items {
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.3rem;
+            padding: 2rem;
+        }
+
+        .crafted-item-slot {
+            background-color: var(--primary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .crafted-item-slot:active {
+            opacity: 85%;
+        }
+
+        .item-creation {
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--accent);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .creator-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .creator-buttons button {
+            padding: 0.5rem;
+            background: var(--secondary);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .creator-input {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .creator-input input {
+            padding: 0.5rem;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .item {
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 40%;
+            aspect-ratio: 1/1;
+        }
+
+        /*Classes to be used dynamically*/
+
+        .creator-mode-enabled {
+            border: 3px solid var(--accent);
+
+        }
+
+        .selected {
+            outline: 5px solid white;
+        }
+
+        .blueprint {
+            opacity: 50%;
+        }
+
+        .blue-filter {
+            filter: brightness(120%) hue-rotate(180deg);
+        }
+
+        .red-filter {
+            filter: brightness(80%) hue-rotate(-40deg);
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<div id="crafting-app">
+    <header>Craft.IO</header>
+    <main class="crafting-main">
+        <div class="buttons-tab">
+            <button id="clear-items">Clear All User Items</button>
+        </div>
+        <div class="crafting-container">
+            <div class="crafting-slot" data-slot-id="0"></div>
+            <div class="crafting-slot" data-slot-id="1"></div>
+            <div class="crafting-slot" data-slot-id="2"></div>
+            <div class="crafting-slot" data-slot-id="3"></div>
+            <div class="crafting-slot" data-slot-id="4"></div>
+            <div class="crafting-slot" data-slot-id="5"></div>
+        </div>
+        <div class="additional-crafting-slots">
+            <div class="" id="powder-slot">
+
+            </div>
+            <div class="" id="result-item-slot">
+
+            </div>
+        </div>
+    </main>
+    <section class="controls-container">
+        <div class="materials-and-powders">
+            <div class="powders">
+                <div class="powder-slot">
+
+                    <div title="Blue Powder"
+                         class="item"
+                         style="background-image: url(./Content/images/blue-powder.png)"
+                         data-item-name="bluePowder"
+                         data-item-type="powder"
+                    ></div>
+                </div>
+                <div class="powder-slot">
+                    <div title="Red Powder"
+                         class="item"
+                         style="background-image: url(./Content/images/red-powder.png)"
+                         data-item-name="redPowder"
+                         data-item-type="powder"
+                    ></div>
+                </div>
+            </div>
+            <div class="materials">
+                <div class="material-slot">
+                    <div title="Wood"
+                         class="item"
+                         style="background-image: url(./Content/images/wood.png)"
+                         data-item-name="wood"
+                         data-item-type="material"
+                    ></div>
+                </div>
+                <div class="material-slot">
+                    <div title="Metal"
+                         class="item"
+                         style="background-image: url(./Content/images/metal.png)"
+                         data-item-name="metal"
+                         data-item-type="material"
+                    ></div>
+                </div>
+                <div class="material-slot">
+                    <div title="Stone"
+                         class="item"
+                         style="background-image: url(./Content/images/stone.png)"
+                         data-item-name="stone"
+                         data-item-type="material"
+                    ></div>
+                </div>
+                <div class="material-slot">
+                    <div title="Eternal Flame"
+                         class="item"
+                         style="background-image: url(./Content/images/eternal-flame.png)"
+                         data-item-name="eternalFlame"
+                         data-item-type="material"
+                    ></div>
+                </div>
+            </div>
+        </div>
+        <div class="crafted-items">
+            <div class="crafted-item-slot" id="crafted-item-0"></div>
+            <div class="crafted-item-slot" id="crafted-item-1"></div>
+            <div class="crafted-item-slot" id="crafted-item-2"></div>
+            <div class="crafted-item-slot" id="crafted-item-3"></div>
+            <div class="crafted-item-slot" id="crafted-item-4"></div>
+            <div class="crafted-item-slot" id="crafted-item-5"></div>
+            <div class="crafted-item-slot" id="crafted-item-6"></div>
+            <div class="crafted-item-slot" id="crafted-item-7"></div>
+            <div class="crafted-item-slot" id="crafted-item-8"></div>
+            <div class="crafted-item-slot" id="crafted-item-9"></div>
+        </div>
+        <div class="item-creation">
+            <div class="creator-input">
+                <label for="item-name">Item Name</label>
+                <input type="text" id="item-name">
+            </div>
+            <div class="creator-input">
+                <label for="item-picture">Item Picture</label>
+                <input type="text" id="item-picture">
+            </div>
+            <div class="creator-buttons">
+                <button id="creator-mode-btn">Creator Mode: OFF</button>
+                <button id="create-item-btn">Create Item</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+    //Основната класа со која се претставува еден предмет
+    class Item
+    {
+        itemName;
+        type;
+        pictureURL;
+
+        constructor(itemName, type, pictureURL)
+        {
+            this.itemName = itemName;
+            this.type = type;
+            this.pictureURL = pictureURL;
+        }
+
+        //Статичка функција која овозможува да се добие инстанца од Item од неговата JSON репрезентација
+        static getInstanceFromJsonFormat(itemJson)
+        {
+            return new Item(itemJson.itemName, itemJson.type, itemJson.pictureURL);
+        }
+
+        //Функција којашто ja враќа HTML репрезентацијата на еден предмет
+        getHTMLFormat()
+        {
+            return `<div
+                         class="item"
+                         title="${this.getFormattedName()}"
+                         style="background-image: url(${this.pictureURL})"
+                         data-item-name="${this.itemName}"
+                         data-item-type="${this.type}"
+                    ></div>`
+        }
+
+        //Функција којашто ja враќа HTML blueprint репрезентацијата на еден предмет
+        getBluePrintHTML()
+        {
+            return `<div
+                         class="item blueprint"
+                         title="${this.getFormattedName()}"
+                         style="background-image: url(${this.pictureURL})"
+                         data-item-name="${this.itemName}"
+                         data-item-type="${this.type}"
+                    ></div>`
+        }
+
+        //Статичка функција којашто го враќа името на предмет во camel case формат.
+        //Пр. Wooden Axes => woodenAxe
+        static getUnFormattedName(name)
+        {
+            const nameParts = name.split(" ");
+            let unFormattedName = nameParts[0].toLowerCase();
+
+            for (let i = 1; i < nameParts.length; i++)
+            {
+                const part = nameParts[i];
+                unFormattedName += part[0].toUpperCase() + part.substring(1).toLowerCase();
+            }
+
+            return unFormattedName;
+
+        }
+
+        //Функција којашто од camel case формат на името на предмет враќа форматиран user-friendly формат на името
+        //Пр. woodenAxe => Wooden Axe
+        getFormattedName()
+        {
+            let previousLetter = this.itemName[0];
+            let stringName = this.itemName[0].toUpperCase();
+            for (let i = 1; i < this.itemName.length; i++)
+            {
+                const nextLetter = this.itemName[i];
+                if (nextLetter >= "A" && nextLetter <= "Z")
+                {
+                    stringName += " ";
+                }
+                stringName += nextLetter;
+                previousLetter = nextLetter;
+            }
+            return stringName;
+        }
+
+    }
+
+    //Изведена класа со која се претставува еден Mythical предмет
+    class MythicalItem extends Item
+    {
+        constructor(item)
+        {
+            const newName = "mythical" + item.itemName[0].toUpperCase() + item.itemName.substring(1);
+            super(newName, item.type, item.pictureURL);
+        }
+
+
+        //Соодветна препокриена верзија на функцијата getHTMLFormat
+        getHTMLFormat()
+        {
+            return `<div
+                         class="item blue-filter"
+                         title="${this.getFormattedName()}"
+                         style="background-image: url(${this.pictureURL})"
+                         data-item-name="${this.itemName}"
+                         data-item-type="${this.type}"
+                    ></div>`
+        }
+
+        //Соодветна препокриена верзија на функцијата getBluePrintHTML
+        getBluePrintHTML()
+        {
+            return `<div
+                         class="item blue-filter blueprint"
+                         title="${this.getFormattedName()}"
+                         style="background-image: url(${this.pictureURL})"
+                         data-item-name="${this.itemName}"
+                         data-item-type="${this.type}"
+                    ></div>`
+        }
+    }
+
+    //Изведена класа со која се претставува еден Legendary предмет
+    class LegendaryItem extends Item
+    {
+
+        constructor(item)
+        {
+            const newName = "legendary" + item.itemName[0].toUpperCase() + item.itemName.substring(1);
+
+            super(newName, item.type, item.pictureURL);
+        }
+
+        //Соодветна препокриена верзија на функцијата getHTMLFormat
+        getHTMLFormat()
+        {
+            return `<div
+                         class="item red-filter"
+                         title="${this.getFormattedName()}"
+                         style="background-image: url(${this.pictureURL})"
+                         data-item-name="${this.itemName}"
+                         data-item-type="${this.type}"
+                    ></div>`
+        }
+
+        //Соодветна препокриена верзија на функцијата getBluePrintHTML
+        getBluePrintHTML()
+        {
+            return `<div
+                         class="item red-filter blueprint"
+                         title="${this.getFormattedName()}"
+                         style="background-image: url(${this.pictureURL})"
+                         data-item-name="${this.itemName}"
+                         data-item-type="${this.type}"
+                    ></div>`
+        }
+    }
+
+    //Класата во која се организирани сите UI елементи на апликацијата
+    class UI
+    {
+        craftingSlots;
+        materialSlots;
+        powderSlots;
+        craftedItemsSlots;
+        craftingResult;
+        powderCraftingSlot;
+
+        creatorModeButton;
+        createItemButton;
+        newItemPicture;
+        newItemName;
+        clearUserItemsButton
+
+        //Констуркот со кој се прави соодветна селекција на потребните елементи и се додаваат потребните “Event Listeners“
+        constructor()
+        {
+            this.craftingSlots = document.querySelectorAll(".crafting-slot");
+            this.powderCraftingSlot = document.querySelector("#powder-slot");
+
+            this.craftingResult = document.querySelector("#result-item-slot");
+
+            this.materialSlots = document.querySelectorAll(".material-slot");
+            this.powderSlots = document.querySelectorAll(".powder-slot");
+
+            this.craftedItemsSlots = document.querySelectorAll(".crafted-item-slot");
+
+
+            this.creatorModeButton = document.querySelector("#creator-mode-btn");
+            this.createItemButton = document.querySelector("#create-item-btn");
+            this.newItemName = document.querySelector("#item-name");
+            this.newItemPicture = document.querySelector("#item-picture");
+
+            this.clearUserItemsButton = document.querySelector("#clear-items");
+
+            this.addEventsForPowderAndMaterialSlots();
+            this.addEventsForCraftingSlots();
+            this.addEventsForCraftingResultSlot();
+            this.addEventsForPowderCraftingSlot();
+            this.addEventsForEmptyCraftedItemSlots();
+            this.addEventsForCreatorModeButtons();
+        }
+
+
+        //Дефинирање на потребните акции што треба да се случат при клик на секое од копчината од модулот за креирање на рецепти
+        addEventsForCreatorModeButtons()
+        {
+            this.creatorModeButton.addEventListener("click", () =>
+            {
+                craftIO.toggleCreatorMode(this.creatorModeButton);
+            })
+
+            this.createItemButton.addEventListener("click", () =>
+            {
+                craftIO.createNewItem();
+            })
+
+            this.clearUserItemsButton.addEventListener("click", () =>
+            {
+                craftIO.clearUserItems();
+            })
+
+        }
+
+        //Дефинирање на потребните акции што треба да се случат при клик на слотовите коишто ги содржат основите материјали и прашаци
+        addEventsForPowderAndMaterialSlots()
+        {
+            const clickHandler = slot =>
+            {
+                slot.addEventListener("click", () =>
+                {
+                    const itemElement = slot.children[0];
+                    const itemName = itemElement.dataset.itemName;
+                    const item = craftIO.getItem(itemName);
+                    craftIO.makeItemActive(item, slot);
+                })
+            }
+            this.powderSlots.forEach(clickHandler)
+            this.materialSlots.forEach(clickHandler);
+        }
+
+        //Дефинирање на потребните акции што треба да се случат при лев и десен клик на секој од слотовите на таблата
+        addEventsForCraftingSlots()
+        {
+            //Акции што се случуваат при лев клик на слотовите од таблата
+            this.craftingSlots.forEach(slot =>
+            {
+                slot.addEventListener("click", () =>
+                {
+                    craftIO.addItemToSlot(slot);
+                })
+            })
+
+            //Акции што се случуваат при десен клик на слотовите од таблата
+            this.craftingSlots.forEach(slot =>
+            {
+                slot.addEventListener("contextmenu", (e) =>
+                {
+                    e.preventDefault();
+                    craftIO.removeItemFromSlot(slot);
+                })
+            })
+        }
+
+        //Дефинирање на потребните акции што треба да се случат при клик на слотот за резултат
+        addEventsForCraftingResultSlot()
+        {
+            this.craftingResult.addEventListener("click", () =>
+            {
+                craftIO.activateConsumeItem();
+            })
+        }
+
+        //Дефинирање на потребните акции што треба да се случат при лев и десен клик на слотот за прашок
+        addEventsForPowderCraftingSlot()
+        {
+            //Акции што се случуваат при лев клик на слотот за прашак
+            this.powderCraftingSlot.addEventListener("click", () =>
+            {
+                craftIO.addPowder();
+            })
+
+            //Акции што се случуваат при десен клик на слотот за прашак
+            this.powderCraftingSlot.addEventListener("contextmenu", (e) =>
+            {
+                e.preventDefault();
+                craftIO.removePowder();
+            })
+        }
+
+        //Дефинирање на потребните акции што треба да се случат при клик на секој празен слот за “изработени предмети“
+        addEventsForEmptyCraftedItemSlots()
+        {
+            this.craftedItemsSlots.forEach(slot =>
+            {
+                slot.addEventListener("click", () =>
+                {
+                    if (craftIO.activeItem === craftIO.craftingResult)
+                    {
+                        craftIO.consumeCraftedItem(slot);
+                    }
+                })
+
+            })
+        }
+
+        //Дефинирање на потребните акции што треба да се случат при лев и десен клик на наведен
+        //исполнет слот за “изработени предмети“
+        addEventsForFullCraftedItemSlot(slot, craftingRecipe)
+        {
+            //Акции што се случуваат при лев клик на исплонет слот за “изработени предмети“
+            slot.addEventListener("contextmenu", (e) =>
+            {
+                e.preventDefault();
+                craftIO.showBluePrintForItem(craftingRecipe);
+            })
+
+            //Акции што се случуваат при десен клик на исплонет слот за “изработени предмети“
+            slot.addEventListener("click", () =>
+            {
+                craftIO.makeItemActive(craftingRecipe.item, slot);
+            })
+        }
+
+    }
+
+    //Класата со која се претставува еден рецепт
+    class CraftingRecipe
+    {
+        item;
+        recipe;
+
+        //Конструктор којшто креира инстанта од CraftingRecipe со наведен предмет (item) - резултатот од рецепотот
+        //и рецепт-објект (recipe) - објектот во којшто е специфицирано кој слот, кој предмет треба да го содржи
+        constructor(item, recipe)
+        {
+            //Иницијализација на рецепт-објектот
+            this.recipe = {};
+            for (let i = 0; i < 6; i++)
+            {
+                this.recipe[i] = null;
+            }
+            this.recipe.powder = null;
+
+            //Проверка дали рецептот содржи прашак
+            //Ако содржи, предметот ќе стане:
+            //Mythical, ако се користи син прашак
+            //Legendary, ако се користи црвен прашак
+            const powder = recipe.powder ? recipe.powder.itemName : null;
+            this.item = item;
+            if (powder)
+            {
+                if (powder === "bluePowder")
+                {
+                    this.item = new MythicalItem(item);
+                }
+                else
+                {
+                    this.item = new LegendaryItem(item);
+                }
+            }
+
+            //Пополнување на рецепт-објектот
+            for (const slotId in recipe)
+            {
+                if (!recipe[slotId]) continue;
+                this.recipe[slotId] = recipe[slotId].itemName;
+            }
+        }
+
+        //Статичка функција со која се добива CraftingRecipe инстанца од JSON репрезентација на еден рецепт-објект
+        static crateRecipeFromJsonFormat(craftingRecipeJson)
+        {
+            //Добивање на Item инстанца од JSON репрезентација на еден предмет
+            const item = Item.getInstanceFromJsonFormat(craftingRecipeJson.item);
+            for (const slotId in craftingRecipeJson.recipe)
+            {
+                craftingRecipeJson.recipe[slotId] = craftIO.getItem(craftingRecipeJson.recipe[slotId]);
+            }
+            return new CraftingRecipe(item, craftingRecipeJson.recipe);
+        }
+
+        //Статичка функција со која се добива CraftingRecipe инстанца од JSON репрезентација на еден рецепт-објект
+        //којшто бил зачуван во local storage
+        static createRecipeFromLocalStorage(craftingRecipeJson)
+        {
+            //Добивање на Item инстанца од JSON репрезентација на еден предмет
+            const item = Item.getInstanceFromJsonFormat(craftingRecipeJson.item);
+            if (item.itemName.startsWith("mythical"))
+            {
+                item.itemName = item.itemName.substring(8);
+            }
+            else if (item.itemName.startsWith("legendary"))
+            {
+                item.itemName = item.itemName.substring(9);
+            }
+
+            for (const slotId in craftingRecipeJson.recipe)
+            {
+                craftingRecipeJson.recipe[slotId] = craftIO.getItem(craftingRecipeJson.recipe[slotId]);
+            }
+            return new CraftingRecipe(item, craftingRecipeJson.recipe);
+        }
+    }
+
+
+    //Главната класа на апликацијата - ја содржи основната логика што апликацијата треба да ја имплементира
+    class CraftIO
+    {
+        //Податочни членки на класата
+        //Таблата за изработка на предмети
+        board;
+
+        //Предметот што моментало е активен
+        activeItem
+
+        //HTML елементот на предметот што моментало е активен
+        activeItemElement
+
+        //Објект со сите предмети коишто апликацијата ги има “научено“. Објектот е во формат: itemName: item (инстанца од класата Item)
+        items;
+
+        //Објект со сите рецепти коишто апликацијата ги има “научено“. Објектот е во формат: itemName: recipe (инстанца од класата CraftingRecipe)
+        craftingRecipes;
+
+        //Рецептот на предметот што моментало се изработува
+        atTheMomentCrafting;
+
+        //Резултатот од изработката се сместува во оваа променлива
+        craftingResult;
+
+        //Податочни членки потребни за имплементација на "Creator Mode"
+        //Boolean променлива којашто служи за да се определи дали "Creator Mode" е активен
+        creatorMode;
+
+        //Иницијализација на податочните членки и почетно ресетирање на таблата
+        constructor()
+        {
+            this.board = {};
+            this.resetBoard();
+
+            this.items = {};
+            this.craftingRecipes = {};
+
+            this.activeItem = null;
+            this.activeItemElement = null;
+            this.atTheMomentCrafting = null;
+            this.craftingResult = null;
+
+            this.creatorMode = false;
+        }
+
+        //Функција којашто враќа Item инстанца на предмет според неговото име
+        getItem(itemName)
+        {
+            return this.items[itemName];
+        }
+
+        //Функција којашто враќа CraftingRecipe инстанца на рецепт според неговото име
+        getRecipe(itemName)
+        {
+            return this.craftingRecipes[itemName];
+        }
+
+        //Функција која што даден предмет и слотот во којшто тој се наоѓа, ги прави активни
+        makeItemActive(item, itemElement)
+        {
+            if (this.activeItemElement)
+            {
+                this.activeItemElement.classList.remove("selected");
+            }
+            this.activeItem = item;
+            this.activeItemElement = itemElement;
+            this.activeItemElement.classList.add("selected");
+        }
+
+        //Функција со којашто активен предмет се додава во слотот за прашаци
+        addPowder()
+        {
+            if (this.activeItem.type !== "powder") return;
+
+            ui.powderCraftingSlot.innerHTML = this.activeItem.getHTMLFormat();
+            this.board.powder = this.activeItem;
+
+            this.craft();
+        }
+
+        //Функција со којашто активен предмет се додава во наведен слот од таблата
+        addItemToSlot(slot)
+        {
+            if (!this.activeItem) return;
+
+            if (this.activeItem === this.craftingResult) return;
+
+
+            const slotId = slot.dataset.slotId;
+            this.board[slotId] = this.activeItem;
+            slot.innerHTML = this.activeItem.getHTMLFormat();
+
+            //Доколку „Creator Mode“ не е вклучен, се повикува функција која што се справува со основната логика на
+            //“изработката“ (crafting) на предмет
+            if (!this.creatorMode)
+            {
+                this.craft();
+            }
+
+        }
+
+        //Функција со којашто се креира нов кориснички рецепт
+        createNewItem()
+        {
+            //Потребната валидација за да се креира нов рецепт
+            if (!this.creatorMode) return;
+
+            if (!ui.newItemName.value)
+            {
+                alert("Please input item name");
+                return
+            }
+
+            if (!ui.newItemPicture.value)
+            {
+                alert("Please input item picture URL");
+                return;
+            }
+
+            const itemName = Item.getUnFormattedName(ui.newItemName.value);
+
+            //Проверка дали рецепт со тоа име веќе постои. Доколку постои се спречува негово креирање и се известува корисникот
+            if(this.getItem(itemName))
+            {
+                alert("An item with that name already exist");
+                return;
+            }
+
+            const pictureURL = ui.newItemPicture.value;
+
+            //Ресетирање на полињата за име и URL на новиот предмет
+            ui.newItemPicture.value = "";
+            ui.newItemName.value = "";
+
+            //Креирање на новиот предмет
+            const newItem = new Item(itemName, "material", pictureURL);
+
+            //Креирање на рецептот за новиот предмет
+            const newCraftingRecipe = new CraftingRecipe(newItem, this.board);
+
+            //Справување со новиот рецепт
+            this.handelNewRecipe(newCraftingRecipe);
+
+            //Додавање на нивиот рецепт во local storage
+            this.addToLocalStorage(newCraftingRecipe);
+
+            //Исклучување на “Creator Mode“ после успешното креирање на нов предемт
+            this.toggleCreatorMode();
+
+            //Ресетирање на таблата
+            this.resetBoard();
+        }
+
+        //Функција со која рецепт се додава во local storage
+        addToLocalStorage(craftingRecipe)
+        {
+            const recipes = localStorage.getItem("recipes");
+            if (!recipes)
+            {
+                localStorage.setItem("recipes", JSON.stringify([craftingRecipe]));
+                return;
+            }
+
+            const parsedRecipes = JSON.parse(recipes);
+            parsedRecipes.push(craftingRecipe);
+            localStorage.setItem("recipes", JSON.stringify(parsedRecipes));
+        }
+
+        //Функција со која предмет се отстранува од наведен слот
+        removeItemFromSlot(slot)
+        {
+            if (!slot.innerHTML) return;
+
+            const slotId = slot.dataset.slotId;
+
+            this.board[slotId] = null;
+            slot.innerHTML = "";
+
+            this.craft();
+        }
+
+        //Функција со која се отстранува прашокот од слотот за прашаци
+        removePowder()
+        {
+            if (!ui.powderCraftingSlot.innerHTML) return;
+
+            this.board.powder = null;
+            ui.powderCraftingSlot.innerHTML = "";
+            this.craft();
+        }
+
+        //Функција со која се активира слотот за резултати
+        activateConsumeItem()
+        {
+            if (!this.craftingResult) return;
+
+            this.makeItemActive(this.craftingResult, ui.craftingResult);
+        }
+
+        //Функција со која предметот од слотот за резултати се сместува во наведениот слот
+        consumeCraftedItem(slot)
+        {
+            //Потребна валидација
+            if (!craftIO.craftingResult) return;
+
+
+            const itemName = this.craftingResult.itemName;
+            const craftingRecipe = this.getRecipe(itemName);
+
+            //Визуелно додавање на предметот во наведениот слот
+            slot.innerHTML = this.craftingResult.getHTMLFormat();
+
+            //Дефинирање на настани за новоисполнетиот слот
+            ui.addEventsForFullCraftedItemSlot(slot, craftingRecipe);
+
+            //Визуелно ресетирање на слотот за резултати
+            ui.craftingResult.innerHTML = "";
+            ui.craftingResult.classList.remove("selected");
+
+            //Слотот во којшто се поставува предметот станува активен слот
+            this.makeItemActive(this.activeItem, slot);
+
+            //Ресетирање на резултатот од изработката
+            this.craftingResult = null;
+
+            //Ресетирање на таблата
+            this.resetBoard();
+        }
+
+        //Функција во која се справуваме со основата логика на изработка на предмети
+        craft()
+        {
+            //Доколку ниту еден “blueprint“ не е активен, се спречува изработка на предмети
+            if (!this.atTheMomentCrafting) return;
+
+            //Проверка на рецептот - дали сите потребни предмети се на точните слотови
+            for (const slotId in this.board)
+            {
+                if (!this.board[slotId] && this.atTheMomentCrafting.recipe[slotId])
+                {
+                    this.craftingResult = null;
+                    ui.craftingResult.innerHTML = this.atTheMomentCrafting.item.getBluePrintHTML();
+                    return;
+                }
+
+                if (!this.board[slotId] && !this.atTheMomentCrafting.recipe[slotId])
+                {
+                    continue;
+                }
+
+                if (this.board[slotId].itemName !== this.atTheMomentCrafting.recipe[slotId])
+                {
+                    this.craftingResult = null;
+                    ui.craftingResult.innerHTML = this.atTheMomentCrafting.item.getBluePrintHTML();
+
+                    return;
+                }
+            }
+
+            //Доколку проверката на рецептот е успешна и се совпаѓа со тоа што е на таблата,
+            //предметот е успешно изработен и се поставува во слотот за резултати
+            this.craftingResult = this.atTheMomentCrafting.item;
+            ui.craftingResult.innerHTML = this.craftingResult.getHTMLFormat();
+        }
+
+        //Функција со која се ресетира таблата, визуелно и логички
+        resetBoard()
+        {
+            for (let i = 0; i < 6; i++)
+            {
+                this.board[i] = null;
+            }
+            this.board.powder = null;
+
+            ui.craftingSlots.forEach(slot => slot.innerHTML = "");
+            ui.powderCraftingSlot.innerHTML = "";
+        }
+
+        //Функција со која што се добиваат основите предмети:
+        // (metal, wood, stone, eternal flame, redPowder and bluePowder)
+        initItems()
+        {
+            const itemElements = document.querySelectorAll(".item");
+
+            itemElements.forEach(item =>
+            {
+                const itemName = item.dataset.itemName;
+                const type = item.dataset.itemType;
+                let pictureURL = item.style.backgroundImage;
+
+                pictureURL = pictureURL.replaceAll("url", "");
+                pictureURL = pictureURL.replaceAll("\"", "");
+                pictureURL = pictureURL.replaceAll("(", "");
+                pictureURL = pictureURL.replaceAll(")", "");
+
+                this.items[itemName] = new Item(itemName, type, pictureURL)
+            })
+
+        }
+
+        //Функција со којашто се прикажува blueprint-от на наведен рецепт
+        showBluePrintForItem(craftingRecipe)
+        {
+            //Доколку "Creator Mode" e активен, се спречува прикажување на blueprint-от
+            if (this.creatorMode) return;
+
+            //Ресетирање на таблата
+            this.resetBoard();
+
+            //Наведување што моментално се обидува корисникот на изработи
+            this.atTheMomentCrafting = craftingRecipe;
+
+            //Прикажување на blueprint-от
+            for (const slotId in craftingRecipe.recipe)
+            {
+                const itemName = craftingRecipe.recipe[slotId];
+
+                //Ако itemName е null, тоа значи дека на тој слот нема никаков предмет
+                if (!itemName) continue;
+
+                const item = craftIO.getItem(itemName);
+
+                //Ако slotId е powder, тоа значи дека станува збор за прашак, а не материјал
+                if (slotId === "powder")
+                {
+                    ui.powderCraftingSlot.innerHTML = item.getBluePrintHTML();
+                }
+                else
+                {
+                    ui.craftingSlots[slotId].innerHTML = item.getBluePrintHTML();
+                }
+            }
+
+            //При прикажувањето на blueprint, и самиот предемт што се обидуваме да го изработиме
+            //се прикажува како во слотот за резултати
+            ui.craftingResult.innerHTML = craftingRecipe.item.getBluePrintHTML();
+        }
+
+        //Функција со која се справува со нов рецепт
+        handelNewRecipe(craftingRecipe)
+        {
+            //Наоѓање на првиот слободен слот од слотовите за “изработени предмети“
+            let index = 0;
+            for (const slot of ui.craftedItemsSlots)
+            {
+                if (!slot.innerHTML) break;
+                index++;
+            }
+
+            //Слотот во којшто треба да се постави предметот
+            const craftedItemsSlot = ui.craftedItemsSlots[index];
+
+            //Предметот којшто треба да се постави
+            const item = craftingRecipe.item;
+
+            //Визуелно поставување на предметот во потребниот слот
+            craftedItemsSlot.innerHTML = item.getHTMLFormat();
+
+            //Додавање на предемтот во објектот којшто ги содржи сите достапни предмети
+            this.items[item.itemName] = item;
+
+            //Додавање на рецептот
+            craftIO.craftingRecipes[craftingRecipe.item.itemName] = craftingRecipe;
+
+            //Додавање на потребните настани за навоисполнетиот слот
+            ui.addEventsForFullCraftedItemSlot(craftedItemsSlot, craftingRecipe);
+        }
+
+        //Функција со којашто се вклучува "Creator Mode"
+        toggleCreatorMode()
+        {
+            this.creatorMode = !this.creatorMode;
+            this.resetBoard();
+            this.atTheMomentCrafting = null;
+            ui.craftingResult.innerHTML = "";
+
+            if (this.creatorMode)
+            {
+                ui.creatorModeButton.innerHTML = "Creator Mode: ON";
+                ui.craftingSlots.forEach(slot =>
+                {
+                    slot.classList.add("creator-mode-enabled");
+                })
+            }
+            else
+            {
+                ui.creatorModeButton.innerHTML = "Creator Mode: OFF";
+                ui.craftingSlots.forEach(slot =>
+                {
+                    slot.classList.remove("creator-mode-enabled");
+                })
+            }
+
+        }
+
+        //Функција со којашто се бришат сите кориснички дефинирани рецепти
+        clearUserItems()
+        {
+            const recipesString = localStorage.getItem("recipes");
+            if (!recipesString) return;
+
+            localStorage.removeItem("recipes");
+            location.reload();
+        }
+    }
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+    //Функција со која што се прави fetching and handling на рецептите од дадениот JSON
+    async function fetchCraftingRecipes()
+    {
+        const craftingRecipesJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/crafting-recipes.json");
+
+        for (const craftingRecipeJson of craftingRecipesJson)
+        {
+            const craftingRecipe = CraftingRecipe.crateRecipeFromJsonFormat(craftingRecipeJson);
+            craftIO.handelNewRecipe(craftingRecipe);
+        }
+
+        const recipes = localStorage.getItem("recipes");
+        if (!recipes) return;
+
+        for (const craftingRecipeJson of JSON.parse(recipes))
+        {
+            const craftingRecipe = CraftingRecipe.createRecipeFromLocalStorage(craftingRecipeJson);
+            craftIO.handelNewRecipe(craftingRecipe);
+        }
+
+    }
+
+
+    //Инстанци од потребните класи
+    const ui = new UI();
+    const craftIO = new CraftIO();
+
+    //Влезна точка на програмта во која ги добиваме основните предмети
+    craftIO.initItems();
+
+    //Повик на fetchCraftingRecipes за да се добијат и процесираат рецептите од JSON-от
+    fetchCraftingRecipes();
+
+</script>
+</body>
+</html>

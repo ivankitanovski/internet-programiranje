@@ -1,0 +1,42 @@
+[
+  {
+    "amplitude": [0.55, 0.40],
+    "frequency": [440, 880],
+    "duration": 2
+  },
+  {
+    "amplitude": [0.70, 0.60],
+    "frequency": [550, 1100],
+    "duration": 3
+  },
+  {
+    "amplitude": [0.45, 0.35],
+    "frequency": [400, 800],
+    "duration": 2
+  },
+  {
+    "amplitude": [0.60, 0.50],
+    "frequency": [600, 1200],
+    "duration": 4
+  },
+  {
+    "amplitude": [0.75, 0.65],
+    "frequency": [700, 1400],
+    "duration": 3
+  },
+  {
+    "amplitude": [0.50, 0.45],
+    "frequency": [480, 960],
+    "duration": 2
+  },
+  {
+    "amplitude": [0.65, 0.55],
+    "frequency": [520, 1040],
+    "duration": 3
+  },
+  {
+    "amplitude": [0.80, 0.70],
+    "frequency": [800, 1600],
+    "duration": 4
+  }
+]

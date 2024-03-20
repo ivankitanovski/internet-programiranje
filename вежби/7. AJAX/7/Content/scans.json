@@ -1,0 +1,72 @@
+[
+  {
+    "itemName": "Very beautiful Black Jacket",
+    "id": 902846513729481000,
+    "price": 500,
+    "amount": 5,
+    "size": 2
+  },
+  {
+    "itemName": "Retro Red Dress",
+    "id": 387569210834765900,
+    "price": 700,
+    "amount": 3,
+    "size": 1
+  },
+  {
+    "itemName": "Comfortable Blue Jeans",
+    "id": 548921367485672300,
+    "price": 300,
+    "amount": 8,
+    "size": 3
+  },
+  {
+    "itemName": "Classic White T-Shirt",
+    "id": 694208173569012700,
+    "price": 150,
+    "amount": 10,
+    "size": 4
+  },
+  {
+    "itemName": "Elegant Formal Suit",
+    "id": 123456789012345600,
+    "price": 1000,
+    "amount": 2,
+    "size": 5
+  },
+  {
+    "itemName": "Casual Sneakers",
+    "id": 987654321098765400,
+    "price": 200,
+    "amount": 6,
+    "size": 6
+  },
+  {
+    "itemName": "Chic Leather Handbag",
+    "id": 456789012345678900,
+    "price": 250,
+    "amount": 4,
+    "size": 7
+  },
+  {
+    "itemName": "Cozy Winter Scarf",
+    "id": 345678901234567800,
+    "price": 50,
+    "amount": 15,
+    "size": 8
+  },
+  {
+    "itemName": "Sporty Gym Shorts",
+    "id": 567890123456789000,
+    "price": 80,
+    "amount": 7,
+    "size": 9
+  },
+  {
+    "itemName": "Trendy Sunglasses",
+    "id": 890123456789012400,
+    "price": 120,
+    "amount": 9,
+    "size": 10
+  }
+]

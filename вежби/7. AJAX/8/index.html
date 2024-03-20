@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #050b08;
+            --background: #f2f9f6;
+            --primary: #49b784;
+            --secondary: #92d7b7;
+            --accent: #70cea2;
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        .selected {
+            outline: 3px solid var(--primary);
+        }
+
+
+        #chat-app {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            padding: 1rem;
+            height: 100vh;
+            gap: 0.5rem;
+        }
+
+        .side-bar {
+            display: grid;
+            grid-template-rows: 0.7fr 1.5fr 1.5fr 1.5fr;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow);
+            gap: 0.5rem;
+        }
+
+        .user-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .chats-container {
+            background-color: var(--background);
+            padding: 0.3rem;
+            border-radius: 7px;
+            color: black;
+        }
+
+        .chat-heads {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0.2rem;
+            gap: 1rem;
+        }
+
+        .chat-head-wrapper {
+            cursor: pointer;
+            display: grid;
+            gap: 0.3rem;
+            place-items: center;
+        }
+
+        .chat-head {
+            border-radius: 50%;
+            width: 55px;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary);
+            font-size: 2rem;
+            box-shadow: var(--shadow);
+            color: white;
+            font-weight: 500;
+            transition: all 200ms ease;
+        }
+
+        .chat-head:hover {
+            opacity: 60%;
+        }
+
+        .chat-head:active {
+            transform: scale(90%);
+        }
+
+        .chat-username {
+            text-align: center;
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .chat-info-container {
+            background-color: var(--background);
+            border-radius: 5px;
+            padding: 1rem;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            box-shadow: var(--shadow);
+        }
+
+        .chat-info-container h3 {
+            text-align: center;
+            padding: 0.2rem;
+            background-color: var(--text);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .chat-info-main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 550px;
+            overflow: auto;
+            padding: 0.5rem;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--secondary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 0 0.5rem;
+        }
+
+        .message-time {
+            text-align: center;
+            color: white;
+            opacity: 40%;
+        }
+
+        .message-wrapper {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message-icon-wrapper {
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+        }
+
+        .message-first-letter {
+            border-radius: 50%;
+            width: 30px;
+            aspect-ratio: 1/1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.1em 0.5em;
+            background-color: var(--text);
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            font-size: 0.7rem;
+        }
+
+        .message-username {
+            font-size: 0.7rem;
+        }
+
+        .message-content {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .sender {
+            justify-content: flex-end;
+        }
+
+        .receiver {
+            justify-content: flex-start;
+        }
+
+        .chat-locked {
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 700;
+            color: white;
+            border-radius: 10px;
+            background-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+<main id="chat-app">
+    <nav class="side-bar">
+        <div class="user-info-container">
+            <div class="user-info">
+                <h3>Username:</h3>
+                <div id="username">mouse123</div>
+            </div>
+            <div class="user-info">
+                <h3>UserID:</h3>
+                <div id="user-id">bigmouse123</div>
+            </div>
+        </div>
+
+        <div class="chats-container">
+            <h3>Met a new Friend</h3>
+            <div class="chat-heads" id="met-a-new-friend">
+            </div>
+        </div>
+        <div class="chats-container">
+            <h3>Rejected</h3>
+            <div class="chat-heads" id="rejected">
+            </div>
+        </div>
+        <div class="chats-container">
+            <h3>Rejectee</h3>
+            <div class="chat-heads" id="rejectee">
+            </div>
+        </div>
+
+    </nav>
+
+    <section class="chat-info-container">
+        <h3>Chat Info</h3>
+        <div class="chat-info-main">
+        </div>
+        <div class="chat-locked">Chat Locked</div>
+    </section>
+</main>
+
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+
+    //Главната класа со која се претставува еден разговор
+    class LockedChat
+    {
+        //Property fields на еден разговор
+        userId;
+        meeterId;
+        username;
+        meeterUsername;
+        chatHistory;
+
+        // Конструктро со кој се иницијализира LockedChat инстанцата од JSON податоците
+        constructor(lockedChatJson)
+        {
+            //Доделување на вредности
+            this.userId = lockedChatJson.userID;
+            this.meeterId = lockedChatJson.meeterID;
+            this.username = lockedChatJson.username;
+            this.meeterUsername = lockedChatJson.meeterUsername;
+
+            //Иницијализација на празна низа во која ќе се сместуваат разменетите токени
+            this.chatHistory = [];
+
+            //Пополнување на низата со креирање на токени од JSON податоците
+            for (const tokenJson of lockedChatJson.chatHistory)
+            {
+                this.chatHistory.push(new Token(tokenJson));
+            }
+
+            //Хронолошко сортирање на разговорите според нивните timeStamp (временски печат)
+            this.chatHistory.sort((t1, t2) => t1.parsedTimestamp - t2.parsedTimestamp);
+        }
+
+        //Метод со кој се добиваат токените пратени од user
+        getUserTokens()
+        {
+            const userTokens = [];
+            this.chatHistory
+                .filter(token => token.sender === this.userId)
+                .forEach(token => userTokens.push(token));
+
+            return userTokens;
+        }
+
+        //Метод со кој се добиваат токените пратени од meeter
+        getMeeterTokens()
+        {
+            const meeterTokens = [];
+            this.chatHistory
+                .filter(token => token.sender === this.meeterId)
+                .forEach(token => meeterTokens.push(token));
+
+            return meeterTokens;
+        }
+
+        //Метод со кој се определува кој е исходот од разговорот
+        getOutCome()
+        {
+            const meeterTokens = this.getMeeterTokens();
+            const userTokens = this.getUserTokens();
+
+            const meetTokenMeeter = meeterTokens.pop();
+            const meetTokenUser = userTokens.pop();
+
+            if (meetTokenUser.content.toLowerCase() === "reject"
+                && meetTokenUser.parsedTimestamp < meetTokenMeeter.parsedTimestamp
+            )
+            {
+                return "rejectee";
+            }
+
+            if (meetTokenUser.content.toLowerCase() === "meet")
+            {
+                if (meetTokenMeeter.content.toLowerCase() === "meet")
+                {
+                    return "newFriend";
+                }
+                else
+                {
+                    return "rejected";
+                }
+            }
+        }
+
+        //Метод со кој се добива правилното име за приказ, според исходот на разговорот
+        getProperName(token)
+        {
+            const outCome = this.getOutCome();
+
+            if (outCome === 'rejected') return token.sender;
+
+            if (token.sender === this.userId)
+            {
+                return this.username;
+            }
+            return this.meeterUsername;
+        }
+    }
+
+    //Класа со која е претставен еден токен
+    class Token
+    {
+        sender;
+        content;
+        timeStamp;
+        parsedTimestamp;
+
+        //Конструктор за иницијализација на инстанцата со податоци од JSON-от
+        constructor(tokenJson)
+        {
+            this.sender = tokenJson.sender;
+            this.content = tokenJson.tokenContent;
+            this.timeStamp = tokenJson.timestamp;
+            this.parsedTimestamp = parseInt(tokenJson.timestamp);
+        }
+
+        // Method to get a formatted timestamp for display
+        //Метод со кој се добива форматираниот временски печат
+        //Пр. од 0930 => 09:30
+        getFormattedTimeStamp()
+        {
+            return this.timeStamp.substring(0, 2) + ":" + this.timeStamp.substring(2);
+        }
+    }
+
+    //Класа во која се групирани сите потребни UI елементи од апликацијата
+    class UI
+    {
+        metANewFriendElement;
+        rejectedElement;
+        rejecteeElement;
+        chatInfoElement;
+        usernameElement;
+        userIdElement;
+
+        // Конструктор во кој се прави соодветно селектирање на елементите
+        constructor()
+        {
+            this.metANewFriendElement = document.querySelector("#met-a-new-friend");
+            this.rejectedElement = document.querySelector("#rejected");
+            this.rejecteeElement = document.querySelector("#rejectee");
+            this.chatInfoElement = document.querySelector(".chat-info-main");
+            this.usernameElement = document.querySelector("#username");
+            this.userIdElement = document.querySelector("#user-id");
+        }
+    }
+
+    //Класа со која се опфаќа целата логика на апликацијата
+    class MeetingFriendsApp
+    {
+        lockedChats;
+
+        metNewFriends;
+        rejected;
+        rejectee;
+
+        activeChat;
+        activeChatElement;
+
+        //Конструктор со кој се инизијализира апликацијата
+        constructor()
+        {
+            this.lockedChats = [];
+            this.metNewFriends = [];
+            this.rejectee = [];
+            this.rejected = [];
+            this.activeChat = null;
+            this.activeChatElement = null;
+        }
+
+        //Метод со кои се прави организација на секој разговор, во категоријата во која припаѓа
+        organizeLockedChats()
+        {
+            for (const lockedChat of this.lockedChats)
+            {
+                const outCome = lockedChat.getOutCome();
+                if (outCome === "newFriend")
+                {
+                    this.metNewFriends.push(lockedChat);
+                }
+                else if (outCome === "rejected")
+                {
+                    this.rejected.push(lockedChat);
+                }
+                else
+                {
+                    this.rejectee.push(lockedChat);
+                }
+            }
+        }
+
+        //Метод се кој се добива баран разговор, според неговиот тип и индексот во соодветната низа
+        getLockedChat(type, index)
+        {
+            return this[type][index];
+        }
+
+        //Метод со кој се активира chat head-от (со додавање на класата selected)
+        activateChatHead(activeChat, activeChatElement)
+        {
+            if (this.activeChatElement)
+            {
+                this.activeChatElement.querySelector(".chat-head").classList.remove("selected");
+            }
+
+            this.activeChat = activeChat;
+            this.activeChatElement = activeChatElement;
+            this.activeChatElement.querySelector(".chat-head").classList.add("selected");
+        }
+
+        //Метод со кој се прави прикажување на chat-овите во соодветните таб-ови
+        renderChatHeads()
+        {
+            let friendIndex = 0;
+            let rejectedIndex = 0;
+            for (const lockedChat of this.metNewFriends)
+            {
+                //За секој chat-head се додаваат дополнителни data полиња: index и type. Ова е потребно за да се определи
+                //за кој точно chat станува збор кога корисникот ќе кликне на него
+                ui.metANewFriendElement.innerHTML +=
+                    `<div class="chat-head-wrapper chat-head-js" data-type="metNewFriends" data-index="${friendIndex}">
+                        <div class="chat-head">${lockedChat.meeterUsername[0].toUpperCase()}</div>
+                        <div class="chat-username">${lockedChat.meeterUsername}</div>
+                    </div>`;
+
+                friendIndex++;
+            }
+            for (const lockedChat of this.rejected)
+            {
+                ui.rejectedElement.innerHTML +=
+                    `<div class="chat-head-wrapper chat-head-js" data-type="rejected" data-index="${rejectedIndex}">
+                        <div class="chat-head">${lockedChat.meeterId[0].toUpperCase()}</div>
+                        <div class="chat-username">${lockedChat.meeterId}</div>
+                    </div>`;
+
+                rejectedIndex++;
+            }
+            for (const lockedChat of this.rejectee)
+            {
+                ui.rejecteeElement.innerHTML +=
+                    `<div class="chat-head-wrapper">
+                        <div class="chat-head">${lockedChat.meeterId[0].toUpperCase()}</div>
+                        <div class="chat-username">${lockedChat.meeterId}</div>
+                    </div>`;
+            }
+        }
+
+        //Метод со кој се дефинира што се случува кога корисникот ќе кликне на chat-head-от.
+        addEventsForChatHeads()
+        {
+            const chatHeads = document.querySelectorAll(".chat-head-js");
+
+            chatHeads.forEach(chatHead =>
+            {
+                chatHead.addEventListener("click", () =>
+                {
+                    const chatType = chatHead.dataset.type;
+                    const chatIndex = chatHead.dataset.index;
+                    const lockedChat = app.getLockedChat(chatType, chatIndex);
+
+                    app.activateChatHead(lockedChat, chatHead);
+                    app.renderChatHistory();
+                });
+            });
+        }
+
+        //Главниот метод со кој се прикажува разговорот (пораките кои биле разменети) во соодвениот дел на апликацијата
+        renderChatHistory()
+        {
+            ui.chatInfoElement.innerHTML = "";
+
+            app.activeChat.chatHistory.forEach(token =>
+            {
+                const properName = app.activeChat.getProperName(token);
+
+                if (token.sender === app.activeChat.userId)
+                {
+                    ui.chatInfoElement.innerHTML += `
+                        <div class="message-container">
+                            <h5 class="message-time">${token.getFormattedTimeStamp()}</h5>
+                            <div class="message-wrapper sender">
+                                <div class="message-content">${token.content}</div>
+                                <div class="message-icon-wrapper">
+                                    <div class="message-first-letter">${properName[0].toUpperCase()}</div>
+                                    <div class="message-username">${properName}</div>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                else
+                {
+                    ui.chatInfoElement.innerHTML += `
+                        <div class="message-container">
+                            <h5 class="message-time">${token.getFormattedTimeStamp()}</h5>
+                            <div class="message-wrapper receiver">
+                                <div class="message-icon-wrapper">
+                                    <div class="message-first-letter">${properName[0].toUpperCase()}</div>
+                                    <div class="message-username">${properName}</div>
+                                </div>
+                                <div class="message-content">${token.content}</div>
+                            </div>
+                        </div>`;
+                }
+            });
+        }
+
+        //Метод со кои се прикажуваат основите информации за еден корисник
+        renderMainUserInfo()
+        {
+            const username = this.lockedChats[1].username;
+            const userId = this.lockedChats[1].userId;
+
+            ui.userIdElement.innerHTML = userId;
+            ui.usernameElement.innerHTML = username;
+        }
+    }
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+    //Иницијализирачка функција од каде се повикуваат сите останати методи за правилно функционирање на апликацијата
+    async function init()
+    {
+        //Преземање на податоците за разговорите
+        const chatsJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/locked-chats.json");
+
+        //Креирање на LockedChat инстанции и нивно додавање во апликацијата
+        chatsJson.forEach(chatJson => app.lockedChats.push(new LockedChat(chatJson)));
+
+        //Организирање на разговорите во соодвтните типови
+        app.organizeLockedChats();
+
+        //Прикажување на chat-head-овите и информациите за корисникот
+        app.renderChatHeads();
+        app.addEventsForChatHeads();
+        app.renderMainUserInfo();
+    }
+
+    //Креирање на инстанци на апликацијата и UI (User Interface) елементите
+    const app = new MeetingFriendsApp();
+    const ui = new UI();
+
+    //Иницијализација на апликацијата
+    init();
+</script>
+</body>
+</html>
