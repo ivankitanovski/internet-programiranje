@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    // Внесување на бројот
+    let number = prompt("Enter a number:");
+    number = parseInt(number);
+
+    // Променлива за чување на обратниот број
+    let reversedNumber = 0;
+    let tempNumber = Math.floor(number);
+
+    // Пресметување на обратниот број
+    while (tempNumber > 0) {
+        const digit = tempNumber % 10;
+        reversedNumber = reversedNumber * 10 + digit;
+        tempNumber = Math.floor(tempNumber / 10);
+    }
+
+    // Проверка дали обратниот број е делив со цифрата на единиците од внесениот број
+    const ones = number % 10;
+    if (reversedNumber % ones === 0) {
+        alert("YES");
+    } else {
+        alert("NO");
+    }
+</script>
+</html>

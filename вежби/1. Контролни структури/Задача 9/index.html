@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    // Иницијализирање на HP
+    let narutoHP = 100;
+    let sasukeHP = 100;
+    let damageToSasuke, damageToNaruto;
+
+    while (true) {
+        // Нападот на Naruto
+        damageToSasuke = Math.floor(Math.random() * 11) + 5;
+        sasukeHP -= damageToSasuke;
+        console.log(narutoHP + " " + sasukeHP);
+        if (sasukeHP <= 0) {
+            console.log("The winner is: Naruto " + narutoHP);
+            break;
+        }
+
+        // Нападот на Sasuke
+        damageToNaruto = Math.floor(Math.random() * 11) + 5;
+        narutoHP -= damageToNaruto;
+        console.log(narutoHP + " " + sasukeHP);
+        if (narutoHP <= 0) {
+            console.log("The winner is: Sasuke " + sasukeHP);
+            break;
+        }
+    }
+</script>
+</html>
