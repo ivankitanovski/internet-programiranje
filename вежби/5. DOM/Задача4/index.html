@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // <div id="container">
+    //     <h1>Hello</h1>
+    //     <p>Ова е вежба за креирање на DOM структура во JavaScript.</p>
+    //     <ul>
+    //         <li>Item 1</li>
+    //         <li>Item 2</li>
+    //         <li>Item 3</li>
+    //     </ul>
+    // </div>
+    function create() {
+        let container = document.createElement('div');//се прави div
+        container.id = 'container';
+
+        let heading = document.createElement('h1');//се прави наслов
+        heading.textContent = 'Hello';
+
+        let paragraph = document.createElement('p');//се прави параграф
+        paragraph.textContent = 'Ова е вежба за креирање на DOM структура во JavaScript.';
+
+        let ul = document.createElement('ul');//се прави unordered list
+
+        let items = ['Item1', 'Item2', 'Item3']; // се прави листа од елементи
+
+        items.forEach(item => { // се става содржината на листата во unordered list
+            let li = document.createElement('li');
+            li.textContent = item;
+            ul.appendChild(li);
+        });
+
+        container.appendChild(heading); // со функцијата аppend се додаваат елементите
+        container.appendChild(paragraph);
+        container.appendChild(ul);
+
+        document.body.appendChild(container);// со функцијата append се додава контејнерот на body
+    }
+
+    create();//повикување на функцијата
+</script>
+</body>
+</html>
