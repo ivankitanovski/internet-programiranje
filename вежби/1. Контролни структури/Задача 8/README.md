@@ -7,6 +7,14 @@
 
 ![image](img/8.2.png)
 
+![image](img/8.3.png)
+
+![image](img/8.4.png)
+
+![image](img/8.5.png)
+
+![image](img/8.6.png)
+
 
 
 

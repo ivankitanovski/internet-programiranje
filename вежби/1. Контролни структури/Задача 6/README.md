@@ -8,6 +8,18 @@
 
 ![image](img/6.3.png)
 
+![image](img/6.4.png)
+
+![image](img/6.5.png)
+
+![image](img/6.6.png)
+
+![image](img/6.7.png)
+
+![image](img/6.8.png)
+
+
+
 
 
 

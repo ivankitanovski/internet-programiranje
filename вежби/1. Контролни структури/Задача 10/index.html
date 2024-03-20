@@ -9,11 +9,12 @@
 <script>
     let number = prompt("Enter an integer number:");
     number = parseInt(number);
+    let digit = number % 10;
     let result = "";
-    for (let i = 0; i <= number; i++) {
+    for (let i = 1; i <= number; i++) {
 
-        // Проверка за непарно растојание
-        if (Math.abs(number - i) % 2 === 1) {
+        // Проверка за деливост со цифрата на единиците
+        if (i % digit === 0) {
             result += i + " ";
         }
     }
