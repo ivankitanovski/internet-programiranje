@@ -1,0 +1,178 @@
+[
+  {
+    "date": "2024-01-30",
+    "calls": [
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "987-654-3210",
+        "time": "15:30:45",
+        "duration": 120
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "789-012-3456",
+        "time": "14:15:30",
+        "duration": 90
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "555-666-7777",
+        "time": "12:45:20",
+        "duration": 180
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "555-666-7777",
+        "time": "10:00:10",
+        "duration": 60
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "222-333-4444",
+        "time": "09:30:00",
+        "duration": 120
+      }
+    ]
+  },
+  {
+    "date": "2024-01-29",
+    "calls": [
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "123-456-7890",
+        "time": "20:45:00",
+        "duration": 150
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "456-789-0123",
+        "time": "18:30:15",
+        "duration": 60
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "777-888-9999",
+        "time": "16:20:30",
+        "duration": 90
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "222-333-4444",
+        "time": "14:10:00",
+        "duration": 120
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "123-456-7890",
+        "time": "12:00:45",
+        "duration": 45
+      }
+    ]
+  },
+  {
+    "date": "2024-01-28",
+    "calls": [
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "111-222-3333",
+        "time": "19:15:00",
+        "duration": 120
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "555-666-7777",
+        "time": "17:30:45",
+        "duration": 90
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "555-666-7777",
+        "time": "15:40:20",
+        "duration": 180
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "789-012-3456",
+        "time": "14:00:10",
+        "duration": 60
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "333-444-5555",
+        "time": "13:10:00",
+        "duration": 120
+      }
+    ]
+  },
+  {
+    "date": "2024-01-27",
+    "calls": [
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "555-666-7777",
+        "time": "21:30:15",
+        "duration": 150
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "222-333-4444",
+        "time": "19:45:30",
+        "duration": 60
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "123-456-7890",
+        "time": "17:10:20",
+        "duration": 90
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "987-654-3210",
+        "time": "15:30:00",
+        "duration": 120
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "789-012-3456",
+        "time": "13:00:45",
+        "duration": 45
+      }
+    ]
+  },
+  {
+    "date": "2024-01-26",
+    "calls": [
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "777-888-9999",
+        "time": "22:00:00",
+        "duration": 180
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "555-666-7777",
+        "time": "20:15:15",
+        "duration": 60
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "123-456-7890",
+        "time": "18:30:30",
+        "duration": 90
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "777-888-9999",
+        "time": "16:45:45",
+        "duration": 120
+      },
+      {
+        "callerNumber": "074-999-999",
+        "receiverNumber": "333-444-5555",
+        "time": "15:00:00",
+        "duration": 45
+      }
+    ]
+  }
+  
+]

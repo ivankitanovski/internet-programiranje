@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #050b08;
+            --background: #f2f9f6;
+            --primary: #49b784;
+            --secondary: #92d7b7;
+            --accent: #70cea2;
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        .selected {
+            outline: 3px solid var(--primary);
+        }
+
+
+        #chat-app {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            padding: 1rem;
+            height: 100vh;
+            gap: 0.5rem;
+        }
+
+        .side-bar {
+            display: grid;
+            grid-template-rows: 0.7fr 1.5fr 1.5fr 1.5fr;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow);
+            gap: 0.5rem;
+        }
+
+        .user-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .chats-container {
+            background-color: var(--background);
+            padding: 0.3rem;
+            border-radius: 7px;
+            color: black;
+
+        }
+
+        .chat-heads {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0.2rem;
+            gap: 1rem;
+        }
+
+        .chat-head-wrapper {
+            cursor: pointer;
+            display: grid;
+            gap: 0.3rem;
+            place-items: center;
+        }
+
+        .chat-head {
+            border-radius: 50%;
+            width: 55px;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary);
+            font-size: 2rem;
+            box-shadow: var(--shadow);
+            color: white;
+            font-weight: 500;
+            transition: all 200ms ease;
+        }
+
+        .chat-head:hover {
+            opacity: 60%;
+        }
+
+        .chat-head:active {
+            transform: scale(90%);
+        }
+
+        .chat-username {
+            text-align: center;
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .chat-info-container {
+            background-color: var(--background);
+            border-radius: 5px;
+            padding: 1rem;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            box-shadow: var(--shadow);
+        }
+
+        .chat-info-container h3 {
+            text-align: center;
+            padding: 0.2rem;
+            background-color: var(--text);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .chat-info-main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 550px;
+            overflow: auto;
+            padding: 0.5rem;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--secondary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 0 0.5rem;
+
+        }
+
+        .message-time {
+            text-align: center;
+            color: white;
+            opacity: 40%;
+        }
+
+        .message-wrapper {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message-icon-wrapper {
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+        }
+
+        .message-first-letter {
+            border-radius: 50%;
+            width: 30px;
+            aspect-ratio: 1/1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.1em 0.5em;
+            background-color: var(--text);
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            font-size: 0.7rem;
+
+        }
+
+        .message-username {
+            font-size: 0.7rem;
+        }
+
+        .message-content {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .sender {
+            justify-content: flex-end;
+        }
+
+        .receiver {
+            justify-content: flex-start;
+        }
+
+        .chat-locked {
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 700;
+            color: white;
+            border-radius: 10px;
+            background-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+<main id="chat-app">
+    <nav class="side-bar">
+        <div class="user-info-container">
+            <div class="user-info">
+                <h3>Username:</h3>
+                <div id="username">mouse123</div>
+            </div>
+            <div class="user-info">
+                <h3>UserID:</h3>
+                <div id="user-id">bigmouse123</div>
+            </div>
+        </div>
+
+        <div class="chats-container">
+            <h3>Met a new Friend</h3>
+            <div class="chat-heads" id="met-a-new-friend">
+                <div class="chat-head-wrapper chat-head-js">
+                    <div class="chat-head selected">N</div>
+                    <div class="chat-username">NewFriend123</div>
+                </div>
+                <div class="chat-head-wrapper chat-head-js">
+                    <div class="chat-head">N</div>
+                    <div class="chat-username">NewFriend123</div>
+                </div>
+            </div>
+        </div>
+        <div class="chats-container">
+            <h3>Rejected</h3>
+            <div class="chat-heads" id="rejected">
+                <div class="chat-head-wrapper chat-head-js">
+                    <div class="chat-head">N</div>
+                    <div class="chat-username">NewFriend123</div>
+                </div>
+                <div class="chat-head-wrapper chat-head-js">
+                    <div class="chat-head">N</div>
+                    <div class="chat-username">NewFriend123</div>
+                </div>
+            </div>
+        </div>
+        <div class="chats-container">
+            <h3>Rejectee</h3>
+            <div class="chat-heads" id="rejectee">
+                <div class="chat-head-wrapper">
+                    <div class="chat-head">N</div>
+                    <div class="chat-username">NewFriend123</div>
+                </div>
+                <div class="chat-head-wrapper">
+                    <div class="chat-head">N</div>
+                    <div class="chat-username">NewFriend123</div>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+    <section class="chat-info-container">
+        <h3>Chat Info</h3>
+        <div class="chat-info-main">
+            <div class="message-container">
+                <h5 class="message-time">15:30</h5>
+                <div class="message-wrapper sender">
+                    <div class="message-content">Hi</div>
+                    <div class="message-icon-wrapper">
+                        <div class="message-first-letter">M</div>
+                        <div class="message-username">mouse123</div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="message-container">
+                <h5 class="message-time">15:30</h5>
+                <div class="message-wrapper receiver">
+                    <div class="message-icon-wrapper">
+                        <div class="message-first-letter">D</div>
+                        <div class="message-username">dog123</div>
+
+                    </div>
+                    <div class="message-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
+                        dolorem ea iste labore modi quo.
+                    </div>
+
+                </div>
+            </div>
+            <div class="message-container">
+                <h5 class="message-time">15:30</h5>
+                <div class="message-wrapper sender">
+                    <div class="message-content">Hi</div>
+                    <div class="message-icon-wrapper">
+                        <div class="message-first-letter">M</div>
+                        <div class="message-username">mouse123</div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="message-container">
+                <h5 class="message-time">15:30</h5>
+                <div class="message-wrapper receiver">
+                    <div class="message-icon-wrapper">
+                        <div class="message-first-letter">D</div>
+                        <div class="message-username">dog123</div>
+
+                    </div>
+                    <div class="message-content">Hi</div>
+
+                </div>
+            </div>
+            <div class="message-container">
+                <h5 class="message-time">15:30</h5>
+                <div class="message-wrapper sender">
+                    <div class="message-content">meet</div>
+                    <div class="message-icon-wrapper">
+                        <div class="message-first-letter">M</div>
+                        <div class="message-username">mouse123</div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="message-container">
+                <h5 class="message-time">15:30</h5>
+                <div class="message-wrapper receiver">
+                    <div class="message-icon-wrapper">
+                        <div class="message-first-letter">D</div>
+                        <div class="message-username">dog123</div>
+
+                    </div>
+                    <div class="message-content">meet</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="chat-locked">Chat Locked</div>
+    </section>
+</main>
+
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+</script>
+</body>
+</html>

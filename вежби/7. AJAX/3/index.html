@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            ---text: #0c130f;
+            --background: #fbfdfc;
+            --primary: #5cb582;
+            --secondary: #9ddab7;
+            --accent: #72d49c;
+            --accent2: #a7a7e7;
+
+
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: "Poppins", "serif";
+            box-shadow: var(--shadow);
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(101%);
+        }
+
+        button:active {
+            transform: scale(98%);
+        }
+
+
+        #student-cards-app {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            padding: 0.5rem;
+            gap: 0.5rem;
+            min-height: 100vh;
+        }
+
+        .students-container {
+            padding: 2rem;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+
+        .students {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .student {
+            padding: 1rem;
+            background-color: var(--accent);
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.1s ease;
+            cursor: pointer;
+        }
+
+        .student:active {
+            transform: scale(98%);
+        }
+
+        .active-student {
+            background-color: var(--primary);
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--accent2);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            align-items: center;
+
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .card {
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .debit-card {
+            background-color: #456cc4;
+            color: white;
+        }
+
+        .movie-card {
+            background-color: #d34040;
+            color: white;
+        }
+
+        .meal-card {
+            background-color: lawngreen;
+        }
+
+        .travel-card {
+            background-color: #343030;
+            color: white;
+        }
+
+        .special-card {
+            background-color: deeppink;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<main id="student-cards-app">
+    <section class="students-container">
+        <h3>Students</h3>
+        <div class="students"></div>
+    </section>
+    <section class="cards-container">
+        <h3>Cards</h3>
+        <div class="cards"></div>
+    </section>
+</main>
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+    // Класата со која е претставена една картичка
+    class Card
+    {
+        cardNumber;
+        name;
+
+        constructor(number, name)
+        {
+            this.cardNumber = number;
+            this.name = name;
+        }
+    }
+
+    // Дефинирање на подкласата DebitCard која наследува од Card
+    class DebitCard extends Card
+    {
+        expirationDate;
+        balance;
+
+        //Конструктор на класата за креирање на инстанца од даден JSON формат
+        constructor(cardJson)
+        {
+            super(cardJson.cardNumber, cardJson.cardHolderName);
+            this.expirationDate = cardJson.expirationDate;
+            this.balance = cardJson.balance;
+        }
+
+        // Метод за добивање на HTML форматот за приказ на картичката
+        getHTMLFormat()
+        {
+            return `<div class="card debit-card">
+            <h5>Student Debit Card</h5>
+            <div class="card-number">${this.cardNumber}</div>
+            <div class="card-holder">${this.name}</div>
+            <div class="expiration-date">${this.expirationDate}</div>
+            <div class="balance">\$${this.balance}</div>
+        </div>`;
+        }
+    }
+
+    // Дефинирање на подкласата MovieCard која наследува од Card
+    class MovieCard extends Card
+    {
+        university;
+        balance;
+
+        //Конструктор на класата за креирање на инстанца од даден JSON формат
+        constructor(cardJson)
+        {
+            super(cardJson.cardNumber, cardJson.studentName);
+            this.university = cardJson.university;
+            this.balance = cardJson.balance;
+        }
+
+        // Метод за добивање на HTML форматот за приказ на картичката
+        getHTMLFormat()
+        {
+            return `<div class="card movie-card">
+            <h5>Student Movie Card</h5>
+            <div class="card-number">${this.cardNumber}</div>
+            <div class="student-name">${this.name}</div>
+            <div class="university">${this.university}</div>
+            <div class="balance">\$${this.balance}</div>
+        </div>`;
+        }
+    }
+
+    // Дефинирање на подкласата MealCard која наследува од Card
+    class MealCard extends Card
+    {
+        dailyLimit;
+        balance;
+
+        //Конструктор на класата за креирање на инстанца од даден JSON формат
+
+        constructor(cardJson)
+        {
+            super(cardJson.cardNumber, cardJson.studentName);
+            this.dailyLimit = cardJson.dailyLimit;
+            this.balance = cardJson.balance;
+        }
+
+        // Метод за добивање на HTML форматот за приказ на картичката
+        getHTMLFormat()
+        {
+            return `<div class="card meal-card">
+            <h5>Student Meal Card</h5>
+            <div class="card-number">${this.cardNumber}</div>
+            <div class="student-name">${this.name}</div>
+            <div class="daily-limit">\$${this.dailyLimit}</div>
+            <div class="balance">\$${this.balance}</div>
+        </div>`;
+        }
+    }
+
+    // Дефинирање на подкласата TravelCard која наследува од Card
+    class TravelCard extends Card
+    {
+        university;
+        tripsLeft;
+
+        //Конструктор на класата за креирање на инстанца од даден JSON формат
+
+        constructor(cardJson)
+        {
+            super(cardJson.cardNumber, cardJson.studentName);
+            this.university = cardJson.university;
+            this.tripsLeft = cardJson.tripsLeft;
+        }
+
+        // Метод за добивање на HTML форматот за приказ на картичката
+        getHTMLFormat()
+        {
+            return `<div class="card travel-card">
+            <h5>Student Travel Card</h5>
+            <div class="card-number">${this.cardNumber}</div>
+            <div class="student-name">${this.name}</div>
+            <div class="university">${this.university}</div>
+            <div class="trips-left">${this.tripsLeft}</div>
+        </div>`;
+        }
+    }
+
+    // Дефинирање на подкласата SpecialCard која наследува од Card
+    class SpecialCard extends Card
+    {
+        university;
+        purpose;
+
+        //Конструктор на класата за креирање на инстанца од даден JSON формат
+        constructor(cardJson)
+        {
+            super(cardJson.cardNumber, cardJson.studentName);
+            this.university = cardJson.university;
+            this.purpose = cardJson.purpose;
+        }
+
+        // Метод за добивање на HTML форматот за приказ на картичката
+        getHTMLFormat()
+        {
+            return `<div class="card special-card">
+            <h5>Student Special Card</h5>
+            <div class="card-number">${this.cardNumber}</div>
+            <div class="student-name">${this.name}</div>
+            <div class="university">${this.university}</div>
+            <div class="purpose">${this.purpose}</div>
+        </div>`;
+        }
+    }
+
+    // Класата со која е преставен еден студент
+    class Student
+    {
+        id;
+        cards;
+
+        //Конструктор на класата
+        constructor(id)
+        {
+            this.id = id;
+            this.cards = [];
+        }
+
+        // Метод за додавање на картичка на студентот
+        addCard(card)
+        {
+            this.cards.push(card);
+        }
+
+        // Метод за прикажување на картичките на студентот
+        showCards()
+        {
+            ui.cardsElement.innerHTML = "";
+            for (let card of this.cards)
+            {
+                ui.cardsElement.innerHTML += card.getHTMLFormat();
+            }
+        }
+
+        // Метод за добивање на HTML форматот за приказ на студентот
+        getHTMLFormat()
+        {
+            return `<div class="student">${this.id}</div>`;
+        }
+    }
+
+    // Класата која ја содржи основната логика на апликацијата
+    class StudentApp
+    {
+        students;
+
+        constructor()
+        {
+            this.students = {};
+        }
+
+        // Метод за додавање на студент во апликацијата
+        addStudent(student)
+        {
+            this.students[student.id] = student;
+            ui.studentsElement.innerHTML += student.getHTMLFormat();
+        }
+
+        // Метод за поставување на активен студент
+        activeStudent(studentElement)
+        {
+            //Додавање, односно, отстранување на класта active-student
+            const previouslyActive = document.querySelector(".active-student");
+            if (previouslyActive)
+            {
+                previouslyActive.classList.remove("active-student");
+            }
+            studentElement.classList.add("active-student");
+            const id = studentElement.innerHTML;
+            const student = this.students[id];
+            student.showCards();
+        }
+    }
+
+    // Класата во која се обедините UI елементите на аплцикацијата
+    class UI
+    {
+        studentsElement;
+        cardsElement;
+
+        //Конструктор на класата
+        constructor()
+        {
+            this.studentsElement = document.querySelector(".students");
+            this.cardsElement = document.querySelector(".cards");
+        }
+
+        // Метод за додавање на настани при клик на студентите
+        addEventsToStudents()
+        {
+            const studentElements = document.querySelectorAll('.student');
+            studentElements.forEach(studentElement =>
+            {
+                studentElement.addEventListener("click", () =>
+                {
+                    app.activeStudent(studentElement);
+                });
+            });
+        }
+    }
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+    // Оваа функција се повикува за иницијализација на апликацијата
+    async function init()
+    {
+        //Fetch на потребните податоци
+        const studentsJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/students.json");
+        const cardsJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/cards.json");
+
+        //За секој студетн се додаваат неговите картички, а потоа студентот се додава во апликацијата
+        studentsJson.forEach(studentId =>
+        {
+            const student = new Student(studentId);
+            const cardsForStudentJson = cardsJson[studentId];
+            cardsForStudentJson.forEach(cardJson =>
+            {
+                student.addCard(createCard(cardJson));
+            });
+            app.addStudent(student);
+        });
+
+        //Додавање на eventListener при клик на секој студент
+        ui.addEventsToStudents();
+    }
+
+    // Функција за креирање на картичката врз основа на типот на картичката
+    function createCard(cardJson)
+    {
+        const type = cardJson.cardType;
+        switch (type)
+        {
+            case "Student Debit Card":
+                return new DebitCard(cardJson);
+            case "Student Movie Card":
+                return new MovieCard(cardJson);
+            case "Student Meal Card":
+                return new MealCard(cardJson);
+            case "Student Travel Card":
+                return new TravelCard(cardJson);
+            case "Special Student Card":
+                return new SpecialCard(cardJson);
+        }
+    }
+
+    // Креирање на инстанци
+    const app = new StudentApp();
+    const ui = new UI();
+
+    // Почеток на иницијализацијата
+    init();
+
+</script>
+</body>
+</html>

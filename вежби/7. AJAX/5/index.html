@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #070707;
+            --background: #f3f7f7;
+            --primary: #58b9ad;
+            --secondary: #91e4da;
+            --accent: #5beddc;
+
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            font-family: "Poppins", "serif";
+            box-shadow: var(--shadow);
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(101%);
+        }
+
+        button:active {
+            transform: scale(98%);
+        }
+
+        #song-finder-app {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--background);
+            height: 100vh;
+        }
+
+        .song-chunks-container {
+            display: grid;
+            grid-template-rows: 1fr 5fr;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: var(--secondary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1rem;
+        }
+
+        .song-chunks {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .song-chunk {
+            background-color: var(--primary);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            color: white;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .song-chunk:active {
+            transform: scale(95%);
+        }
+
+        .main-ui-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--accent);
+            box-shadow: var(--shadow);
+
+            border-radius: 30px;
+        }
+
+        #find-song-btn {
+            font-size: 2rem;
+            padding: 2.1em 1em;
+            border-radius: 50%;
+            font-weight: 700;
+            background-color: lightskyblue;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .found-song-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--secondary);
+            box-shadow: var(--shadow);
+
+            border-radius: 10px;
+        }
+
+        .song-info-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 60%;
+        }
+
+        .song-cover-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .song-duration {
+            position: absolute;
+            color: black;
+            box-shadow: var(--shadow);
+            background-color: var(--accent);
+            opacity: 90%;
+            padding: 0.4rem;
+            border-radius: 10px;
+            bottom: 3%;
+            right: 4%;
+            font-size: clamp(1vw, 1rem, 0.5rem);
+        }
+
+        .song-cover-container img {
+            width: 15vw;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .song-info-field {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem;
+            width: 80%;
+            font-size: 1.2rem;
+            background-color: var(--primary);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            color: white;
+            font-weight: 500;
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+    </style>
+
+</head>
+<body>
+<main id="song-finder-app">
+    <section class="song-chunks-container">
+        <h3>Song Chunks</h3>
+        <div class="song-chunks"></div>
+    </section>
+    <section class="main-ui-container">
+        <button id="find-song-btn">Shzamit</button>
+        <h3>Identify:</h3>
+        <div class="identifying-chunk"></div>
+    </section>
+    <section class="found-song-container">
+        <h3>Song Info</h3>
+        <div class="song-info-container"></div>
+    </section>
+</main>
+
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+    //Класата во која се групирани UI елементите на апликацијата
+    class UI
+    {
+        // Дефинирање на променливи за различни елементи од корисничкиот интерфејс
+        identifyingChunkElement;
+        chunksElement;
+        findSongButton;
+        songInfoElement;
+
+        constructor()
+        {
+            // Иницијализација на елементите од корисничкиот интерфејс
+            this.identifyingChunkElement = document.querySelector(".identifying-chunk");
+            this.chunksElement = document.querySelector(".song-chunks");
+            this.findSongButton = document.querySelector("#find-song-btn");
+            this.songInfoElement = document.querySelector(".song-info-container");
+            // Додавање на настани за копчето
+            this.addEventsForButton();
+        }
+
+        // Додавање на настани за копчето за пребарување на песни
+        addEventsForButton()
+        {
+            this.findSongButton.addEventListener("click", ()=>{
+                app.identifySong();
+            })
+        }
+    }
+
+    // Класата со која е преставен еден дел од песна
+    class SongChunk
+    {
+        // Дефинирање на променливи за дел од песната
+        amplitude;
+        frequency;
+        duration;
+
+        constructor(songChunkJson)
+        {
+            // Поставување на вредности за делот од песната од JSON објект
+            this.amplitude = songChunkJson.amplitude;
+            this.frequency = songChunkJson.frequency;
+            this.duration = songChunkJson.duration;
+        }
+
+        // Пресметка на отпечаток за делот од песната
+        getFingerprint()
+        {
+            // Функцијата reduce(), прави „редуцирање“ на вредностите од дадена низа во единствена вредност
+            //Пр во случајот, нивен збир
+            const amplitudePart = this.amplitude.reduce((acc, val) => acc + val, 0) / this.duration;
+            const frequencyPart = this.frequency.reduce((acc, val) => acc + val, 0) / this.duration;
+
+            //Функцијата toFix() ја трансформира нумеричката (float) вредност во стринг со наведен број на децимални цифри, во случајот 2
+            const fingerprint = amplitudePart.toFixed(2) + "_" + frequencyPart.toString() + "_" + this.duration;
+
+            return fingerprint;
+        }
+
+        // Креирање на HTML елемент за делот од песната
+        getHTMLElement()
+        {
+            const chunkElement = document.createElement("div");
+            chunkElement.classList.add("song-chunk");
+            chunkElement.dataset['chunkId'] = this.getFingerprint();
+            chunkElement.textContent = this.getFingerprint();
+            return chunkElement;
+        }
+    }
+
+    // Класата со која е преставена една песна
+    class Song
+    {
+        // Дефинирање на променливи за песната
+        title;
+        artist;
+        duration;
+        coverPictureURL;
+        fingerprints;
+
+        constructor(songJson)
+        {
+            // Поставување на вредности за песната од JSON објект
+            this.title = songJson.title;
+            this.artist = songJson.artist;
+            this.duration = songJson.duration;
+            this.coverPictureURL = songJson.coverPictureURL;
+            this.fingerprints = songJson.fingerprints;
+        }
+
+        // Проверка дали даден отпечаток припаѓа на песната
+        checkFingerprint(fingerprint)
+        {
+            for (const fingerprint1 of this.fingerprints)
+            {
+                if (fingerprint === fingerprint1) return true;
+            }
+            return false;
+        }
+
+        // Фунцка со која се добива HTML форматот на една песна; потребно за визуелно претставување на идентификуваната песна
+        getHTMLFormat()
+        {
+            return `<div class="song-cover-container">
+                <img alt="Song Cover Picture" src="${this.coverPictureURL}">
+                <div class="song-duration">${this.duration}</div>
+            </div>
+            <div class="song-artis song-info-field">${this.artist}</div>
+            <div class="song-title song-info-field">${this.title}</div>`
+        }
+
+
+    }
+
+
+    // Основата класа којашто ја содржи главната логика на апликацијата
+    class SongFinderApp
+    {
+        // Дефинирање на променливи за апликацијата за пребарување на песни
+        songs;
+        chunks;
+
+        //Делот од песна што моментално се идентификува
+        identifyingChunk;
+
+        constructor(songsJson)
+        {
+            // Иницијализација на празни низи и променливи
+            this.songs = [];
+            this.chunks = {};
+            this.identifyingChunk = null;
+
+            // Креирање на објекти од класата Song од JSON објекти
+            songsJson.forEach(songJson=>{
+                this.songs.push(new Song(songJson))
+            })
+        }
+
+        // Функција којашто враќа инстанца од SongChunk, според неговиот отпечаток
+        getChunk(chunkFingerprint)
+        {
+            return this.chunks[chunkFingerprint];
+        }
+
+        // Логичко и визуелно додавање на даден дел од песна, во самата апликација
+        addChunk(songChunk)
+        {
+            this.chunks[songChunk.getFingerprint()] = songChunk;
+            const chunkElement = songChunk.getHTMLElement();
+            ui.chunksElement.appendChild(chunkElement);
+            chunkElement.addEventListener("click", ()=>{
+                this.makeChunkActive(this.getChunk(chunkElement.dataset.chunkId))
+
+            })
+        }
+
+        // Функција со којашто наведен дел од песна станува делот од песна што се идентификува
+        makeChunkActive(chunk)
+        {
+            this.identifyingChunk = chunk;
+
+            //Визуелно поставување на делот од песната на местото за идентификација
+            ui.identifyingChunkElement.innerHTML = "";
+            ui.identifyingChunkElement.appendChild(chunk.getHTMLElement());
+        }
+
+        // Основната функција со којашто се врши идентификување на песната на која припаѓа отпечатокот што се идентификува
+        identifySong()
+        {
+            //Потребна валидација
+            if (!this.identifyingChunk) return;
+
+            //Преварување низ базата со песни
+            for (const song of this.songs)
+            {
+                //Доколку песна го содржи во себе отпечатокот, таа се прикажува во соодветниот таб
+                if (song.checkFingerprint(this.identifyingChunk.getFingerprint()))
+                {
+                    ui.songInfoElement.innerHTML = song.getHTMLFormat();
+                    return;
+                }
+            }
+        }
+
+    }
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+
+    //Функција со којашто се започнува работата на апликацијата
+    async function init()
+    {
+        //Fetch на соодветните податоци за песните
+        if (!app)
+        {
+            const songsJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/songs-database.json");
+            app = new SongFinderApp(songsJson);
+        }
+
+
+        //Fetch на податоци за деловите од песни
+
+        const songChunksJson = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/song-chunks.json");
+        for (const songChunkJson of songChunksJson)
+        {
+            app.addChunk(new SongChunk(songChunkJson));
+        }
+    }
+
+    //Инизијализација на променливи
+    let app = null;
+    const ui = new UI();
+
+    //Повик на соодветната функција
+    init();
+</script>
+
+</body>
+</html>

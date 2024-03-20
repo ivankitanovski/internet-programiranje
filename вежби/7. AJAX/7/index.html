@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #07050b;
+            --background: #f5f3fa;
+            --primary: #6b5ab1;
+            --secondary: #d0cb9b;
+            --accent: #94c483;
+            --br: 5px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        .app-container {
+            display: grid;
+            justify-items: center;
+            height: 90vh;
+            margin-top: 1rem;
+        }
+
+        .main-item-container {
+            background-color: var(--background);
+            border-radius: var(--br);
+            width: 80%;
+            display: grid;
+            grid-auto-rows: auto auto auto;
+        }
+
+        .item-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--background);
+            border-top-left-radius: var(--br);
+            border-top-right-radius: var(--br);
+            color: black;
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+            font-weight: 600;
+        }
+
+        .item-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+
+        .item-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--secondary);
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .item-picture {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item-picture img {
+            width: 60%;
+            aspect-ratio: 1/1;
+            border-radius: var(--br);
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .item-shopping-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .item-shopping-info > * {
+            background-color: var(--accent);
+            color: white;
+            border-radius: var(--br);
+            width: 50%;
+            padding: 0.5rem;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .barcode-section {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            padding: 1rem;
+            gap: 1rem;
+            background-color: var(--primary);
+            border-bottom-right-radius: var(--br);
+            border-bottom-left-radius: var(--br);
+            color: white;
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .barcode-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+
+        .shops-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+
+        .shops-info > * {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .barcode-container {
+            display: flex;
+            /*gap: 0.1rem;*/
+            padding: 0.4rem;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: white;
+        }
+
+        .barcode-container-hover:hover {
+            opacity: 30%;
+            transition: all 2s ease;
+
+        }
+
+        .barcode-element {
+            width: 5px;
+            height: 90px;
+        }
+
+        .barcode-element-0 {
+            background-color: black;
+
+        }
+
+        .barcode-element-1 {
+            background-color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <main class="main-item-container">
+        <header class="item-header">
+            <div class="item-name">
+                <span id="item-name"></span>
+            </div>
+            <div class="item-id">
+                ID:<span id="id"></span>
+            </div>
+        </header>
+
+        <section class="item-info">
+            <div class="item-picture">
+                <img id="item-picture" src="#" alt="clothing">
+            </div>
+            <div class="item-shopping-info">
+                <div class="item-price">Price: <span id="price"></span></div>
+                <div class="amount">Amount: <span id="amount"></span></div>
+                <div class="size">Size: <span id="size"></span></div>
+            </div>
+        </section>
+
+        <section class="barcode-section">
+            <div class="barcode-info">
+                <div>Hover To Scan</div>
+                <div class="barcode-container barcode-container-hover"></div>
+            </div>
+
+            <div class="shops-info">
+                <div>Store Info</div>
+                <div class="availability-info"></div>
+            </div>
+        </section>
+
+    </main>
+</div>
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+    // Класа со која се претставува секој производ во продавниците
+    class Item {
+        itemName;
+        id;
+        price;
+        amount;
+        size;
+
+        // Конструктор со кои се иницијализираат податочните членки на секој производ
+        constructor(item) {
+            this.itemName = item.itemName;
+            this.id = item.id;
+            this.price = item.price;
+            this.amount = item.amount;
+            this.size = item.size;
+        }
+
+        // Функција со која идентификационионт број на производот се конвертира во
+        // бинарен, а потоа секоја бинарна цифра, редоследно, се зачувува во низа којашто се враќа.
+        getBarcodeArray() {
+            const binaryDigits = [];
+            this.id
+
+                // Со функцијата toString(),нумеричката репрезенатација на ид-то се конвертира во стринг репрезентација.
+                //Доколку, пак, функцијата toString() се повика со нумерички аргумент, како во случајот toString(2), ќе се направи конверзија во
+                //стринг репрезентација во броен систем со основа еднаква на нумеричкиот аргумент - во случајот 2-бинарен.
+                //Пр. let a = 4; console.log(a.toString(2)) ќе испечати во конзола: 100 (бинарно 4)
+                .toString(2)
+
+                // Потоа со функцијата split(""), стрингот се разделува на единечни знаци
+                .split("")
+
+                // На крај, секоја стринг-бинарна цивра ја мапираме во соодветната нумеричка репрезентација и ја сместуваме во низа
+                //Пр “0“ => 0, “1“ => 1
+                .map(s => parseInt(s))
+                .forEach(digit => binaryDigits.push(digit));
+
+            return binaryDigits;
+        }
+
+        // Генерирање на името на сликата врз основа на името на производот и неговото ид.
+        getPictureName() {
+            const parts = this.itemName.toString().split(" ");
+            const onlyItemName = parts.pop().toLowerCase();
+            const pictureId = this.id
+                .toString()
+                .substring(this.id.toString().length - 5);
+
+            return onlyItemName + "-" + pictureId + ".jpg";
+        }
+    }
+
+    function getUI() {
+        // Земање на референца до UI елементите
+        const itemName = document.querySelector("#item-name");
+        const id = document.querySelector("#id");
+        const price = document.querySelector("#price");
+        const amount = document.querySelector("#amount");
+        const size = document.querySelector("#size");
+        const barcodeContainer = document.querySelector(".barcode-container");
+        const availabilityInfo = document.querySelector(".availability-info");
+        const itemPicture = document.querySelector("#item-picture");
+
+        return {
+            itemName, id, price, amount, size, barcodeContainer, availabilityInfo, itemPicture
+        };
+    }
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+
+    // Функција за прикажување на производот
+    async function renderScan() {
+        if (items.length === 0) {
+            // Ако низата со производи е презна, информациите за нив се преземаат од соодветната JSON датотека.
+            const fetchedItems = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/scans.json");
+            for (const fetchedItem of fetchedItems) {
+                items.push(new Item(fetchedItem));
+            }
+        }
+
+        const item = items.pop();
+        ui.barcodeContainer.innerHTML = "";
+
+        item.getBarcodeArray().forEach(digit => {
+            // Прикажување на баркодот врз основа на бинарните цифри на ид-то.
+            if (digit === 0) {
+                ui.barcodeContainer.innerHTML += `
+                <div class="barcode-element barcode-element-0"></div>
+            `;
+            } else {
+                ui.barcodeContainer.innerHTML += `
+                <div class="barcode-element barcode-element-1"></div>
+            `;
+            }
+        });
+
+        const pictureName = item.getPictureName();
+
+        ui.itemPicture.src = `Content/images/${pictureName}`;
+
+        // Прикажување на информациите за еден производ
+        ui.itemName.innerHTML = item.itemName;
+        ui.id.innerHTML = item.id;
+        ui.price.innerHTML = item.price;
+        ui.amount.innerHTML = item.amount;
+        ui.size.innerHTML = item.size;
+        ui.barcodeContainer.classList.add('barcode-container-hover');
+        ui.availabilityInfo.innerHTML = "";
+
+        let interval = null;
+
+
+        // Функција со која се дефинира што треба да се случи откако со покажувачот ќе се позиционираме на баркодот на производот
+
+        const mouseHandler = () => {
+            //Сите ефекти се случуваат после 1,3 сек од почетокот на позиционирањето
+            interval = setTimeout(() => {
+                //Откако еден баркод ќе се скенира, се спречува негово повторно скенирањ.
+                ui.barcodeContainer.removeEventListener("mouseenter", mouseHandler);
+
+                //Се отстранува избледувањето на баркодот, со кое се визуелизираше неговото скенирање
+                ui.barcodeContainer.classList.remove("barcode-container-hover");
+
+                //На крај, се проверува во која продавница е присутен соодветниот производ
+                checkAvailability(item);
+            }, 1300);
+        };
+
+        ui.barcodeContainer.addEventListener("mouseenter", mouseHandler);
+
+        // Доколку покажувачот го тргнеме од баркодот пред да заврши „скенирањето“, скенирањето се откажува
+        ui.barcodeContainer.addEventListener("mouseleave", () => {
+            clearTimeout(interval);
+        });
+    }
+
+    // Функција којашто проверува во која продавница е достапен соодветен производ
+    async function checkAvailability(item) {
+        if (shops.length === 0) {
+            // Ако низата со продавници е презна, информациите за нив се преземаат од соодветната JSON датотека.
+            shops = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/shops.json");
+        }
+
+        const availableShops = [];
+
+        for (const shop of shops) {
+            // Ја изминуваме низата со продавници и проверуваме каде е достапен соодветниот производ врз основа на бараните услови.
+            const availableItems = shop.availableItems;
+            for (const availableItem of availableItems) {
+                if (availableItem.id === item.id && availableItem.amount >= item.amount) {
+                    //Ако пронајдеме продавница во која е достапен производот, продавницата ја смесуваме во низата „availableShops“
+                    availableShops.push(shop);
+                    break;
+                }
+            }
+        }
+
+        //Доколку низата „availableShops“ е празна, бараниот производ не е присутен во ниту една продавница, па ја прикажуваме соодветната порака
+        if (availableShops.length === 0) {
+            ui.availabilityInfo.innerHTML = `
+            <div>The item is NOT available anywhere</div>`;
+            setTimeout(renderScan, 3000);
+            return;
+        }
+
+
+        // Низата „availableShops“ ја сортираме според нивната оддалеченост во растечки редослед
+        // и ја избираме првата продавнита во така сортираната низа (онаа која што има најмал distance, односно онаа којашто е најблиску)
+        availableShops.sort((s1, s2) => s1.distance - s2.distance);
+        const closeShop = availableShops[0];
+
+        //Ги прикаќуваме соодветните информации за продавницата
+        ui.availabilityInfo.innerHTML = `
+        <div>The item is available at:</div>
+        <div>${closeShop.name}, ${closeShop.streetAddress} ${closeShop.number}, Skopje</div>
+    `;
+
+        //После 3 сек, автоматски се вчитува следниот производ којшто треба да се прикаже
+        setTimeout(renderScan, 3000);
+    }
+
+    // Иницијализација на низите со производи и продавници
+    let items = [];
+    let shops = [];
+
+    //Земање на соодветните UI елементи
+    let ui = getUI();
+
+    // Прикажување на иницијалниот, прв производ
+    renderScan();
+</script>
+</body>
+</html>
