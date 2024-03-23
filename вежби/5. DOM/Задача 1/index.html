@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Задача 1</title>
+    <style>
+        label{
+            display: inline-block;
+            margin-bottom: 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <!--    внес на хтмл, inputi со labels-->
+    <h1>Формулар за апликација</h1>
+    <div>
+        <label>Име</label><input type="text">
+    </div>
+    <div>
+        <label>Презиме</label><input type="text">
+    </div>
+    <div>
+        <label>Работно Искуство(време)</label><input type="number" style="width: 50px" id="godini">години
+    </div>
+    <!--креираме копче со настан onclick-при клик да провери податоци, во нашиот случај    -->
+    <button onclick="proveri()">Аплицирај</button>
+  <script>
+      function proveri()
+      {
+          let godini=document.getElementById('godini').value;
+          //проверува дали годините се помали од 5, ако се печати порака, и обојува во црвено
+          if(godini<5)
+          {
+              alert("Nemate dovolno rabotno iskustvo da aplicirate za rabotata!!");
+              document.body.style.backgroundColor='red';
+          } else{
+              //доколку годините се доволни, се бои во зелено се печати порака за успешна апликација
+              alert("Vi blagodarime na uspesnata aplikacija. Se gledame naskoro!")
+              document.body.style.backgroundColor='greenm';
+          }
+      }
+  </script>
+</body>
+</html>

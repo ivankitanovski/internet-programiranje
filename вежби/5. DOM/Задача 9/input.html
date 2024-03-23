@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Зад. 8</title>
+
+</head>
+<body>
+<div id="dodavajInputi">
+
+</div>
+<script>
+    //креираме низа со зборови за погодување
+    var tocniZborovi=["sonce", "mesec", "licna", "karta"];
+    var zbor=tocniZborovi[Math.floor(Math.random()*4)];
+    console.log(zbor)
+    //бројач за тоа колку обиди имаме
+    var counts=1;
+    // при вчитувањето да ги креира полињата
+    window.onload=function (){
+        let novDiv=document.createElement("div");
+        for(let i=0;i<5;i++)
+        {
+            //креираме 5 инпут полиња со соодветни карактеристики
+            let novInput=document.createElement("input");
+            novInput.style.marginRight="10px";
+            novInput.style.border="3px solid black";
+            novInput.style.width="100px";
+            novInput.style.height="100px";
+            novInput.style.fontSize="70px";
+            novInput.style.textAlign="center";
+            if(i===4)
+            {
+                novInput.addEventListener("keydown", function(event){
+                    checkInput(event);
+                });
+
+            }
+            novDiv.appendChild(novInput);
+        }
+        document.getElementById("dodavajInputi").append(novDiv);
+    }
+        //проверка на кориснички внесениот збор
+    function checkInput(event)
+    {
+        //проверуваме дали е кликнато ентер за проверка на внесениот збор
+        if(event.key==="Enter")
+        {
+            // ги зимаме сите инпут полиња и ги спојуваме вредностите, притоа корисникот ако
+            // внесе големи букви ги правиме мали и ги сечеме празните места за секој случај
+            let inputs=document.querySelectorAll("#dodavajInputi input");
+            let korisnickiZbor="";
+            inputs.forEach(input =>{
+                korisnickiZbor+=input.value.trim().toLowerCase();
+                input.value='';
+            })
+            console.log(korisnickiZbor);
+            // проверуваме доколку се исти печатиме порака и зелена позадина
+            if(korisnickiZbor===zbor)
+            {
+                alert("Браво го погодивте бараниот збор!!!!");
+                document.body.style.backgroundColor='green';
+
+            }else{
+                // броиме обиди и му даваме шанса повторно да проба
+                if(counts<=3){
+                    counts++
+                    alert("Пробај повторно!");
+                    // искористени обиди, нема више шанси го печатиме зоборот кој што е точен
+                } else{
+
+                    alert("Не го погодивте зборот. Бараниот збор беше: "+ zbor);
+
+                }
+
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>
