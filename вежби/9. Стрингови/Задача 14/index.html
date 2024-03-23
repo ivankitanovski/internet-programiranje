@@ -5,8 +5,8 @@
   </head>
   <body>
     <script>
-      var str = prompt("Внесете стринг:").toLowerCase().split(" ");
-      for (var i = 0; i < str.length; i++) {
+      let str = prompt("Внесете стринг:").toLowerCase().split(" ");
+      for (let i = 0; i < str.length; i++) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
       }
       alert("Стрингот форматиран со Title case е: " + str.join(" "));

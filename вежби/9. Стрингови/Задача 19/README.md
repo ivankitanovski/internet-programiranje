@@ -16,8 +16,8 @@
   </head>
   <body>
     <script>
-      var dateString = prompt("Внесете дата во DD/MM/YYYY формат:");
-      var regex =
+      let dateString = prompt("Внесете дата во DD/MM/YYYY формат:");
+      let regex =
         /^(3[01]|[12][0-9]|0?[1-9])(\/|-)(1[0-2]|0?[1-9])\2([0-9]{2})?[0-9]{2}$/;
       if (regex.test(dateString)) {
         alert("Датумот " + dateString + " е валиден");

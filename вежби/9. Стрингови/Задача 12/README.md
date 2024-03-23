@@ -20,9 +20,9 @@
   </head>
   <body>
     <script>
-      var str = prompt("Внесете стринг:");
-      var x = parseInt(prompt("Внесете почетен индекс:"));
-      var y = parseInt(prompt("Внесете краен индекс:"));
+      let str = prompt("Внесете стринг:");
+      let x = parseInt(prompt("Внесете почетен индекс:"));
+      let y = parseInt(prompt("Внесете краен индекс:"));
       alert("Подстрингот е: " + str.substring(x, y));
     </script>
   </body>

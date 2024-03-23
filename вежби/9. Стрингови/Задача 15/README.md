@@ -18,8 +18,8 @@
   </head>
   <body>
     <script>
-      var str = prompt("Внесете стринг:");
-      var times = parseInt(prompt("Колку пати да се повтори?"));
+      let str = prompt("Внесете стринг:");
+      let times = parseInt(prompt("Колку пати да се повтори?"));
       alert("Стрингот повторен " + times + " пати: " + str.repeat(times));
     </script>
   </body>

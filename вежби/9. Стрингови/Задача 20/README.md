@@ -16,7 +16,7 @@
   </head>
   <body>
     <script>
-      var urlString = prompt("Внесете URL:");
+      let urlString = prompt("Внесете URL:");
 
       if (
         (urlString.startsWith("http://") || urlString.startsWith("https://")) &&

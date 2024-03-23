@@ -14,7 +14,7 @@
   <head> </head>
   <body>
     <script>
-      var str = prompt("Внесете стринг:");
+      let str = prompt("Внесете стринг:");
       alert("Новиот стринг со отстранети празни места: " + str.trim());
     </script>
   </body>

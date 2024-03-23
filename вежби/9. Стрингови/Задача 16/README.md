@@ -16,7 +16,7 @@
   </head>
   <body>
     <script>
-      var str = prompt("Внесете стринг:");
+      let str = prompt("Внесете стринг:");
       alert("Превртениот стринг е: " + str.split("").reverse().join(""));
     </script>
   </body>

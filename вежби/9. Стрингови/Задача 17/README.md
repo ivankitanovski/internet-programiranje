@@ -16,8 +16,8 @@
   </head>
   <body>
     <script>
-      var str = prompt("Внесете стринг:");
-      var reversed = str.split("").reverse().join("");
+      let str = prompt("Внесете стринг:");
+      let reversed = str.split("").reverse().join("");
       if (str === reversed) {
         alert("Внесениот стринг е палиндром");
       } else {
