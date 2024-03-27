@@ -1,0 +1,38 @@
+# Задача
+
+Да се напише функција која ќе земе објект и ќе враќа нов објект само со променливи од тип стринг.
+
+# Решение
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      function onlyString(object) {
+        let newObject = {};
+
+        for (const property in object) {
+          if (typeof object[property] == "string") {
+            newObject[property] = object[property];
+          }
+        }
+
+        return newObject;
+      }
+
+      let fruits = {
+        apple: "apple",
+        banana: 23,
+        orange: "orange3",
+      };
+
+      console.log(fruits);
+      console.log(onlyString(fruits));
+    </script>
+  </body>
+</html>
+```

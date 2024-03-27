@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      function extend(child, ...parents) {
+        parents.forEach((parent) => {
+          for (const property in parent.prototype) {
+            if (!(property in child.prototype)) {
+              // ако дете објектот не го содржи
+              child.prototype[property] = parent.prototype[property]; // го наследува
+            }
+          }
+        });
+      }
+
+      // Пример објекти
+      function Customer(name) {
+        this.name = name;
+      }
+
+      Customer.prototype.print = function () {
+        console.log(`Name: ${this.name}`);
+      };
+
+      function Special() {}
+
+      Special.prototype.discount = 30;
+
+      Special.prototype.printDiscount = function () {
+        console.log(`Discount: ${this.discount}%`);
+      };
+
+      function VIP(name) {
+        this.name = name;
+      }
+
+      extend(VIP, Customer, Special);
+
+      const example = new VIP("Adam");
+
+      example.print();
+      example.printDiscount();
+    </script>
+  </body>
+</html>
