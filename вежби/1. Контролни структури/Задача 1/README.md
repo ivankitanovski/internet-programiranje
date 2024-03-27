@@ -8,11 +8,9 @@
 
 ![image](img/screen3.png)
 
-
-
 # Решение
-```html
 
+```html
 <!doctype html>
 <html>
   <head> </head>
@@ -35,5 +33,4 @@
     </script>
   </body>
 </html>
-
 ```
