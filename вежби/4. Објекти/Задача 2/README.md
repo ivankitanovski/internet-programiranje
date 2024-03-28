@@ -2,6 +2,8 @@
 
 Да се напише функција која ќе земе објект и ќе враќа нов објект само со променливи од тип стринг.
 
+![img](img/screen1.png)
+
 # Решение
 
 ```html
@@ -17,6 +19,7 @@
 
         for (const property in object) {
           if (typeof object[property] == "string") {
+            // ако е од тип string
             newObject[property] = object[property];
           }
         }

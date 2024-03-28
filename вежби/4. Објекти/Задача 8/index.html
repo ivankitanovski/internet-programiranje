@@ -10,7 +10,7 @@
           for (const property in parent.prototype) {
             if (!(property in child.prototype)) {
               // ако дете објектот не го содржи
-              child.prototype[property] = parent.prototype[property]; // го наследува
+              child.prototype[property] = parent.prototype[property]; // ги вметнува во структурата
             }
           }
         });
@@ -41,8 +41,8 @@
 
       const example = new VIP("Adam");
 
-      example.print();
-      example.printDiscount();
+      example.print(); // наследен
+      example.printDiscount(); // наследен
     </script>
   </body>
 </html>

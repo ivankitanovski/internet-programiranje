@@ -7,10 +7,9 @@
     <script type="text/javascript">
       function shuffle(object) {
         let newObject = {};
-        // entries() враќа низа од низи, со flat() ги спојуваме во една низа
-        let array = Object.entries(object)
-          .flat()
-          .toSorted(() => Math.random() - 0.5);
+        let array = Object.entries(object) // враќа со елементи во форма [property, value]
+          .flat() // ги спојува листите во една листа
+          .toSorted(() => Math.random() - 0.5); // дава копија од низата сортирана
 
         for (let i = 0; i < array.length; i += 2) {
           newObject[array[i]] = array[i + 1];

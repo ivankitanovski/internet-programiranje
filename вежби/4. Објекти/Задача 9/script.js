@@ -5,12 +5,13 @@ function difference(...objects) {
   objects.forEach((object) => {
     for (const property in object) {
       if (property in newObject && !(property in duplicates))
+        // за да не се повторуваат елементи во листата
         duplicates.push(property);
       else newObject[property] = object[property];
     }
   });
 
-  duplicates.forEach((duplicate) => delete newObject[duplicate]);
+  duplicates.forEach((duplicate) => delete newObject[duplicate]); // ги брише сите дупликати во објектот
 
   return newObject;
 }

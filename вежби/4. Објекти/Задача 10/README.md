@@ -10,6 +10,9 @@
 
 Пресметка за **damage** = `Math.floor(Math.random() * 20) + (strength - 10)`
 
+![img](img/screen1.png)
+![img](img/screen2.png)
+
 # Решение
 
 ```html
@@ -60,8 +63,8 @@
           if (difference_x > 1 || difference_y > 1)
             super.update(entity.position); // додека не се во близина
           else {
-            let damage = Math.floor(Math.random() * 20) + (this.strength - 10);
-            entity.update(damage);
+            let damage = Math.floor(Math.random() * 20) + (this.strength - 10); // формулата за damage
+            entity.update(damage); // ажурира health
           }
         }
 
@@ -80,7 +83,7 @@
         }
 
         update(damage) {
-          let new_damage = Math.floor(damage * (1 - this.defense / 100));
+          let new_damage = Math.floor(damage * (1 - this.defense / 100)); // намалување за defense%
           this.health -= new_damage;
 
           if (this.health <= 0) console.log(`${this.id} died`);

@@ -1,5 +1,9 @@
 # Задача
 
+Да се напише програма која ќе додаде атрибути на еден објект во друг.
+
+![img](img/screen1.png)
+
 # Решение
 
 ```html
@@ -12,7 +16,7 @@
     <script type="text/javascript">
       function merge(object1, object2) {
         for (const property in object2) {
-          object1[property] = object2[property];
+          object1[property] = object2[property]; // се додава во објектот
         }
 
         return object1;
@@ -30,6 +34,8 @@
         f: 6,
       };
 
+      console.log(object1);
+      console.log(object2);
       console.log(merge(object1, object2));
     </script>
   </body>

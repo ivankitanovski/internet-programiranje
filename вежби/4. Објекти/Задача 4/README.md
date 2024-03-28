@@ -5,6 +5,10 @@
 
 Да се овозможи и употреба на кориснички влезови.
 
+![img](img/screen1.png)
+![img](img/screen2.png)
+![img](img/screen3.png)
+
 # Решение
 
 ```html
@@ -16,7 +20,7 @@
   <body>
     <script type="text/javascript">
       function BankAccount(name) {
-        let balance = 0; // приватен
+        let balance = 0; // приватен атрибут
         this.name = name;
         this.transactions = [];
 

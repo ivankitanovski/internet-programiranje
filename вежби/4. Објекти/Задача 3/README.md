@@ -2,6 +2,8 @@
 
 Да се напише програма која ќе ги размени својствата и вредностите на објект.
 
+![img](img/screen1.png)
+
 # Решение
 
 ```html
@@ -16,7 +18,7 @@
         Object.entries(object).forEach((entry) => {
           // entry е во форма [property, value]
           object[entry[1]] = entry[0];
-          delete object[entry[0]];
+          delete object[entry[0]]; // ја брише старата
         });
       }
 
