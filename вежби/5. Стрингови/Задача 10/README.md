@@ -5,20 +5,18 @@
 ![image](img/screen1.PNG)
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Задача 10</title>
 </head>
 <body>
-
-<span>Стринг: </span><input type="text" id="in"><br>
-<button onclick="convert()">Тест</button><br>
+<span>Стринг: </span><input type="text" id="in" /><br />
+<button onclick="convert()">Тест</button><br />
 <b><span>Излез: </span><span id="izlez"></span></b>
 
 <script>
-
   function convert() {
     let rechenica = document.getElementById("in").value;
     let izlezElem = document.getElementById("izlez");
@@ -36,9 +34,7 @@
 
     izlezElem.innerText = camelCaseString;
   }
-
 </script>
-
 </body>
 </html>
 ```

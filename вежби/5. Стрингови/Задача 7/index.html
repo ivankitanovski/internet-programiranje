@@ -1,41 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Задача 7</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Задача 7</title>
+  </head>
+  <body>
+    <span>Регистерска табличка: </span><input type="text" id="tablica" /><br />
+    <button onclick="valid()">Тест</button>
+    <br />
+    <b><span>Излез: </span><span id="izlez"></span></b>
 
-<span>Регистерска табличка: </span><input type="text" id="tablica"><br>
-<button onclick="valid()">Тест</button><br>
-<b><span>Излез: </span><span id="izlez"></span></b>
+    <script>
+      gradoviOznaka = {
+        BE: "Берово",
+        BT: "Битола",
+        DB: "Дебар",
+        DE: "Делчево",
+        DH: "Демир Хисар",
+        DK: "Демир Капија",
+        GE: "Гевгелија",
+        GV: "Гостивар",
+        KA: "Кавадарци",
+        KI: "Кичево",
+        KO: "Кочани",
+        KR: "Кратово",
+        KP: "Крива Паланка",
+        KS: "Крушево",
+        KU: "Куманово",
+        MB: "Македонски Брод",
+        MK: "Македонска Каменица",
+        NE: "Неготино",
+        OH: "Охрид",
+        PP: "Прилеп",
+        PE: "Пехчево",
+        PS: "Пробиштип",
+        RA: "Радовиш",
+        RE: "Ресен",
+        SK: "Скопје",
+        SN: "Свети Николе",
+        SR: "Струмица",
+        ST: "Штип",
+        SU: "Струга",
+        TE: "Тетово",
+        VA: "Валандово",
+        VE: "Велес",
+        VI: "Виница",
+        VV: "Вевчани",
+      };
 
-<script>
+      function proveriPochetniBukvi(del) {
+        let grad = gradoviOznaka[del];
 
-    function proveriBukvi (del) {
+        return grad != null;
+      }
+
+      function proveriKrajniBukvi(del) {
         let regexBukvi = /^[A-Z]+$/;
 
         // regex кој проверува дали делот се состои само од букви
         return regexBukvi.test(del) && del.length === 2;
-    }
-    function proveriBrojki (del) {
+      }
+
+      function proveriBrojki(del) {
         let regexBrojki = /^\d+$/;
         // regex кој проверува дали делот се состои само од бројки
         return regexBrojki.test(del) && del.length === 4;
-    }
+      }
 
-    function valid() {
+      function valid() {
         let tablica = document.getElementById("tablica").value;
         let izlezElem = document.getElementById("izlez");
 
         let delovi = tablica.toUpperCase().split("-");
 
-        if (proveriBukvi(delovi[0]) && proveriBrojki(delovi[1]) && proveriBukvi(delovi[2]))
-            izlezElem.innerText = "Валидна";
-        else
-            izlezElem.innerText = "Невалидна";
-    }
-
-</script>
-</body>
+        if (
+          proveriPochetniBukvi(delovi[0]) &&
+          proveriBrojki(delovi[1]) &&
+          proveriKrajniBukvi(delovi[2])
+        ) {
+          izlezElem.innerText = "Валидна - " + gradoviOznaka[delovi[0]];
+        } else {
+          izlezElem.innerText = "Невалидна";
+        }
+      }
+    </script>
+  </body>
 </html>

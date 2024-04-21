@@ -1,43 +1,38 @@
 # Задача 9
 
-Да се провери дали два дадени зборови се анаграми.
+Да се провери дали два дадени зборови се [анаграми](https://en.wikipedia.org/wiki/Anagram).
 
 ![image](img/screen1.PNG)
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Задача 9</title>
 </head>
 <body>
-
-<span>Стринг 1: </span><input type="text" id="prvString"><br>
-<span>Стринг 2: </span><input type="text" id="vtorString"><br>
-<button onclick="check()">Тест</button><br>
+<span>Стринг 1: </span><input type="text" id="prvString" /><br />
+<span>Стринг 2: </span><input type="text" id="vtorString" /><br />
+<button onclick="test()">Тест</button><br />
 <b><span>Излез: </span><span id="izlez"></span></b>
 
 <script>
-
-  function check(){
+  let test = () => {
     let str1 = document.getElementById("prvString").value;
     let str2 = document.getElementById("vtorString").value;
     let izlezElem = document.getElementById("izlez");
 
-    console.log(str1.split("").join(""))
+    console.log(str1.split("").join(""));
 
-    if (str1.split('').sort().join('') === str2.split('').sort().join('')){
+    if (str1.split("").sort().join("") === str2.split("").sort().join("")) {
       // Доколку двата сортирани стрингови се исти -> стринговите се анаграми.
-      izlezElem.innerText = "Да"
+      izlezElem.innerText = "Да";
+    } else {
+      izlezElem.innerText = "Не";
     }
-    else{
-      izlezElem.innerText = "Не"
-    }
-  }
-
+  };
 </script>
-
 </body>
 </html>
 ```
