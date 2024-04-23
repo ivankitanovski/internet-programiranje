@@ -18,12 +18,12 @@
     <script>
         // Ги зимаме параграфите, се со цел да додадеме onmouseover преку ЈС
         var kluchniZborovi=document.querySelectorAll('p');
-        window.onload=function(){
-            console.log(kluchniZborovi)
+
+           
             kluchniZborovi.forEach(function(p){
                 p.addEventListener('mouseover', revealHints);
             })
-        }
+
 
         function revealHints()
         {
