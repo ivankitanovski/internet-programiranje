@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading spinner</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      .spinner {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #3498db;
+        border-bottom-color: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="spinner" class="spinner"></div>
+  </body>
+
+  <script>
+    const spinner = document.getElementById("spinner");
+
+    // anime({
+    //   targets: spinner,
+    //   rotate: 360,
+    //   easing: "linear",
+    //   loop: true,
+    //   duration: 1000,
+    // });
+
+    anime({
+      targets: spinner,
+      rotate: 2 * 360, // две завртувања
+      scale: [1, 0.85, 1],
+      easing: "linear",
+      loop: true,
+      duration: 2000, // 2 секунди
+    });
+
+    anime({
+      targets: spinner,
+      borderColor: ["#ff0000", "#00ff00", "#0000ff"],
+      borderBottomColor: "rgba(0, 0, 0, 0.3)", // бојата на долната рамка ќе остане иста
+      loop: true,
+      duration: 6000,
+    });
+  </script>
+</html>
