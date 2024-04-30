@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat GPT</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #222;
+        margin: 0;
+        padding: 50px 300px;
+      }
+
+      h1 {
+        color: green;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .text-animation {
+        color: white;
+        font-size: 20px;
+      }
+
+      .cursor {
+        display: inline-block;
+        background: white;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>ChatGPT</h1>
+    <div id="container"></div>
+  </body>
+
+  <script>
+    const container = document.getElementById("container");
+
+    const contents = [
+      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt dolorem, quae dolor molestias magnam labore. reprehenderit alias asperiores dignissimos quo officiis, unde in! Nostrum ipsa at, suscipit eum soluta harum.`,
+
+      `Hic tenetur numquam odio! Modi explicabo, fuga, iusto unde nihil corporis officia repellendus ab magni necessitatibus hic iure repellat accusamus officiis molestiae consequuntur vero incidunt quo. Amet unde architecto facere praesentium quaerat voluptate reiciendis.`,
+    ];
+
+    const TYPE_AFTER_MS = 2000;
+    const LETTERS_PER_SECOND = 50; // брзина - букви во секунда
+
+    function typeContent(index) {
+      const content = contents[index];
+
+      if (!content) {
+        return;
+      }
+
+      const textEl = document.createElement("span");
+      textEl.classList.add("text-animation");
+      container.appendChild(textEl);
+
+      const cursorEl = document.createElement("span");
+      cursorEl.classList.add("cursor");
+      container.appendChild(cursorEl);
+
+      const blinkAnimation = anime({
+        targets: cursorEl,
+        loop: true,
+        duration: 500,
+        opacity: [1, 0],
+        easing: "linear",
+        direction: "alternate",
+      });
+
+      const duration = (content.length / LETTERS_PER_SECOND) * 1000;
+      const delay = index === 0 ? TYPE_AFTER_MS : 0;
+
+      anime({
+        targets: { count: 0 },
+        count: [0, content.length],
+        round: 1,
+        easing: "linear",
+        duration: duration,
+        delay: delay,
+        changeBegin: function () {
+          blinkAnimation.pause();
+          anime.set(cursorEl, { opacity: 1 });
+        },
+        update: function (anim) {
+          const numCharacters = Math.round(anim.animations[0].currentValue);
+          textEl.innerHTML = content.substring(0, numCharacters);
+        },
+        complete: function () {
+          cursorEl.remove();
+          container.innerHTML += "<br><br>";
+          typeContent(index + 1);
+        },
+      });
+    }
+
+    typeContent(0);
+  </script>
+</html>

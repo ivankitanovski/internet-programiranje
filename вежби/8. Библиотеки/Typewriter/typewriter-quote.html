@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typewriter</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        text-align: center;
+        background-color: #000;
+        color: #fff;
+        font-family: monospace;
+        margin: 0;
+        padding: 2rem;
+        height: 100vh;
+        box-sizing: border-box;
+      }
+
+      #typewriter {
+        font-size: 24px;
+      }
+
+      #btnNewQuote {
+        padding: 8px 16px;
+        opacity: 1;
+        background: black;
+        border: 1px solid gray;
+        color: gray;
+        cursor: pointer;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="typewriter"></div>
+
+    <button id="btnNewQuote">Show another quote</button>
+  </body>
+
+  <script>
+    const textEl = document.getElementById("typewriter");
+    const btnNewQuote = document.getElementById("btnNewQuote");
+
+    function showNewQuote() {
+      // Ги стопираме старите анимации доколку се активни
+      anime.remove([textEl, btnNewQuote]);
+
+      // Го празниме полето за текст
+      textEl.innerHTML = "";
+
+      // Го криеме и оневозможуваме копчето за нов цитат
+      btnNewQuote.style.opacity = 0;
+      btnNewQuote.disabled = true;
+
+      // Правиме повик за нов рандом цитат од API-то за цитати
+      fetch("https://api.quotable.io/random")
+        .then((response) => response.json())
+        .then((data) => {
+          const quote = data.content + " - " + data.author;
+
+          anime({
+            targets: { count: 0 },
+            count: [0, quote.length],
+            round: 1,
+            easing: "linear",
+            duration: 4000,
+            update: function (anim) {
+              const numCharacters = anim.animations[0].currentValue;
+              textEl.innerHTML = quote.substring(0, numCharacters);
+            },
+            complete: function () {
+              btnNewQuote.disabled = false;
+
+              anime({
+                targets: btnNewQuote,
+                opacity: 1,
+                easing: "linear",
+                duration: 1000,
+              });
+            },
+          });
+        })
+        .catch(() => {
+          textEl.innerHTML = "Unexpected error occurred";
+        });
+    }
+
+    btnNewQuote.addEventListener("click", showNewQuote);
+
+    showNewQuote();
+  </script>
+</html>
