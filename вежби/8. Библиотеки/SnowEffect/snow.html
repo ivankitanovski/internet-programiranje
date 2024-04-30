@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sneg</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      body {
+        background-color: #000;
+        overflow: hidden;
+      }
+
+      .snegulka {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="snegulki"></div>
+  </body>
+
+  <script>
+    const container = document.getElementById("snegulki");
+
+    for (let i = 0; i < 250; i++) {
+      const snegulka = document.createElement("div");
+      snegulka.classList.add("snegulka");
+      container.appendChild(snegulka);
+
+      snegulka.style.left = anime.random(0, window.innerWidth) + "px";
+    }
+
+    anime({
+      targets: ".snegulka",
+      translateY: [-50, window.innerHeight],
+      scale: () => anime.random(0.5, 1.5),
+      easing: "linear",
+      duration: 3000,
+      delay: (el, i) => i * 100,
+      loop: true,
+    });
+  </script>
+</html>
