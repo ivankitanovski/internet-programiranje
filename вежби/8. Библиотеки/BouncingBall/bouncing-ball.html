@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bouncing ball</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+      }
+
+      #field {
+        width: 600px;
+        height: 300px;
+        background: linear-gradient(to bottom, #4caf50, #4caf50, #2e7d32);
+      }
+
+      #ball {
+        width: 0;
+        box-sizing: border-box;
+        border: 25px solid white;
+        border-top-color: black;
+        border-bottom-color: black;
+        border-radius: 50%;
+        margin: auto;
+      }
+
+      #ground {
+        width: 600px;
+        height: 25px;
+        background: #795548;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="field">
+      <div id="ball"></div>
+    </div>
+    <div id="ground"></div>
+  </body>
+
+  <script>
+    anime({
+      targets: "#ball",
+      translateY: [250, 50],
+      rotate: 360 * 3,
+      easing: "easeOutQuad",
+      loop: true,
+      direction: "alternate",
+    });
+  </script>
+</html>
