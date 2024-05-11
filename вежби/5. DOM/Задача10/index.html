@@ -14,7 +14,6 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        /* font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; */
         font-family: "Roboto";
         scroll-behavior: smooth;
     }
@@ -35,7 +34,6 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        /* display: none; */
     }
 
     .title {
@@ -48,7 +46,6 @@
         padding: 30px;
         border-radius: 10px;
         border: 1px solid #ddd;
-        /* display: none; */
     }
 
     .formContainer h3 {
@@ -121,19 +118,19 @@
         position: relative;
     }
     .navbar ul li a::after {
-        content: ""; /* Add content for the pseudo-element */
-        position: absolute; /* Position the pseudo-element absolutely */
+        content: ""; 
+        position: absolute; 
         left: 0;
-        bottom: -5px; /* Adjust this value to control the distance of the line from the text */
-        width: 100%; /* Make the line span the entire width of the anchor tag */
-        height: 2px; /* Set the height of the line */
-        background-color: #000000; /* Set the color of the line */
-        transition: all 0.3s ease; /* Add transition for smooth effect */
-        transform: scaleX(0); /* Initially scale the line to 0 width */
+        bottom: -5px; 
+        width: 100%; 
+        height: 2px; 
+        background-color: #000000; 
+        transition: all 0.3s ease; 
+        transform: scaleX(0); 
     }
     .navbar ul li a:hover::after {
-        /* Fixed the selector here */
-        transform: scaleX(1); /* On hover, scale the line to full width */
+       
+        transform: scaleX(1); 
     }
 
     .userBlock {
@@ -141,9 +138,7 @@
         padding: 10px 20px;
         border-radius: 8px;
     }
-    /* .userBlock::after {
-      content: "Username";
-    } */
+ 
 
     .productGrid {
         display: grid;
@@ -172,7 +167,7 @@
         padding: 20px 50px;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        z-index: 1000; /* Ensure it's above other elements */
+        z-index: 1000; 
     }
 
     .popUpContent {
@@ -242,7 +237,7 @@
     }
 
     .inventoryCard button {
-        background-color: #ff0000; /* Red color for sell button */
+        background-color: #ff0000; 
         color: #fff;
         padding: 10px 20px;
         border: none;
@@ -253,7 +248,7 @@
     }
 
     .inventoryCard button:hover {
-        background-color: #ff6666; /* Lighter red on hover */
+        background-color: #ff6666; 
     }
 
     .inventoryCard p {
@@ -299,7 +294,6 @@
         <div class="userBlock">Username</div>
     </nav>
     <section class="productGrid">
-        <!-- Product cards -->
         <div class="productCard">Product 1</div>
         <div class="productCard">Product 2</div>
         <div class="productCard">Product 3</div>

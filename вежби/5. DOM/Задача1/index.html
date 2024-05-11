@@ -33,12 +33,10 @@
 </div>
 <script>
 
-    let isLightBlue = true; // варијабла која е одговорна за стилот
-
     function toggleStyles() {
         let targetElement = document.getElementById('targetElement');// со getElementById се зема елементот
 
-        if (isLightBlue) { // се проверува дали isLightBlue е true
+        if (targetElement.classList.contains('lightBlueStyles')) { // се проверува дали елементот ја содржи класата
             targetElement.classList.remove('lightBlueStyles');
             targetElement.classList.add('darkRedStyles');
         } else { // се менува помеѓу стиловите во зависност од тоа кој стил е во моментот
@@ -46,7 +44,6 @@
             targetElement.classList.add('lightBlueStyles');
         }
 
-        isLightBlue = !isLightBlue;
     }
 </script>
 </body>
