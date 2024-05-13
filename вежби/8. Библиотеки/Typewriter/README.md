@@ -41,14 +41,15 @@
 
     <style>
       body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 1rem;
-        text-align: center;
         background-color: #000;
         color: #fff;
         font-family: monospace;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         margin: 0;
         padding: 2rem;
         height: 100vh;
@@ -202,6 +203,61 @@
     showNewQuote();
   </script>
 </html>
+```
+
+### Scramble анимација
+
+![Typewriter example with scramble animation](./typewriter-scramble.gif)
+
+```js
+const textEl = document.getElementById("typewriter");
+const text = "Интернет Програмирање на Клиентска Страна";
+const characters = "!<>-_\\/[]{}—=+*^?#_";
+
+// Креираме низа од booleans за да следиме кои знаци се откриени
+const unscrambledChars = new Array(text.length).fill(false);
+
+anime({
+  easing: "linear",
+  duration: 3000,
+  update: function (anim) {
+    const currentText = textEl.innerText;
+    let newText = "";
+
+    for (let i = 0; i < text.length; i++) {
+      // Веќе откриените знаци остануваат како што се
+      if (unscrambledChars[i]) {
+        newText += currentText[i];
+        continue;
+      }
+
+      const speed = 50; // Поголеми вредности имаат поголема веројатност за откривање
+      const shouldUnscramble = Math.random() <= speed / anim.duration;
+
+      // Дали треба да го откриеме знакот
+      if (shouldUnscramble) {
+        newText += text[i];
+        unscrambledChars[i] = true;
+      } else {
+        // Ако не, замени го со нов случаен знак
+        const randomIndex = anime.random(0, characters.length - 1);
+        newText += characters[randomIndex];
+      }
+    }
+
+    textEl.innerText = newText;
+  },
+  complete: function () {
+    textEl.innerText = text;
+
+    anime({
+      targets: textEl,
+      color: "#00cc00",
+      duration: 1000,
+      easing: "linear",
+    });
+  },
+});
 ```
 
 ### ChatGPT
