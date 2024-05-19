@@ -227,6 +227,8 @@
             this.board[row][col].isMine = true;
             this.board[row][col].count = undefined;
 
+            minesPlaced++;
+
             // Update counts
             for (let dx = -1; dx <= 1; dx++) {
               for (let dy = -1; dy <= 1; dy++) {
@@ -241,8 +243,6 @@
                 }
               }
             }
-
-            minesPlaced++;
           }
         }
       }
@@ -311,7 +311,6 @@
 
       gameWon() {
         this.canMakeMove = false;
-        anime.remove(".cell");
 
         const mineCellElements = this.board
           .flat()
@@ -329,7 +328,6 @@
 
       gameOver(row, col) {
         this.canMakeMove = false;
-        // anime.remove(".cell");
 
         anime
           .timeline()
