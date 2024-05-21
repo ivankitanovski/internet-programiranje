@@ -49,7 +49,13 @@
       scale: [0, 1],
       easing: "easeInOutSine",
       duration: duration,
-      delay: anime.stagger(100),
+      delay: (el, i) => {
+        if (i % 2 === 0) {
+          return 0;
+        } else {
+          return duration;
+        }
+      },
     });
   </script>
 </html>

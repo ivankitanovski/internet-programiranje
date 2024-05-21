@@ -44,12 +44,28 @@
   <script>
     const duration = 1000;
 
-    anime({
-      targets: ".zrak",
-      scale: [0, 1],
-      easing: "easeInOutSine",
-      duration: duration,
-      delay: anime.stagger(100),
-    });
+    anime
+      .timeline({
+        duration: duration,
+        easing: "easeInOutSine",
+      })
+      .add({
+        targets: ".krug",
+        scale: [0, 1],
+      })
+      .add({
+        targets: ".zrak",
+        delay: anime.stagger(100),
+        scale: [0, 1],
+      })
+      .add({
+        targets: ".zrak",
+        delay: anime.stagger(100),
+        scale: [1, 0],
+      })
+      .add({
+        targets: ".krug",
+        scale: [1, 0],
+      });
   </script>
 </html>
