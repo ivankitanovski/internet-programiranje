@@ -68,8 +68,6 @@
 
 ![Flag stagger animation](./img/flag-stagger.gif)
 
-### Корисни ресурси и насоки
-
 ### Решение
 
 ```html

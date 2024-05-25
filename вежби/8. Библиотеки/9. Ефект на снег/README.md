@@ -53,8 +53,6 @@
 
 ![Loading spinner](./img/snow.gif)
 
-### Корисни ресурси и насоки
-
 ### Решение
 
 ```html

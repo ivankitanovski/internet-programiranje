@@ -36,8 +36,6 @@
 
 ![Loading spinner](./img/loading-balls.gif)
 
-### Корисни ресурси и насоки
-
 ### Решение
 
 ```html

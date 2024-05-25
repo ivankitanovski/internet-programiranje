@@ -36,8 +36,6 @@
 
 ![Progressbar](./img/progress-bar.gif)
 
-### Корисни ресурси и насоки
-
 ### Решение
 
 ```html

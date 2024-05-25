@@ -36,8 +36,6 @@
 
 ![Carousel with fading transition](./img/carousel-fade.gif)
 
-### Корисни ресурси и насоки
-
 ### Решение
 
 ```html
