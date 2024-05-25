@@ -1,6 +1,6 @@
 # Задача
 
-Да се напише програма која ќе додаде атрибути на еден објект во друг.
+Да се напише програма која ќе додаде атрибути на еден или повеќе објекти во друг.
 
 ![img](img/screen1.png)
 
@@ -14,12 +14,16 @@
   </head>
   <body>
     <script type="text/javascript">
-      function merge(object1, object2) {
-        for (const property in object2) {
-          object1[property] = object2[property]; // се додава во објектот
+      function merge(target, ...objects) {
+        for (const object of objects) {
+          for (const property in object) {
+            target[property] = object[property];
+          }
         }
 
-        return object1;
+        return target;
+
+        // return Object.assign(target, ...objects)
       }
 
       const object1 = {
@@ -34,9 +38,16 @@
         f: 6,
       };
 
+      const object3 = {
+        g: 7,
+        h: 8,
+        i: 9,
+      };
+
       console.log(object1);
       console.log(object2);
-      console.log(merge(object1, object2));
+      console.log(object3);
+      console.log(merge(object1, object2, object3));
     </script>
   </body>
 </html>

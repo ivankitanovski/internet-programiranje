@@ -1,6 +1,6 @@
 # Задача
 
-Да се креира објект `Animal` кој содржи име, звук и метод `makeSound()` што ги печати истите. Да се креира објект `Cat` кој го наследува `Animal` и го препокрива методот.
+Да се креира објект `Animal` кој содржи име, звук и метод `makeSound()` што ги печати истите. Да се креира објект `Cat` кој наследува од `Animal` и го препокрива `makeSound()` методот.
 
 ![img](img/screen1.png)
 
@@ -42,19 +42,19 @@
       // function Animal(name, sound) {
       //     this.name = name;
       //     this.sound = sound;
+      // }
       //
-      //     this.makeSound = function() {
-      //         console.log(`${this.name}: ${this.sound}`);
-      // 	   }
+      // Animal.prototype.makeSound = function() {
+      //   console.log(`${this.name}: ${this.sound}`);
       // }
       //
       // function Cat(name, age) {
-      //     Animal.call(this, name, "meow");
-      //     this.age = age;
+      //   Animal.call(this, name, "meow");
+      //   this.age = age;
+      // }
       //
-      //     this.makeSound = function() {
-      //         console.log(`${this.name}: ${this.sound} (age: ${this.age})`);
-      // 	   }
+      // Cat.prototype.makeSound = function() {
+      //   console.log(`${this.name}: ${this.sound} (age: ${this.age})`);
       // }
 
       new Animal("Poppy", "woof").makeSound();

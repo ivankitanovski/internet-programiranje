@@ -1,9 +1,10 @@
 # Задача
 
-Да се креира програма со објект `BankAccount` која содржи име, сметки за трансакции и состојба на сметката (приватен атрибут).
-Објектот дополнително да содржи методи за депозит, повлекување и принтање.
+Да се креира програма со објект `BankAccount` која содржи име, состојба на сметката и историја на трансакции.
+Објектот содржи методи за додавање, повлекување и печатење на името на корисникот, состојбата на сметката и историјата на трансакции.
+Секоја трансакција да биде објект што ќе содржи информација за трансакцијата и време на креирање.
 
-Да се овозможи и употреба на кориснички влезови.
+Корисникот треба да внесе име на сметката, и може да внесе неопределен број трансакции додека не излезе од промптот.
 
 ![img](img/screen1.png)
 ![img](img/screen2.png)
@@ -19,6 +20,11 @@
   </head>
   <body>
     <script type="text/javascript">
+      function Transaction(details, timestamp) {
+        this.details = details;
+        this.timestamp = timestamp;
+      }
+
       function BankAccount(name) {
         let balance = 0; // приватен атрибут
         this.name = name;
@@ -26,18 +32,25 @@
 
         this.deposit = function (amount) {
           balance += amount;
-          this.transactions.push(`New deposit: ${amount}`);
+          let date = new Date(Date.now()).toLocaleString(); // Date.now() го дава моменталното време, toLocaleString() го враќа во друг формат
+          let transaction = new Transaction(`New deposit: ${amount}`, date);
+          this.transactions.push(transaction);
         };
 
         this.withdraw = function (amount) {
           balance -= amount;
-          this.transactions.push(`New withdrawal: -${amount}`);
+          let date = new Date(Date.now()).toLocaleString();
+          let transaction = new Transaction(`New withdrawal: -${amount}`, date);
+          this.transactions.push(transaction);
         };
 
         this.print = function () {
           console.log(`Account: ${this.name}`);
           console.log(`Balance: ${balance}`);
-          console.log(`Transactions: \n${this.transactions.join("\n")}`);
+          console.log(`Transactions:`);
+          for (const transaction of this.transactions) {
+            console.log(transaction);
+          }
         };
       }
 

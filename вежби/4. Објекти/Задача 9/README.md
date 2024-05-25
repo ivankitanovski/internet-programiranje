@@ -33,14 +33,14 @@ const object1 = {
 };
 
 const object2 = {
-  ...object1,
+  name: "Paul",
   country: "Denmark",
   print: function () {
     console.log("Example print");
   },
 };
 
-const example = difference(object1, object2, { a: "3", test: 4112 });
+const example = difference(object1, object2);
 
 console.log(example);
 ```

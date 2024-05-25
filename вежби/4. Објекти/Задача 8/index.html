@@ -7,30 +7,29 @@
     <script type="text/javascript">
       function extend(child, ...parents) {
         parents.forEach((parent) => {
-          for (const property in parent.prototype) {
+          for (const property in parent) {
             if (!(property in child.prototype)) {
               // ако дете објектот не го содржи
-              child.prototype[property] = parent.prototype[property]; // ги вметнува во структурата
+              child.prototype[property] = parent[property]; // ги вметнува во структурата
             }
           }
         });
+
+        // return Object.assign(child.prototype, ...parents);
       }
 
       // Пример објекти
-      function Customer(name) {
-        this.name = name;
-      }
-
-      Customer.prototype.print = function () {
-        console.log(`Name: ${this.name}`);
+      const Customer = {
+        print() {
+          console.log(`Name: ${this.name}`);
+        },
       };
 
-      function Special() {}
-
-      Special.prototype.discount = 30;
-
-      Special.prototype.printDiscount = function () {
-        console.log(`Discount: ${this.discount}%`);
+      const Special = {
+        discount: 30,
+        printDiscount() {
+          console.log(`Discount: ${this.discount}%`);
+        },
       };
 
       function VIP(name) {
