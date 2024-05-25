@@ -34,7 +34,7 @@
 
 ### Очекуван резултат
 
-![Carousel with fading transition](./carousel-fade.gif)
+![Carousel with fading transition](./img/carousel-fade.gif)
 
 ### Корисни ресурси и насоки
 
@@ -247,7 +247,7 @@
 - При клик на копчето "Prev", тековниот слајд треба да се поместува од центарот кон десно, а претходниот слајд од лево кон центарот.
 - При клик на копчето "Next", тековниот слајд треба да се поместува од центарот кон лево, а следниот слајд од десно кон центарот
 
-![Carousel with left-right scroll transition](./carousel-left-right.gif)
+![Carousel with left-right scroll transition](./img/carousel-left-right.gif)
 
 ```js
 const slides = document.querySelectorAll(".slide");
@@ -336,7 +336,7 @@ updatePagination();
 - При клик на копчето "Prev", тековниот слајд треба да се поместува од центарот надолу, а претходниот слајд од горе кон центарот.
 - При клик на копчето "Next", тековниот слајд треба да се поместува од центарот нагоре, а следниот слајд од долу кон центарот
 
-![Carousel with top-bottom scroll transition](./carousel-top-bottom.gif)
+![Carousel with top-bottom scroll transition](./img/carousel-top-bottom.gif)
 
 ```js
 const slides = document.querySelectorAll(".slide");
@@ -427,7 +427,7 @@ updatePagination();
 
 > **Помош:** Користете го easing параметарот за да го поставите ефектот на скокање.
 
-![Carousel with bounce transition](./carousel-bounce.gif)
+![Carousel with bounce transition](./img/carousel-bounce.gif)
 
 ```js
 const slides = document.querySelectorAll(".slide");

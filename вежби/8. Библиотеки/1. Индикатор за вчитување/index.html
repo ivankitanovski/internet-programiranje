@@ -27,29 +27,12 @@
   <script>
     const spinner = document.getElementById("spinner");
 
-    // anime({
-    //   targets: spinner,
-    //   rotate: 360,
-    //   easing: "linear",
-    //   loop: true,
-    //   duration: 1000,
-    // });
-
     anime({
       targets: spinner,
-      rotate: 2 * 360, // две завртувања
-      scale: [1, 0.85, 1],
+      rotate: 360,
       easing: "linear",
       loop: true,
-      duration: 2000, // 2 секунди
-    });
-
-    anime({
-      targets: spinner,
-      borderColor: ["#ff0000", "#00ff00", "#0000ff"],
-      borderBottomColor: "rgba(0, 0, 0, 0.3)", // бојата на долната рамка ќе остане иста
-      loop: true,
-      duration: 6000,
+      duration: 1000,
     });
   </script>
 </html>

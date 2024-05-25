@@ -34,7 +34,7 @@
 
 ### Очекуван резултат
 
-![Typewriter example](./typewriter.gif)
+![Typewriter example](./img/typewriter.gif)
 
 ### Корисни ресурси и насоки
 
@@ -123,7 +123,7 @@
 - Додадете копче `Show another quote` кое при клик ќе прикаже нов цитат со истата анимација.
 - Копчето треба да биде оневозможено и скриено додека трае анимацијата, и да се појави повторно кога анимацијата ќе заврши. Појавувањето на копчето треба да биде анимирано.
 
-![Typewriter example with random quote](./typewriter-quote.gif)
+![Typewriter example with random quote](./img/typewriter-quote.gif)
 
 ```html
 <!doctype html>
@@ -242,7 +242,7 @@
 - Оваа анимација треба да трае 3 секунди.
 - Кога текстот е целосно откриен, бојата треба да се смени во зелена со дополнителна анимација од 1 секунда.
 
-![Typewriter example with decypher animation](./typewriter-decypher.gif)
+![Typewriter example with decypher animation](./img/typewriter-decypher.gif)
 
 ```js
 const textEl = document.getElementById("typewriter");
@@ -310,7 +310,7 @@ anime({
 - Кога ќе се заврши со пишување на еден параграф, треба да се додаде нов ред и да се продолжи со пишување на следниот параграф.
 - Кога текстот ќе заврши со пишување на сите параграфи, курсорот треба да се отстрани со анимација.
 
-![ChatGPT typewriter example](./typewriter-chatgpt.gif)
+![ChatGPT typewriter example](./img/typewriter-chatgpt.gif)
 
 ```html
 <!doctype html>

@@ -66,7 +66,7 @@
 
 ### Очекуван резултат
 
-![Flag stagger animation](./flag-stagger.gif)
+![Flag stagger animation](./img/flag-stagger.gif)
 
 ### Корисни ресурси и насоки
 
@@ -136,7 +136,7 @@
 
 Во ова барање, целта е прво да ги анимирате исправените зраци на знамето, а потоа дијагоналните. Ова ќе создаде анимација во која зраците се појавуваат во две групи, со тоа што исправените зраци треба да се издолжат целосно пред да започнат дијагоналните.
 
-![Flag grouped animation](./flag-grouped.gif)
+![Flag grouped animation](./img/flag-grouped.gif)
 
 ```js
 anime({
@@ -167,7 +167,7 @@ anime({
 3. Зраците треба да се соберат еден по еден со забавување од `100` милисекунди
 4. Сонцето треба да се намали додека го снема
 
-![Flag stagger animation](./flag-timeline.gif)
+![Flag stagger animation](./img/flag-timeline.gif)
 
 ```html
 <circle class="krug" r="22.5" stroke="#d82126" stroke-width="5" />

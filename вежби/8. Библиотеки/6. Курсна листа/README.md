@@ -41,7 +41,7 @@
 
 ### Очекуван резултат
 
-![Currency rates](./currency.gif)
+![Currency rates](./img/currency.gif)
 
 ### Корисни ресурси и насоки
 
@@ -211,7 +211,7 @@
 
 > **Помош:** Вредностите на валутите се во однос на денарот (MKD). За да добиете вредност во денари за дадена валута, треба да ја инвертирате вредноста.
 
-![Currency rates with update button example](./currency-update.gif)
+![Currency rates with update button example](./img/currency-update.gif)
 
 ```html
 <!doctype html>

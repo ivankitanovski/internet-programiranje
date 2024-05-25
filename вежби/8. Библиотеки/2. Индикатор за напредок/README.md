@@ -34,7 +34,7 @@
 
 ### Очекуван резултат
 
-![Progressbar](./loading-bar.gif)
+![Progressbar](./img/progress-bar.gif)
 
 ### Корисни ресурси и насоки
 
@@ -127,7 +127,7 @@ anime({
 - Должината на анимацијата треба да биде `2500` милисекунди
 - Анимацијата треба да се извршува во постојан циклус
 
-![Progressbar](./loading.gif)
+![Progressbar](./img/loading.gif)
 
 ```html
 <style>
@@ -163,7 +163,7 @@ anime({
 
 #### Градиент Parallel
 
-![Progressbar](./loading-lines.gif)
+![Progressbar](./img/progress-lines.gif)
 
 ```html
 <style>
@@ -185,7 +185,7 @@ anime({
 
 #### Градиент Zig Zag
 
-![Progressbar](./loading-zigzag.gif)
+![Progressbar](./img/progress-zigzag.gif)
 
 ```html
 <style>

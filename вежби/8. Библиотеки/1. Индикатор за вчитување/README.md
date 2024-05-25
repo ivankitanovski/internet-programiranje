@@ -49,7 +49,7 @@
 
 ### Очекуван резултат
 
-![Loading spinner](./loading-spinner.gif)
+![Loading spinner](./img/loading-spinner.gif)
 
 ### Корисни ресурси и насоки
 
@@ -106,7 +106,7 @@
 
 Во ова барање, ќе ја измените вашата анимација така што ќе се извршува во спротивна насока од стрелките на часовникот.
 
-![Loading spinner](./loading-spinner-reverse.gif)
+![Loading spinner](./img/loading-spinner-reverse.gif)
 
 ```js
 anime({
@@ -127,7 +127,7 @@ anime({
 - Големината на индикаторот треба да се намалува на 85% од оригиналната големина и потоа да се зголеми назад на 100% за време на еден циклус
 - Бојата на индикаторот треба да се менува во секој циклус. Промените треба да се во следниве бои: `црвена, зелена и сина`
 
-![Loading spinner](./loading-spinner-color.gif)
+![Loading spinner](./img/loading-spinner-color.gif)
 
 ```js
 anime({

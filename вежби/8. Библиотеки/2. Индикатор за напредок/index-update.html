@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progress bar</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      .container {
+        display: inline-block;
+        width: 500px;
+        height: 25px;
+        border: 1px solid lightgray;
+        border-radius: 25px;
+        overflow: hidden;
+      }
+
+      #progress {
+        width: 0%;
+        height: 100%;
+        background-color: #ff0000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="progress"></div>
+    </div>
+    <span id="percentage">0%</span>
+  </body>
+
+  <script>
+    const duration = 3000;
+
+    anime({
+      targets: "#progress",
+      width: ["0%", "100%"],
+      easing: "linear",
+      duration: duration,
+      update: function (anim) {
+        const percentageElement = document.getElementById("percentage");
+        percentageElement.textContent = Math.round(anim.progress) + "%";
+      },
+    });
+  </script>
+</html>

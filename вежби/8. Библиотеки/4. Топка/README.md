@@ -35,7 +35,7 @@
 
 ### Очекуван резултат
 
-![Bouncing ball result](./bouncing-ball.gif)
+![Bouncing ball result](./img/bouncing-ball.gif)
 
 ### Корисни ресурси и насоки
 
@@ -116,7 +116,7 @@
 - При клик на "Restart" треба да се рестартира анимацијата.
 - При промена на вредноста на полето за контрола на анимацијата, треба да се постави вредноста на анимацијата која е избрана од страна на корисникот.
 
-![Bouncing ball with controls](./bouncing-ball-controls.gif)
+![Bouncing ball with controls](./img/bouncing-ball-controls.gif)
 
 ```html
 <!doctype html>

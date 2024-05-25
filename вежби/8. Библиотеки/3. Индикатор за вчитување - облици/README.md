@@ -34,7 +34,7 @@
 
 ### Очекуван резултат
 
-![Loading spinner](./loading-balls.gif)
+![Loading spinner](./img/loading-balls.gif)
 
 ### Корисни ресурси и насоки
 
@@ -113,7 +113,7 @@ y = A * sin(F * x)
 - Штом анимацијата заврши повторно да се изврши во обратна насока.
 - Анимацијата да се извршува во постојан циклус.
 
-![Loading sine](./loading-sine.gif)
+![Loading sine](./img/loading-sine.gif)
 
 ```js
 anime({
@@ -153,7 +153,7 @@ anime({
 - Штом анимацијата заврши повторно да се изврши во обратна насока.
 - Анимацијата да се извршува во постојан циклус.
 
-![Loading shapes](./loading-shapes.gif)
+![Loading shapes](./img/loading-shapes.gif)
 
 ```js
 const balls = document.querySelectorAll(".ball");

@@ -51,7 +51,7 @@
 
 ### Очекуван резултат
 
-![Loading spinner](./snow.gif)
+![Loading spinner](./img/snow.gif)
 
 ### Корисни ресурси и насоки
 
@@ -137,7 +137,7 @@
   - времето на тајмерот се зголемува за истиот број на поени.
 - Кога играчот ќе достигне 50 поени, играта завршува со порака "You won!".
 
-![Word game example](./word-game.gif)
+![Word game example](./img/word-game.gif)
 
 ```html
 <!doctype html>
