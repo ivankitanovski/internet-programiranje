@@ -1,4 +1,4 @@
-# Loading Spinner
+# Индикатор за вчутување
 
 #### Тежина: <span style="color: green">Лесна</span>
 
