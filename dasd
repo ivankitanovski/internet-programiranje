@@ -1,0 +1,90 @@
+[33mcommit 031a4f27e897e3834d032ff2c392964b0814fc1d[m[33m ([m[1;36mHEAD -> [m[1;32mfetch-json-tasks[m[33m, [m[1;31morigin/fetch-json-tasks[m[33m)[m
+Author: Itonkdong <kostadinoskiviktor@yahoo.com>
+Date:   Wed Mar 20 10:23:04 2024 +0100
+
+    Added all Exercises about JSON and Fetch
+
+[33mcommit 97234111cb30713ecfc8c437a2afe54e13e6e0f9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Wed Jan 24 17:42:43 2024 +0100
+
+    Update README.md
+
+[33mcommit fee0f3ba27359a78f25c729484afcf8b7b7a9e72[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Wed Jan 24 17:41:38 2024 +0100
+
+    Update README.md
+
+[33mcommit 5c1b424662a84eb2ad0f541fa05ecee192201984[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Wed Jan 24 17:34:32 2024 +0100
+
+    Update README.md
+
+[33mcommit 965ddf6738646d1497dce29d222280d73b50aec0[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 14:16:12 2024 +0100
+
+    Update readme
+
+[33mcommit fe0ac039fdf1ac7289b0d65e5545816f2a904314[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 14:02:43 2024 +0100
+
+    Update README.md
+
+[33mcommit d879c0662a14e6b35504ced64d3625b309810560[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 14:02:28 2024 +0100
+
+    Update README.md
+
+[33mcommit 4de67f4ab51709150ebee4dcd76c4354717866a3[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 13:54:38 2024 +0100
+
+    Update README.md of task1 of topic 1
+
+[33mcommit 79d9e86fc8daed4f1f98a4d836dc4971b419581e[m
+Merge: 45541d6 8d6cd9c
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 13:53:57 2024 +0100
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 45541d6476d58a5c5a2de27d2bb4ffddf2075f5f[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 13:53:19 2024 +0100
+
+    update formatting
+
+[33mcommit 0f2b12548d3755129f6484ce7185393f224bea3f[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 13:51:14 2024 +0100
+
+    add pre-commit hooks
+
+[33mcommit 8d6cd9c83d079adb2ea3229faaf48fc09f56ffda[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 11:52:24 2024 +0100
+
+    Update README.md
+
+[33mcommit dd4432f4efbd0e29b38f68b1f64da52448c04482[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 11:47:00 2024 +0100
+
+    screenshot for task 1 of topic 1
+
+[33mcommit 83ebde132fa295e880af91fe8ef3edac53453a28[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 11:45:49 2024 +0100
+
+    initial structure
+
+[33mcommit ca09a345a56b32b1b59e360219ec03bae98b951f[m
+Author: Ivan Kitanovski <ivan.kitanovski@gmail.com>
+Date:   Tue Jan 23 11:24:10 2024 +0100
+
+    Initial commit
