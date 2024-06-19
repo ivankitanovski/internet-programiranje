@@ -13,12 +13,12 @@
 </head>
 <body>
 <script>
-    var a = prompt("Внеси број:")
-    var fact = 1
+    let a = prompt("Внеси број:")
+    let fact = 1
     if (isNaN(a)) {
         alert("Потребно е да внесете број!")
     } else {
-        var tmp = parseInt(a)
+        let tmp = parseInt(a)
         while (tmp > 0) {
             fact *= tmp
             tmp--

@@ -6,13 +6,13 @@
 </head>
 <body>
 <script>
-  var a = prompt("Внеси број:")
-  var tmp = parseInt(a), counter = 0, sum = 0
+  let a = prompt("Внеси број:")
+  let tmp = parseInt(a), counter = 0, sum = 0
   while (tmp > 0) { //Ги броиме цифрите во бројот
     counter++
     tmp = parseInt(tmp / 10)
   }
-  for (var i = 0; i < a.length; i++) {
+  for (let i = 0; i < a.length; i++) {
     sum += Math.pow(parseInt(a.at(i)), counter) //Во збирот ја додаваме секоја цифра крената на степен на бројот на цифри
   }
   if (parseInt(a) === sum) {

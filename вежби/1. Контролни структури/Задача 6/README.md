@@ -12,9 +12,9 @@
 </head>
 <body>
 <script>
-  var a = prompt("Внеси број:")
-  var reversed = ""
-  for (var i = a.length - 1; i >= 0; i--) {
+  let a = prompt("Внеси број:")
+  let reversed = ""
+  for (let i = a.length - 1; i >= 0; i--) {
     reversed += a.at(i) //Го превртуваме внесениот број
   }
   if (a !== reversed) { //Проверуваме дали превртениот број е еднаков со внесениот

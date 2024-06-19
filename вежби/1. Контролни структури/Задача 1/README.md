@@ -15,9 +15,9 @@
 <body>
 <script>
     //Преку prompt ја внесуваме температурата
-    var temp = prompt("Внеси температура во целзиусови степени:")
+    let temp = prompt("Внеси температура во целзиусови степени:")
     temp = parseInt(temp) //Ја парсираме температурата од String во Integer
-    var fahrenheit = (9 / 5 * temp) + 32
+    let fahrenheit = (9 / 5 * temp) + 32
     alert("Температурата во фаренхајтови е: " + fahrenheit)
 </script>
 </body>

@@ -13,10 +13,10 @@
 </head>
 <body>
 <script>
-    var num = parseInt(prompt("Внеси број:"))
-    var exp = parseInt(prompt("Внеси експонент:"))
-    var result = 1
-    for (var i = 0; i < exp; i++) {
+    let num = parseInt(prompt("Внеси број:"))
+    let exp = parseInt(prompt("Внеси експонент:"))
+    let result = 1
+    for (let i = 0; i < exp; i++) {
         result *= num
     }
     alert(result)

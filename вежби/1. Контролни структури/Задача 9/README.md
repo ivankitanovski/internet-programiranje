@@ -13,9 +13,9 @@
 </head>
 <body>
 <script>
-  var a = prompt("Внеси го првиот број:")
-  var b = prompt("Внеси го вториот број:")
-  var o = prompt("Внеси оператор:")
+  let a = prompt("Внеси го првиот број:")
+  let b = prompt("Внеси го вториот број:")
+  let o = prompt("Внеси оператор:")
   a = parseInt(a)
   b = parseInt(b)
   if (o === "*") {

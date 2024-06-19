@@ -6,9 +6,9 @@
 </head>
 <body>
 <script>
-  var height = parseFloat(prompt("Внеси висина во m:")) //Парсирање на децимални броеви
-  var weight = parseInt(prompt("Внеси тежина во kg:"))
-  var bmi = weight / (height * height)
+  let height = parseFloat(prompt("Внеси висина во m:")) //Парсирање на децимални броеви
+  let weight = parseInt(prompt("Внеси тежина во kg:"))
+  let bmi = weight / (height * height)
   bmi = parseFloat(bmi)
   if (bmi >= 18.5 && bmi <= 24.9) {
     alert(bmi + " - Normal weight")
