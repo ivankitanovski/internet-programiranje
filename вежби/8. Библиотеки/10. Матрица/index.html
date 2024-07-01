@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(14, 50px);
+        grid-template-rows: repeat(5, 50px);
+        gap: 4px;
+      }
+
+      .square {
+        background-color: #4caf50;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="grid"></div>
+  </body>
+
+  <script>
+    const container = document.querySelector(".grid");
+
+    for (let i = 0; i < 70; i++) {
+      container.innerHTML += `<div id=${i} class="square"></div>`;
+    }
+
+    container.addEventListener("click", (e) => {
+      if (!e.target.classList.contains("square")) return;
+
+      // Find which square was clicked
+      const id = e.target.id;
+
+      anime({
+        targets: ".square",
+        scale: [
+          { value: 0.1, easing: "easeOutSine", duration: 500 },
+          { value: 1, easing: "easeInOutQuad", duration: 1200 },
+        ],
+        delay: anime.stagger(200, { grid: [14, 5], from: id }),
+      });
+    });
+
+    container.addEventListener("mouseover", (e) => {
+      if (!e.target.classList.contains("square")) return;
+
+      anime({
+        targets: e.target,
+        scale: [
+          { value: 0.1, easing: "easeOutSine", duration: 500 },
+          { value: 1, easing: "easeInOutQuad", duration: 1200 },
+        ],
+      });
+    });
+  </script>
+</html>

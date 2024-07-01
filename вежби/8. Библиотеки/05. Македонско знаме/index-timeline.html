@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Macedonian flag</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      svg {
+        overflow: hidden;
+        width: 1200px;
+        height: 600px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <svg width="1200" height="600" viewBox="-140 -70 280 140" fill="#f8e92e">
+      <path fill="#d82126" d="m-140-70h280V70h-280z" />
+
+      <path class="zrak" d="M -14 -70 L 14 -70 L 0 -15 L -14 -70 Z" />
+      <path class="zrak" d="M 140 -70 L 98 -70 L -12.86 7.72 L 140 -70 Z" />
+      <path class="zrak" d="M 0 0 L 140 14 L 140 -14" />
+      <path class="zrak" d="M 140 70 L 98 70 L -12.86 -7.72 L 140 70 Z" />
+      <path class="zrak" d="M 14 70 L -14 70 L 0 15 L 14 70 Z" />
+      <path class="zrak" d="M -140 70 L -98 70 L 12.86 -7.72 L -140 70 Z" />
+      <path class="zrak" d="M -140 14 L -140 -14 L 0 0 L -140 14" />
+      <path class="zrak" d="M -140 -70 L -98 -70 L 12.86 7.72 L -140 -70 Z" />
+
+      <circle class="krug" r="22.5" stroke="#d82126" stroke-width="5" />
+    </svg>
+  </body>
+
+  <script>
+    const duration = 1000;
+
+    anime
+      .timeline({
+        duration: duration,
+        easing: "easeInOutSine",
+      })
+      .add({
+        targets: ".krug",
+        scale: [0, 1],
+      })
+      .add({
+        targets: ".zrak",
+        delay: anime.stagger(100),
+        scale: [0, 1],
+      })
+      .add({
+        targets: ".zrak",
+        delay: anime.stagger(100),
+        scale: [1, 0],
+      })
+      .add({
+        targets: ".krug",
+        scale: [1, 0],
+      });
+  </script>
+</html>

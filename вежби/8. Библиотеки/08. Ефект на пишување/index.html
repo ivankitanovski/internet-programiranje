@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typewriter</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+        font-family: monospace;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 0;
+        padding: 2rem;
+        height: 100vh;
+        box-sizing: border-box;
+      }
+
+      #typewriter {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="typewriter"></div>
+  </body>
+
+  <script>
+    const textEl = document.getElementById("typewriter");
+    const text = "Интернет Програмирање на Клиентска Страна";
+
+    anime({
+      targets: { count: 0 },
+      count: [0, text.length],
+      round: 1,
+      easing: "linear",
+      duration: 4000,
+      update: function (anim) {
+        const numCharacters = Math.round(anim.animations[0].currentValue);
+        textEl.innerHTML = text.substring(0, numCharacters);
+      },
+      complete: function () {
+        anime({
+          targets: textEl,
+          color: "#00cc00",
+          duration: 1000,
+          easing: "linear",
+        });
+      },
+    });
+  </script>
+</html>

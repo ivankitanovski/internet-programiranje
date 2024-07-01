@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading balls sine</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .ball {
+        margin: 5px;
+        border: 25px solid #3498db;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+  </body>
+
+  <script>
+    anime({
+      targets: ".ball",
+      translateY: function (ball, index, numBalls) {
+        const amplitude = 100;
+        const frequency = 0.6;
+        return amplitude * Math.sin(frequency * index);
+      },
+      borderColor: "#ff0000",
+      delay: anime.stagger(100, { start: 2000 }),
+      endDelay: 500,
+      duration: 250,
+      easing: "linear",
+      direction: "alternate",
+      loop: true,
+    });
+  </script>
+</html>
