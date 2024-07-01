@@ -1,0 +1,74 @@
+# Задача
+
+Да се креира програма со објект `BankAccount` која содржи име, состојба на сметката и историја на трансакции.
+Објектот содржи методи за додавање, повлекување и печатење на името на корисникот, состојбата на сметката и историјата на трансакции.
+Секоја трансакција да биде објект што ќе содржи информација за трансакцијата и време на креирање.
+
+Корисникот треба да внесе име на сметката, и може да внесе неопределен број трансакции додека не излезе од промптот.
+
+![img](img/screen1.png)
+![img](img/screen2.png)
+![img](img/screen3.png)
+
+# Решение
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      function Transaction(details, timestamp) {
+        this.details = details;
+        this.timestamp = timestamp;
+      }
+
+      function BankAccount(name) {
+        let balance = 0; // приватен атрибут
+        this.name = name;
+        this.transactions = [];
+
+        this.deposit = function (amount) {
+          balance += amount;
+          let date = new Date(Date.now()).toLocaleString(); // Date.now() го дава моменталното време, toLocaleString() го враќа во друг формат
+          let transaction = new Transaction(`New deposit: ${amount}`, date);
+          this.transactions.push(transaction);
+        };
+
+        this.withdraw = function (amount) {
+          balance -= amount;
+          let date = new Date(Date.now()).toLocaleString();
+          let transaction = new Transaction(`New withdrawal: -${amount}`, date);
+          this.transactions.push(transaction);
+        };
+
+        this.print = function () {
+          console.log(`Account: ${this.name}`);
+          console.log(`Balance: ${balance}`);
+          console.log(`Transactions:`);
+          for (const transaction of this.transactions) {
+            console.log(transaction);
+          }
+        };
+      }
+
+      const account = new BankAccount(prompt("Vnesi ime:"));
+      let amount;
+
+      while ((amount = prompt("Vnesi iznos:"))) {
+        amount = parseInt(amount);
+
+        if (isFinite(amount)) {
+          // ако е број
+          if (amount < 0) account.withdraw(-amount);
+          else if (amount > 0) account.deposit(amount);
+        }
+      }
+
+      account.print();
+    </script>
+  </body>
+</html>
+```

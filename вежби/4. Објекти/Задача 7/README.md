@@ -1,0 +1,41 @@
+# Задача
+
+Да се напише програма која ќе ги измеша сите својства и вредности на објект.
+
+![img](img/screen1.png)
+
+# Решение
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      function shuffle(object) {
+        let newObject = {};
+        let array = Object.entries(object) // враќа со елементи во форма [property, value]
+          .flat() // ги спојува листите во една листа
+          .toSorted(() => Math.random() - 0.5); // дава копија од низата сортирана
+
+        for (let i = 0; i < array.length; i += 2) {
+          newObject[array[i]] = array[i + 1];
+        }
+
+        return newObject;
+      }
+
+      let object = {
+        a: "3",
+        b: "2",
+        f: [3, ["ab", "test"]],
+      };
+
+      console.log(object);
+      console.log(shuffle(object));
+    </script>
+  </body>
+</html>
+```

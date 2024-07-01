@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      function extend(child, ...parents) {
+        parents.forEach((parent) => {
+          for (const property in parent) {
+            if (!(property in child.prototype)) {
+              // ако дете објектот не го содржи
+              child.prototype[property] = parent[property]; // ги вметнува во структурата
+            }
+          }
+        });
+
+        // return Object.assign(child.prototype, ...parents);
+      }
+
+      // Пример објекти
+      const Customer = {
+        print() {
+          console.log(`Name: ${this.name}`);
+        },
+      };
+
+      const Special = {
+        discount: 30,
+        printDiscount() {
+          console.log(`Discount: ${this.discount}%`);
+        },
+      };
+
+      function VIP(name) {
+        this.name = name;
+      }
+
+      extend(VIP, Customer, Special);
+
+      const example = new VIP("Adam");
+
+      example.print(); // наследен
+      example.printDiscount(); // наследен
+    </script>
+  </body>
+</html>
