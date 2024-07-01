@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Зад. 4</title>
+    <style>
+        #slideshow{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            left:600px;
+            top:100px;
+            position: absolute;
+        }
+        #slideshow img{
+            max-height: 300px;
+            max-width: 300px;
+        }
+        #next{
+            position: absolute;
+            left: 650px;
+            top:400px;
+            margin-right: 20px;
+        }
+        #previous{
+            position: absolute;
+            left: 800px;
+            top:400px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="slideshow">
+        <img src="img/finki.png" alt="finki">
+    </div>
+    <button id="next">Следна</button><button id="previous">Предходна</button>
+    <script>
+        //Правиме колекција со сликите се со цел да имаме индекс кој ќе ги врти сликите на през.
+        var imgs=["img/finki.png" , "img/java.png" , "img/html.png", "img/css.png"];//finki-0, java-1, html-2 css-3;
+        var index=0;
+        //Бидејки сакаме да го искористиме addEventListener методот од ЈС ке ги земеме копчињата и во ЈС ке ги додадеме фунцкиите
+        var nextBttn=document.getElementById('next');
+        var previousBttn=document.getElementById('previous');
+        nextBttn.addEventListener('click', slednaslika);
+        previousBttn.addEventListener('click', predhodnaSlika);
+        //Ги креираме функциите, предходно дефинирани во аддЕвентЛистенер
+        function slednaslika()
+        {
+
+            if(index===imgs.length-1) //max index=3 imgs.length=4, затоа -1
+            {
+                index=0; //Во случај да сме на последната слика, бидејки немаме повише слики треба да се врати на првата слика
+            } else{
+                index++;
+            }
+
+            let slika=document.getElementsByTagName('img')[0];
+            slika.src=imgs[index];
+        }
+        function predhodnaSlika()
+        {
+            if(index===0)
+            {
+                index=imgs.length-1;//Во случај да сме на првата слика неможе -1 да оди индексот, па мора да оди на последната слика
+            } else{
+                index--;
+            }
+
+            let slika=document.getElementsByTagName('img')[0];
+            slika.src=imgs[index];
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Зад. 5</title>
+    <style>
+        p{
+            display: block;
+            margin-bottom: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <p>Постојано <span>растам</span>, мегутоа <span>никогаш</span> неможам да се вратам <span>назад</span>. Што сум јас?</p>
+    <p>Што е тоа што оди на <span>сабајле</span> на 4 нозе , а <span>навечер</span> на 3?</p>
+    <p><span>Железen</span> покрив, <span>стаклени</span> , не престанувам да горам. Што сум јас? </p>
+    <script>
+        // Ги зимаме параграфите, се со цел да додадеме onmouseover преку ЈС
+        var kluchniZborovi=document.querySelectorAll('p');
+
+           
+            kluchniZborovi.forEach(function(p){
+                p.addEventListener('mouseover', revealHints);
+            })
+
+
+        function revealHints()
+        {
+           //Додаваме црвена боја на текстот на спановите се со цел да бидат хинтови(како прва помош, при погодувањето)
+           //Притоа ставаме евентЛистенер се со цел да им се даде втора шанса во случај да им текне
+            let spans=document.getElementsByTagName('span');
+            for(let i=0;i<spans.length;i++)
+            {
+                spans[i].style.color='red';
+                spans[i].addEventListener('mouseover', revealAnswer);
+            }
+
+        }
+        function revealAnswer()
+        {
+            //Ги креираме одговорите, се со цел да ги прикачиме, доколку корисникот не ги погоди!
+           let answer1=document.createElement('p');
+           answer1.innerHTML='време';
+           let answer2=document.createElement('p');
+           answer2.innerHTML='човек';
+           let answer3=document.createElement('p');
+           answer3.innerHTML='ламба';
+           kluchniZborovi[0].appendChild(answer1);
+           kluchniZborovi[1].appendChild(answer2);
+           kluchniZborovi[2].appendChild(answer3);
+
+
+        }
+    </script>
+
+
+</body>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Задача 3</title>
+    <style>
+        div{
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <!--    Ги додаваме ХТМЛ Елементите со соодветни фунцкии, при промена да се промени текстот-->
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+    <div>
+        <label>Width: </label>
+        <select id="sirina" onchange="changeWidth()">
+            <option>500px</option>
+            <option>250px</option>
+            <option>125px</option>
+            <option>62.5px</option>
+        </select>
+    </div>
+    <div>
+        <label>BackgroundColor: </label>
+        <select id="pozadinskaBoja" onchange="changeBackgroundColor()">
+            <option>Green</option>
+            <option>Yellow</option>
+            <option>Blue</option>
+            <option>Red</option>
+        </select>
+    </div>
+    <div>
+        <label>Text Color: </label>
+        <select id="tekstBoja" onchange="changeTextColor()">
+            <option>Purple</option>
+            <option>Gray</option>
+            <option>Brown</option>
+            <option>Black</option>
+        </select>
+    </div>
+    <script>
+        var tekst=document.getElementsByTagName('p')[0];
+        //функција за промена на ширина
+        function changeWidth()
+        {
+            let sirinaTekst=document.getElementById('sirina').value;
+            tekst.style.width=sirinaTekst;
+        }
+        // функција за промена на позадинска боја на текстот
+        function changeBackgroundColor()
+        {
+            let boja=document.getElementById('pozadinskaBoja').value;
+            tekst.style.backgroundColor=boja;
+        }
+        // фунцкија за промена на боја на самиот текст
+        function changeTextColor()
+        {
+            let tekstBoja=document.getElementById('tekstBoja').value
+            tekst.style.color=tekstBoja;
+
+        }
+
+    </script>
+
+</body>
