@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #101015;
+            --background: #e0e0e7;
+            --primary: #7b7b9c;
+            --secondary: #bdb9a8;
+            --accent: #9aad92;
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        #movie-editor-app {
+            display: grid;
+            grid-template-rows: 2fr 2fr 0.5fr;
+            /*padding: 1rem;*/
+            gap: 1rem;
+            height: 100vh;
+            background-color: var(--background);
+        }
+
+        #movie-editor-app > * {
+
+            /*Remove this*/
+            background-color: var(--background);
+            border-radius: 5px;
+        }
+
+        .hover-element {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .hover-element:hover {
+            background-color: var(--accent);
+        }
+
+        .hover-element:active {
+            transform: scale(95%);
+        }
+
+        .options-section {
+            display: grid;
+            grid-template-columns: 0.7fr 2fr 2fr 2fr 2fr;
+            gap: 1rem;
+            padding: 0.5rem;
+            /*justify-content: flex-start;*/
+        }
+
+        .folders-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--primary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .folders {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .folder {
+            border-radius: 3px;
+            border: 2px solid black;
+            padding: 0.5rem;
+        }
+
+        .files-container {
+
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+            background-color: var(--primary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .files {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 0.7rem;
+            padding: 0.5rem;
+        }
+
+        .file {
+            padding: 1rem;
+            border: 3px solid black;
+            border-radius: 4px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 85px;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            font-weight: 900;
+        }
+
+        .project-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+
+            background-color: var(--secondary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-name {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+        }
+
+        .project-name input {
+            padding: 0.5rem;
+            outline: none;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .colors-container {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.3rem;
+        }
+
+        .color-box {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .black {
+            background-color: black;
+            color: white;
+        }
+
+        .selected {
+            outline: 3px solid white;
+        }
+
+        .project-render-container {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            /*padding: 0.5rem;*/
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+        }
+
+        .projects {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .project {
+            padding: 0.5rem;
+            border: 3px solid black;
+            border-radius: 5px;
+            width: 20%;
+            text-align: center;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 85px;
+        }
+
+        .saving-bar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .saving-bar {
+            padding: 0.7rem;
+            position: relative;
+            background-color: var(--background);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .saving-element {
+            background-color: var(--primary);
+            position: absolute;
+            top: 3px;
+            bottom: 3px;
+            left: 3px;
+            right: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .start-loading {
+            right: 0;
+        }
+
+        .preview-container {
+            padding: 1rem;
+            background-color: var(--accent);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+
+        }
+
+        .preview {
+            padding: 1rem;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            flex-grow: 1;
+            border-radius: 10px;
+
+        }
+
+
+        .editing-section {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 0.5rem;
+            padding: 0.5rem;
+
+        }
+
+        .editing-bar-container {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .editing-bar {
+            background-color: var(--secondary);
+            flex-grow: 1;
+            border-radius: 3px;
+            display: flex;
+            padding: 0.3rem;
+            justify-content: flex-start;
+            align-items: stretch;
+            gap: 0.2rem;
+            box-shadow: var(--shadow);
+
+        }
+
+        .movie-clip {
+            cursor: pointer;
+            background-color: red;
+            display: grid;
+            place-items: center;
+            border-radius: 2px;
+            border: black solid 2px;
+
+            background-size: contain;
+            background-position: left;
+            background-repeat: repeat-x;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            color: white;
+            font-weight: 900;
+        }
+
+
+        .editing-bar-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem;
+            display: grid;
+            place-items: center;
+            background-color: var(--primary);
+            border-radius: 3px;
+            box-shadow: var(--shadow);
+
+
+        }
+
+        .buttons-sections {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            padding: 0.5rem;
+            background-color: var(--primary);
+        }
+
+        .movie-btn {
+            padding: 1rem;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            width: 10%;
+            box-shadow: var(--shadow);
+
+        }
+
+        .movie-btn:hover {
+            opacity: 70%;
+        }
+
+        .movie-btn:active {
+            transform: scale(95%);
+        }
+
+
+        #delete-btn {
+            background-color: red;
+            color: white;
+        }
+
+        #save-project-btn {
+            background-color: lightgreen;
+            color: black;
+        }
+
+        #delete-all-projects-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+<main id="movie-editor-app">
+    <section class="options-section">
+        <div class="folders-container">
+            <h3>Folders</h3>
+            <div class="folders">
+                <div class="folder hover-element selected">Folder 1</div>
+                <div class="folder">Folder 2</div>
+                <div class="folder">Folder 3</div>
+            </div>
+        </div>
+        <div class="files-container">
+            <h3>Files</h3>
+            <div class="files">
+                                <div style="background-image: url(https://i.guim.co.uk/img/media/39970e92e956c49a3c19093b31272deffb59b044/0_67_4323_2594/master/4323.jpg?width=700&quality=85&auto=format&fit=max&s=92ae4526fbbdb3914f5e42352376895f)" class="file hover-element" title="example.mp4">example.mp4</div>
+                <div class="file hover-element selected">File1</div>
+                <div class="file">File2</div>
+                <div class="file">File3</div>
+                <div class="file">File4</div>
+            </div>
+        </div>
+        <div class="project-info-container">
+            <h3>Project Info</h3>
+            <div class="project-info">
+                <div class="project-name">
+                    <label for="project-name">Project Name:</label>
+                    <input type="text" id="project-name">
+                </div>
+                <div class="project-duration">
+                    <label for="duration15">Track Duration:</label>
+                    <input type="radio" name="duration" id="duration15" value="15" checked> 15 min
+                    <input type="radio" name="duration" id="duration20" value="20"> 20 min
+                </div>
+                <div class="colors-wrapper">
+                    <div>Project Color:</div>
+                    <div class="colors-container">
+                        <div class="blue color-box selected">Blue</div>
+                        <div class="yellow color-box">Yellow</div>
+                        <div class="red color-box">Red</div>
+                        <div class="green color-box">Green</div>
+                        <div class="black color-box">Black</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-render-container">
+            <div class="projects-container">
+                <h3>Saved Projects</h3>
+                <div class="projects">
+                    <div class="project hover-element">Project1</div>
+                    <div class="project">Project2</div>
+                    <div class="project">Project3</div>
+                </div>
+            </div>
+            <div class="saving-bar-container">
+                <h3>Save Progress:</h3>
+                <div class="saving-bar">
+                    <div class="saving-element"></div>
+                </div>
+            </div>
+        </div>
+        <div class="preview-container">
+            <h3>Preview</h3>
+            <div class="preview"></div>
+        </div>
+    </section>
+    <section class="editing-section">
+        <div class="editing-bar-container">
+            <h4 class="editing-bar-tag">T2</h4>
+            <div id="track-2" class="editing-bar"></div>
+        </div>
+        <div class="editing-bar-container">
+            <h4 class="editing-bar-tag">T1</h4>
+            <div id="track-1" class="editing-bar"></div>
+        </div>
+    </section>
+    <section class="buttons-sections">
+        <button class="movie-btn" id="delete-btn">Delete Element</button>
+        <button class="movie-btn" id="save-project-btn">Save Project</button>
+        <button class="movie-btn" id="delete-all-projects-btn">Delete all Projects</button>
+    </section>
+</main>
+
+
+<script>
+
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+</script>
+</body>
+</html>

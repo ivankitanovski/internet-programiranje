@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #07050b;
+            --background: #f5f3fa;
+            --primary: #6b5ab1;
+            --secondary: #d0cb9b;
+            --accent: #94c483;
+            --br: 5px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        .app-container {
+            display: grid;
+            justify-items: center;
+            height: 90vh;
+            margin-top: 1rem;
+        }
+
+        .main-item-container {
+            background-color: var(--background);
+            border-radius: var(--br);
+            width: 80%;
+            display: grid;
+            grid-auto-rows: auto auto auto;
+        }
+
+        .item-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--background);
+            border-top-left-radius: var(--br);
+            border-top-right-radius: var(--br);
+            color: black;
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+            font-weight: 600;
+        }
+
+        .item-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+
+        .item-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--secondary);
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .item-picture {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item-picture img {
+            width: 60%;
+            aspect-ratio: 1/1;
+            border-radius: var(--br);
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .item-shopping-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .item-shopping-info > * {
+            background-color: var(--accent);
+            color: white;
+            border-radius: var(--br);
+            width: 50%;
+            padding: 0.5rem;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .barcode-section {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            padding: 1rem;
+            gap: 1rem;
+            background-color: var(--primary);
+            border-bottom-right-radius: var(--br);
+            border-bottom-left-radius: var(--br);
+            color: white;
+            box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        }
+
+        .barcode-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+
+        .shops-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+
+        .shops-info > * {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <main class="main-item-container">
+        <header class="item-header">
+            <div class="item-name">
+                <span id="item-name"></span>
+            </div>
+            <div class="item-id">
+                ID:<span id="id"></span>
+            </div>
+        </header>
+
+        <section class="item-info">
+            <div class="item-picture">
+                <img id="item-picture" src="#" alt="item-picture">
+            </div>
+            <div class="item-shopping-info">
+                <div class="item-price">Price: <span id="price"></span></div>
+                <div class="amount">Amount: <span id="amount"></span></div>
+                <div class="size">Size: <span id="size"></span></div>
+            </div>
+        </section>
+
+        <section class="barcode-section">
+            <div class="barcode-info">
+                <div>Hover To Scan</div>
+                <div class="barcode-container barcode-container-hover"></div>
+            </div>
+
+            <div class="shops-info">
+                <div>Store Info</div>
+                <div class="availability-info"></div>
+            </div>
+        </section>
+
+    </main>
+</div>
+<script>
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+</script>
+</body>
+</html>

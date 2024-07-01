@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --text: #101015;
+            --background: #e0e0e7;
+            --primary: #7b7b9c;
+            --secondary: #bdb9a8;
+            --accent: #9aad92;
+            --shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+
+        html {
+            font-family: "Poppins", "serif";
+            box-sizing: border-box;
+
+        }
+
+        #movie-editor-app {
+            display: grid;
+            grid-template-rows: 2fr 2fr 0.5fr;
+            /*padding: 1rem;*/
+            gap: 1rem;
+            height: 100vh;
+            background-color: var(--background);
+        }
+
+        #movie-editor-app > * {
+
+            /*Remove this*/
+            background-color: var(--background);
+            border-radius: 5px;
+        }
+
+        .hover-element {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .hover-element:hover {
+            background-color: var(--accent);
+        }
+
+        .hover-element:active {
+            transform: scale(95%);
+        }
+
+        .options-section {
+            display: grid;
+            grid-template-columns: 0.7fr 2fr 2fr 2fr 2fr;
+            gap: 1rem;
+            padding: 0.5rem;
+            /*justify-content: flex-start;*/
+        }
+
+        .folders-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--primary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .folders {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .folder {
+            border-radius: 3px;
+            border: 2px solid black;
+            padding: 0.5rem;
+        }
+
+        .files-container {
+
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+            background-color: var(--primary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .files {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 0.7rem;
+            padding: 0.5rem;
+        }
+
+        .file {
+            padding: 1rem;
+            border: 3px solid black;
+            border-radius: 4px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 85px;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            font-weight: 900;
+        }
+
+        .project-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+
+            background-color: var(--secondary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-name {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+        }
+
+        .project-name input {
+            padding: 0.5rem;
+            outline: none;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .colors-container {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.3rem;
+        }
+
+        .color-box {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .black {
+            background-color: black;
+            color: white;
+        }
+
+        .selected {
+            outline: 3px solid white;
+        }
+
+        .project-render-container {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            /*padding: 0.5rem;*/
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+        }
+
+        .projects {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .project {
+            padding: 0.5rem;
+            border: 3px solid black;
+            border-radius: 5px;
+            width: 20%;
+            text-align: center;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 85px;
+        }
+
+        .saving-bar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .saving-bar {
+            padding: 0.7rem;
+            position: relative;
+            background-color: var(--background);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .saving-element {
+            background-color: var(--primary);
+            position: absolute;
+            top: 3px;
+            bottom: 3px;
+            left: 3px;
+            right: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+
+        }
+
+        .start-loading {
+            right: 0;
+        }
+
+        .preview-container {
+            padding: 1rem;
+            background-color: var(--accent);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+
+        }
+
+        .preview {
+            padding: 1rem;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            flex-grow: 1;
+            border-radius: 10px;
+
+        }
+
+
+        .editing-section {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 0.5rem;
+            padding: 0.5rem;
+
+        }
+
+        .editing-bar-container {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .editing-bar {
+            background-color: var(--secondary);
+            flex-grow: 1;
+            border-radius: 3px;
+            display: flex;
+            padding: 0.3rem;
+            justify-content: flex-start;
+            align-items: stretch;
+            gap: 0.2rem;
+            box-shadow: var(--shadow);
+
+        }
+
+        .movie-clip {
+            cursor: pointer;
+            background-color: red;
+            display: grid;
+            place-items: center;
+            border-radius: 2px;
+            border: black solid 2px;
+
+            background-size: contain;
+            background-position: left;
+            background-repeat: repeat-x;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            color: white;
+            font-weight: 900;
+        }
+
+
+        .editing-bar-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem;
+            display: grid;
+            place-items: center;
+            background-color: var(--primary);
+            border-radius: 3px;
+            box-shadow: var(--shadow);
+
+
+        }
+
+        .buttons-sections {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            padding: 0.5rem;
+            background-color: var(--primary);
+        }
+
+        .movie-btn {
+            padding: 1rem;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            width: 10%;
+            box-shadow: var(--shadow);
+
+        }
+
+        .movie-btn:hover {
+            opacity: 70%;
+        }
+
+        .movie-btn:active {
+            transform: scale(95%);
+        }
+
+
+        #delete-btn {
+            background-color: red;
+            color: white;
+        }
+
+        #save-project-btn {
+            background-color: lightgreen;
+            color: black;
+        }
+
+        #delete-all-projects-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+<main id="movie-editor-app">
+    <section class="options-section">
+        <div class="folders-container">
+            <h3>Folders</h3>
+            <div class="folders"></div>
+        </div>
+        <div class="files-container">
+            <h3>Files</h3>
+            <div class="files"></div>
+        </div>
+        <div class="project-info-container">
+            <h3>Project Info</h3>
+            <div class="project-info">
+                <div class="project-name">
+                    <label for="project-name">Project Name:</label>
+                    <input type="text" id="project-name">
+                </div>
+                <div class="project-duration">
+                    <label for="duration15">Track Duration:</label>
+                    <input type="radio" name="duration" id="duration15" value="15" checked> 15 min
+                    <input type="radio" name="duration" id="duration20" value="20"> 20 min
+                </div>
+                <div class="colors-wrapper">
+                    <div>Project Color:</div>
+                    <div class="colors-container">
+                        <div class="blue color-box selected">Blue</div>
+                        <div class="yellow color-box">Yellow</div>
+                        <div class="red color-box">Red</div>
+                        <div class="green color-box">Green</div>
+                        <div class="black color-box">Black</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-render-container">
+            <div class="projects-container">
+                <h3>Saved Projects</h3>
+                <div class="projects">
+                </div>
+            </div>
+            <div class="saving-bar-container">
+                <h3>Save Progress:</h3>
+                <div class="saving-bar">
+                    <div class="saving-element"></div>
+                </div>
+            </div>
+        </div>
+        <div class="preview-container">
+            <h3>Preview</h3>
+            <div class="preview"></div>
+        </div>
+    </section>
+    <section class="editing-section">
+        <div class="editing-bar-container">
+            <h4 class="editing-bar-tag">T2</h4>
+            <div id="track-2" class="editing-bar"></div>
+        </div>
+        <div class="editing-bar-container">
+            <h4 class="editing-bar-tag">T1</h4>
+            <div id="track-1" class="editing-bar"></div>
+        </div>
+    </section>
+    <section class="buttons-sections">
+        <button class="movie-btn" id="delete-btn">Delete Element</button>
+        <button class="movie-btn" id="save-project-btn">Save Project</button>
+        <button class="movie-btn" id="delete-all-projects-btn">Delete all Projects</button>
+    </section>
+</main>
+
+
+<script>
+
+    //Вашиот код тука
+    //Не заборавајте да ги отстраните hard-code-ираните елементи од страницата
+
+    //Класа со која е преставен root фолдерот
+    class RootFolder
+    {
+        //Фолдерите во root фолдерот
+        folders;
+
+        //Конструктор на класата
+        constructor(jsonFolders)
+        {
+            this.folders = {};
+            for (const jsonFolder of jsonFolders)
+            {
+                //Од секој JSON формат на фолдер се креира инстанца од класата Folder
+                this.folders[jsonFolder.folderId] = new Folder(jsonFolder);
+            }
+        }
+
+        // Функција со која се враќа фолдерот со наведен фолдер id
+        getFolderWithId(folderId)
+        {
+            return this.folders[folderId];
+        }
+    }
+
+    // Класата со која е претставен еден фолдер во рамите на root фолдерот
+    class Folder
+    {
+        folderName;
+        folderId;
+        files;
+
+        //Конструктор со кој се креира инстанца од даден JSON формат на фолдер
+        constructor(jsonFolder)
+        {
+            this.folderName = jsonFolder.folderName;
+            this.folderId = jsonFolder.folderId;
+            this.files = {};
+
+            // Create MovieFile objects for each file in the folder
+            // За секој JSON фајл во фолдерот, се креира инстанца од класата MovieFile
+            jsonFolder.files.forEach(fileJson =>
+            {
+                this.files[fileJson.fileName] = new MovieFile(fileJson);
+            });
+        }
+
+        // Функција која враќа фалј во фолдерот со наведено име
+        getFileByFileName(fileName)
+        {
+            return this.files[fileName];
+        }
+
+        // Функција со која се добива HTML форматот за визуелно претставување на еден фолдер
+        getHTMLFormat()
+        {
+            return `<div class="folder hover-element" data-folder-id="${this.folderId}">${this.folderName}</div>`;
+        }
+
+        // Функција со која визуелно се претставува еден фолдер на страницата
+        renderFolder()
+        {
+            ui.filesElement.innerHTML = "";
+            for (const fileName in this.files)
+            {
+                const file = this.files[fileName];
+                ui.filesElement.innerHTML += file.getHTMLFormat();
+            }
+
+
+            //Додавање на евенти за секој фајл од фолдерот
+            ui.addEventsForFiles();
+        }
+
+    }
+
+    // Класата со која е претставен еден фајл
+    class MovieFile
+    {
+        fileName;
+        thumbnailURL;
+        previewURL;
+        duration;
+
+        //Конструктор на класата
+        constructor(jsonMovieFile)
+        {
+            this.fileName = jsonMovieFile.fileName;
+            this.thumbnailURL = jsonMovieFile.thumbnailURL;
+            this.previewURL = jsonMovieFile.previewURL;
+            this.duration = jsonMovieFile.duration;
+        }
+
+        // Функција со која се добива HTML форматот за визуелно претставување на еден фајл
+
+        getHTMLFormat()
+        {
+            return `<div style="background-image: url(${this.thumbnailURL})" class="file hover-element" title="${this.fileName}">${this.fileName}</div>`;
+        }
+
+
+        //Функција со која се добива HTML елементот со кој е претставен еден фајл којшто е поставен на лентата за едитирање
+        getEditingFileElement(percentage)
+        {
+            const editingFileElement = document.createElement("div");
+            editingFileElement.style.backgroundImage = `url(${this.previewURL})`;
+            editingFileElement.style.width = percentage + "%";
+            editingFileElement.textContent = this.fileName;
+            editingFileElement.classList.add('movie-clip');
+
+            return editingFileElement;
+        }
+    }
+
+    // Класа со која е претставен еден проект
+    class Project
+    {
+        projectFiles;
+        projectName;
+        projectColor
+
+        // Конструктор на класата
+        constructor(projectFiles, projectName, projectColor)
+        {
+            this.projectFiles = [];
+            projectFiles.forEach(file =>
+            {
+                //За секоја од фајловите креираме инстанца од MovieFile
+                this.projectFiles.push(new MovieFile(file))
+            })
+            this.projectColor = projectColor;
+            this.projectName = projectName;
+        }
+
+        // Функција со која се добива HTML форматот за визуелно претставување на еден проект
+        getHTMLFormat()
+        {
+            return `<div title="${this.projectName}" class="project hover-element ${this.projectColor}">${this.projectName}</div>`;
+        }
+    }
+
+    // Класа во која се групирани активните елементи на апликацијата
+    class Active
+    {
+        //За секој елемент потребни се две променливе:
+        //Во едната е сместен елементот логички (JavaScript ентитет)
+        //Во другата е сместен самиот активен HTML елемент
+        folder;
+        folderElement;
+
+        file;
+        fileElement;
+
+        project;
+        projectElement;
+
+        editingFile;
+        editingFileElement;
+
+        color
+        colorElement
+
+        constructor()
+        {
+            this.folderElement = null;
+            this.fileElement = null;
+            this.projectElement = null;
+            this.editingFileElement = null;
+            this.colorElement = null;
+        }
+
+        //Функција со која наведен елемент се прави активен
+        //active => логичкиот елемент
+        //element => HTML елементот
+        //activeId (string) => за кој логички елемент од класата станува збор
+        //elementId (string) => за кој HTML елемент од класата станува збор
+        activate(active, element, activeId)
+        {
+            const elementId = activeId + "Element";
+            if (this[elementId] !== null)
+            {
+                this[elementId].classList.remove('selected');
+            }
+            this[activeId] = active;
+            this[elementId] = element;
+            this[elementId].classList.add('selected');
+        }
+
+        // Функција со која се деактивираат сите уредувачки фајлови
+        // Уредувачки фајл === фајл којшто е поставен на лентата за едитирање
+        deActiveAllEditingFiles()
+        {
+            this.editingFile = null;
+            this.editingFileElement = null;
+            ui.previewElement.style.backgroundImage = "url()";
+
+        }
+
+        //Функција со која се деактивираат сите активни проекти
+        deActiveAllProjects()
+        {
+            this.project = null;
+            this.projectElement = null;
+            const allProjectElements = document.querySelectorAll(".project");
+
+            // Remove the 'selected' class from all project elements
+            // Отстранување на класата „selected“, за визуелно да се деактивираат сите проекти
+            allProjectElements.forEach(projectElement =>
+            {
+                projectElement.classList.remove("selected");
+            });
+        }
+    }
+
+    // Класа со која е претставена една едитирачка лента од апликацијата
+    class TrackHandler
+    {
+        //Времетраењето на лентата
+        duration;
+        //Фајловите коишто се поставени на лентата
+        track1Clips;
+
+        //Конструктор на класата
+        constructor()
+        {
+            this.duration = 15;
+            this.track1Clips = [];
+        }
+
+        // Функција со која се додава фајл на наведената трака
+        addFileToTrack(file, trackElement)
+        {
+            const totalDurationOfEditingFiles = this.getTotalDurationOfEditingFiles();
+
+            //Соодветна валидација
+            if (totalDurationOfEditingFiles + (file.duration / 60) > this.duration)
+            {
+                alert("There is not enough space on the editing bar to add that file")
+                return null;
+            }
+
+            const fileDuration = file.duration;
+            const percentage = (100 * fileDuration) / (this.duration * 60);
+
+            // HTML елементот за уредувачкиот фајл
+            const editingFileElement = file.getEditingFileElement(percentage);
+
+            //Визуелно додавање на фајлот на лентата
+            trackElement.appendChild(editingFileElement);
+
+            //Логичко додавање на фајлот на лентата
+            this.track1Clips.push(file);
+
+            //Дефинирање што треба да се случи при клкик на новододадениот фајл на лентата
+            editingFileElement.addEventListener("click", (e) =>
+            {
+                //Бидејќи самата лента има одредени eventListeners
+                //потребно е да се наведе дека при клкик на фајл,
+                // којшто гледано во однос на HTML, се наоѓа во лентата,
+                // како нејзино дета, кликот не треба да пропагира (да се пренеси) и на самата лента
+                e.stopPropagation();
+
+                active.activate(file, editingFileElement, 'editingFile');
+                ui.renderPreviewImage();
+            })
+
+            return editingFileElement;
+        }
+
+        //Функција со која се отстранува фајл од наведена лента
+        removeFileFromTrack(file, fileElement, trackElement)
+        {
+            let flag = true;
+
+            //Filter функцијата ќе ги пропушти сите фајлови коишто се различни од наведениот фајл,
+            //но бидејќи на лентата може еден фајл да се појави повеќе пати, затоа е потребен и флаг-от
+            this.track1Clips = this.track1Clips
+                .filter(editingFile =>
+                {
+                    if (editingFile === file && flag)
+                    {
+                        flag = false;
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                });
+
+            //Визуелно отсранување на фајлот од лентата
+            trackElement.removeChild(fileElement);
+
+            //По отсранување на фајл потребно е да се деактивираат сите уредувачки фајлови
+            active.deActiveAllEditingFiles();
+        }
+
+        // Функција со која се ресетираат лентита за уредување
+        clearTracks()
+        {
+            this.track1Clips = [];
+            ui.tracks.track1.innerHTML = '';
+        }
+
+        // Функција со која се добива вкупното времетраење на уредувачките фајлови во минути
+        getTotalDurationOfEditingFiles()
+        {
+            const totalDuration = this.track1Clips.reduce((acc, file) => acc + file.duration, 0);
+            return totalDuration / 60;
+        }
+
+        //Функција со која се променува времетраењето на лентата за едитирање
+        changeTrackDuration(newDuration)
+        {
+            const oldDuration = this.duration;
+            if (newDuration == oldDuration) return;
+            this.duration = newDuration;
+
+            //Потребна валидација: Доколку со новото времетраење, нема доволно простор на лентата за уредувачките фајлови,
+            //се спречува промена на времетраењето на лентата
+            if (!projectHandler.checkTrackDuration(trackHandler.track1Clips))
+            {
+                this.duration = oldDuration;
+                return false;
+            }
+
+            //Низа од HTML елементите на сите уредувачки фајлови
+            const editingFilesElements = ui.tracks.track1.querySelectorAll(".movie-clip");
+
+            //Промена на нивната ширина според новопресметаниот процент
+            for (let i = 0; i < this.track1Clips.length; i++)
+            {
+                const editingFile = this.track1Clips[i];
+                const editingFilesElement = editingFilesElements[i];
+                const durationInSeconds = editingFile.duration;
+                const percentage = (100 * durationInSeconds) / (this.duration * 60);
+                editingFilesElement.style.width = percentage + "%";
+            }
+            return true;
+        }
+    }
+
+    // Класа која се справува со проектите на апликацијата
+    class ProjectHandler
+    {
+        //Низа од сите зачувани проекти
+        projects;
+
+        //Константата за која се намалува времето за рендер на еден проект
+        static RENDER_TIME_REDUCE_FACTOR = 100;
+
+        //Конструктор на класата
+        constructor()
+        {
+            this.projects = [];
+        }
+
+        // Функција со која се проект
+        saveProject()
+        {
+            const projectName = ui.projectInfoElement.projectNameElement.value;
+
+            //Потребна валидација
+            if (!projectName)
+            {
+                alert("Input Project Name");
+                return;
+            }
+
+            const totalDuration = trackHandler.getTotalDurationOfEditingFiles() * 60;
+
+            //Времето потребно за рендер
+            const renderTime = totalDuration / ProjectHandler.RENDER_TIME_REDUCE_FACTOR;
+
+
+            //Анимирање на прогресионата лента
+            ui.saveProgressElement.style.transition = `all ${renderTime}s linear`
+            ui.saveProgressElement.classList.add("start-loading");
+
+
+            //Откако времето за рендер ќе истече, проектот се зачувува
+            setTimeout(() =>
+            {
+                //Анимирање на прогресионата лента
+                ui.saveProgressElement.style.transition = `all 0s linear`
+                ui.saveProgressElement.classList.remove("start-loading");
+
+                //Креирање на нова Project инстанца
+                const newProject = new Project(trackHandler.track1Clips, projectName, active.color);
+
+                //Додавање на новиот проект во низата со проекти
+                this.projects.push(newProject);
+
+                //Визуелно прикажување на новиот проект
+                ui.renderProject(newProject)
+
+                //Акции што треба да се случат откако еден проект ќе се зачува:
+
+                //Ресетирање на лентите
+                trackHandler.clearTracks();
+
+                //Ресетирање на input полето за име на проектот
+                ui.projectInfoElement.projectNameElement.value = "";
+
+                //Деактивирање на сите уредувачки фајлови
+                active.deActiveAllEditingFiles();
+
+                //Зачувување на проектот во local storage
+                localStorage.setItem("projects", JSON.stringify(projectHandler.projects));
+
+            }, renderTime * 1000)
+
+        }
+
+        // Вчитување на наведен проект
+        loadProject(activeProject)
+        {
+            //Додавање на секој фајл, од проектот, на лента
+            activeProject.projectFiles.forEach(file =>
+            {
+                trackHandler.addFileToTrack(file, ui.tracks.track1);
+            });
+
+            //Активирање на последиот фајл од проектот
+            const lastEditingFile = activeProject.projectFiles[activeProject.projectFiles.length - 1];
+            const lastEditingFileElements = document.querySelectorAll(".movie-clip");
+            active.activate(lastEditingFile, lastEditingFileElements[lastEditingFileElements.length - 1], 'editingFile');
+
+            //Вчитување на preview сликата на активниот уредувачки фајл
+            ui.renderPreviewImage();
+        }
+
+        // Функција која враќа проект според наведеното име
+        getProjectByName(projectName)
+        {
+            for (const project of this.projects)
+            {
+                if (project.projectName === projectName)
+                {
+                    return project;
+                }
+            }
+            return null;
+        }
+
+        //Функција која проверува дали наведената низа со фајлови може да се вчита на едитирачката лента
+        //т.е. дали вкупното времетраење на фајловите е помало или еднакво со времетраењето на лентата
+        checkTrackDuration(filesArray)
+        {
+            let totalDuration = 0;
+            for (let i = 0; i < filesArray.length; i++)
+            {
+                const editingFile = filesArray[i];
+                const durationInSeconds = editingFile.duration;
+
+                if (totalDuration + durationInSeconds / 60 > trackHandler.duration)
+                {
+                    alert("The selected file is longer then the track duration. Please change the track duration");
+                    return false;
+                }
+                totalDuration += durationInSeconds / 60;
+            }
+            return true;
+        }
+    }
+
+    // Класа во која се обединети сите UI елементи од апликацијата
+    class UI
+    {
+        foldersElement;
+        filesElement;
+        projectInfoElement;
+        savedProjectElement;
+        saveProgressElement;
+        previewElement;
+        tracks;
+        buttons;
+
+        //Конструктор во кој се прави соодветно селектирање на елементите од HTML-от
+        constructor()
+        {
+            this.foldersElement = document.querySelector(".folders");
+            this.filesElement = document.querySelector(".files");
+
+            const projectNameElement = document.querySelector("#project-name");
+            const duration15Element = document.querySelector("#duration15");
+            const duration20Element = document.querySelector("#duration20");
+            const colorsElementArray = document.querySelectorAll(".color-box");
+            this.projectInfoElement = {
+                projectNameElement, duration15Element, duration20Element, colorsElementArray
+            };
+
+            this.savedProjectElement = document.querySelector(".projects");
+            this.previewElement = document.querySelector(".preview");
+            this.saveProgressElement = document.querySelector(".saving-element")
+
+            const track1 = document.querySelector("#track-1");
+            this.tracks = {
+                track1
+            };
+
+            const deleteElementButton = document.querySelector("#delete-btn");
+            const saveProjectButton = document.querySelector("#save-project-btn");
+            const deleteAllProjectsButton = document.querySelector("#delete-all-projects-btn");
+            this.buttons = {
+                deleteElementButton, saveProjectButton, deleteAllProjectsButton
+            };
+
+            this.addEventsForTrack();
+            this.addEventsForButtons();
+            this.addEventsForRadioButton();
+            this.addEventsForColor();
+        }
+
+        // Дефинирање што се случува при клик на лентата за едитирање
+        addEventsForTrack()
+        {
+            const trackElement = this.tracks.track1;
+            trackElement.addEventListener("click", () =>
+            {
+                const activeFileElement = trackHandler.addFileToTrack(active.file, trackElement);
+                if (!activeFileElement) return;
+                active.deActiveAllProjects();
+                active.activate(active.file, activeFileElement, 'editingFile');
+                ui.renderPreviewImage();
+            });
+        }
+
+        // Дефинирање што се случува при клик на секој од фолдерите
+        addEventsForFolders()
+        {
+            const folderElements = document.querySelectorAll(".folder");
+            for (const folderElement of folderElements)
+            {
+                folderElement.addEventListener("click", () =>
+                {
+                    const folderId = folderElement.dataset.folderId;
+                    const activeFolder = rootFolder.getFolderWithId(folderId);
+                    active.activate(activeFolder, folderElement, 'folder');
+                    activeFolder.renderFolder();
+                });
+            }
+        }
+
+        // Дефинирање што се случува при клик на секој од фајловите
+        addEventsForFiles()
+        {
+            const filesElement = document.querySelectorAll(".file");
+
+            for (const fileElement of filesElement)
+            {
+                fileElement.addEventListener("click", () =>
+                {
+                    const activeFile = active.folder.getFileByFileName(fileElement.innerText);
+                    active.activate(activeFile, fileElement, 'file');
+                });
+            }
+        }
+
+        // Дефинирање што прави секое копче од апликацијата
+        addEventsForButtons()
+        {
+            //Копче за зачувување на проектот
+            this.buttons.saveProjectButton.addEventListener("click", () =>
+            {
+                projectHandler.saveProject();
+                active.deActiveAllProjects();
+            });
+
+            //Копче за бришење на активен уредувачки фајл
+            this.buttons.deleteElementButton.addEventListener("click", () =>
+            {
+                trackHandler.removeFileFromTrack(active.editingFile, active.editingFileElement, ui.tracks.track1);
+            })
+
+            //Копче за бришење на сите зачувани проекти
+            this.buttons.deleteAllProjectsButton.addEventListener("click", () =>
+            {
+                if (projectHandler.projects.length === 0) return;
+
+                if (!confirm("Do you wish to delete all projects?")) return;
+
+                localStorage.removeItem("projects");
+                projectHandler.projects = [];
+                ui.savedProjectElement.innerHTML = "";
+            })
+
+        }
+
+        // Дефинирање што се случува при клик на секој од проектите
+        addEventsForProjects()
+        {
+            //Низата со сите HTML елементи за проекти
+            const projectElements = document.querySelectorAll(".project");
+
+            for (const projectElement of projectElements)
+            {
+                projectElement.addEventListener("click", () =>
+                {
+                    //Проверки дали даден проект може да се вчита на лентата за едитирање
+
+                    //Проверка дали на лентата има некои веќе вчитани фајлови
+                    if (trackHandler.track1Clips.length !== 0)
+                    {
+                        const answer = confirm("There are files on T1. Do you wish to discard them?");
+                        if (!answer) return;
+                    }
+
+                    //Проверка дали времетраењето на проектот е помало или еднакво од времетраењето на траката
+                    const activeProject = projectHandler.getProjectByName(projectElement.innerText);
+                    if (!projectHandler.checkTrackDuration(activeProject.projectFiles)) return;
+
+                    //Ресетирање на траката
+                    trackHandler.clearTracks();
+
+                    //Активирање и вчитување на проектот
+                    active.activate(activeProject, projectElement, 'project');
+                    projectHandler.loadProject(activeProject);
+                });
+            }
+        }
+
+        //Дефинирање што се случува при клик на радио копчињата за времетраење на лентата
+        addEventsForRadioButton()
+        {
+            this.projectInfoElement.duration15Element.addEventListener("click", () =>
+            {
+                if (!trackHandler.changeTrackDuration(15))
+                {
+                    this.projectInfoElement.duration20Element.checked = true;
+                }
+            })
+
+            this.projectInfoElement.duration20Element.addEventListener("click", () =>
+            {
+                trackHandler.changeTrackDuration(20);
+            })
+        }
+
+        //Дефинирање што се случува при клик на копчињата за боја на проект
+        addEventsForColor()
+        {
+            this.projectInfoElement.colorsElementArray.forEach(colorElement =>
+            {
+                colorElement.addEventListener("click", () =>
+                {
+                    active.activate(colorElement.textContent.toLowerCase(), colorElement, 'color')
+                })
+            })
+        }
+
+        //Визуелно вчитување на preview сликата од активниот уредувачки фајл
+        renderPreviewImage()
+        {
+            ui.previewElement.style.backgroundImage = `url(${active.editingFile.previewURL})`;
+        }
+
+        //Визуелно прикажување на наведен проект
+        renderProject(newProject)
+        {
+            ui.savedProjectElement.innerHTML += newProject.getHTMLFormat();
+            ui.addEventsForProjects();
+        }
+    }
+
+
+    // Оваа асинхрона функција ги вчитува податоците од специфицираната патека користејќи го Fetch API-то.
+    async function fetchData(pth)
+    {
+        try
+        {
+            // Обид да се вчитаат податоците од специфицираната патека.
+            const promise = await fetch(pth);
+            // Откако promise-от се исполни (resolve), парсирај го одговорот како JSON и врати го.
+            return promise.json();
+        } catch (e)
+        {
+            // Ако се појави грешка за време на вчитувањето или парсирањето, логирај ја гршката во конзолата.
+            console.error("Error:", e);
+        }
+    }
+
+    // Функција со која се прави почетно процесирање на root фолдерот
+    async function processRootFolder()
+    {
+        if (rootFolder == null)
+        {
+            //Преземање на податоците за root фолдерот од JSON - от
+            const jsonFolders = await fetchData("https://raw.githubusercontent.com/Itonkdong/JSON/main/root-folder.json");
+            rootFolder = new RootFolder(jsonFolders);
+        }
+
+        //Визуелно прикажување на секој фолдер на страницата
+        for (const folderId in rootFolder.folders)
+        {
+            ui.foldersElement.innerHTML += rootFolder.folders[folderId].getHTMLFormat();
+        }
+
+        ui.addEventsForFolders();
+    }
+
+    //Функција со која се вчитуваат сите проекти зачувани во local storage
+    function loadStoredProjects()
+    {
+        const storedProjects = localStorage.getItem("projects");
+        if (!storedProjects) return;
+
+        const projects = JSON.parse(storedProjects);
+
+        //За секој зачуван проект (во JSON формат) се креира инстанца од Project
+        projects.forEach(project =>
+        {
+            projectHandler.projects.push(new Project(project.projectFiles, project.projectName, project.projectColor))
+        })
+
+        //Визуелно прикажување на секој проект
+        projectHandler.projects.forEach(project =>
+        {
+            ui.renderProject(project);
+        })
+    }
+
+    // Креирање инстанцци од UI, Active, TrackHandler, and ProjectHandler
+    const ui = new UI();
+    const active = new Active();
+    const trackHandler = new TrackHandler();
+    const projectHandler = new ProjectHandler();
+
+    let rootFolder = null;
+
+    // Повик кон соодветните функции
+    processRootFolder();
+    loadStoredProjects();
+
+    //При вчитување на страницата, сината боја за проект е автоматски селектирана
+    active.activate('blue', document.querySelector(".blue"), 'color');
+
+
+</script>
+</body>
+</html>

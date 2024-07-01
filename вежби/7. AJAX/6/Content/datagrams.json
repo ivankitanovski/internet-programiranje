@@ -1,0 +1,68 @@
+[
+  {
+    "version": 4,
+    "headerLength": 20,
+    "totalLength": 80,
+    "timeToLive": 5,
+    "protocol": "TCP",
+    "headerChecksum": "0xABCD",
+    "sourceIP": "192.168.30.10",
+    "destinationIP": "192.168.1.10",
+    "payload": "Hello, RouterX"
+  },
+  {
+    "version": 4,
+    "headerLength": 20,
+    "totalLength": 120,
+    "timeToLive": 8,
+    "protocol": "UDP",
+    "headerChecksum": "0x5678",
+    "sourceIP": "192.168.40.20",
+    "destinationIP": "192.168.1.20",
+    "payload": "Greetings!!!"
+  },
+  {
+    "version": 4,
+    "headerLength": 20,
+    "totalLength": 100,
+    "timeToLive": 10,
+    "protocol": "ICMP",
+    "headerChecksum": "0x1234",
+    "sourceIP": "192.168.50.30",
+    "destinationIP": "192.168.1.30",
+    "payload": "ICMP Test"
+  },
+  {
+    "version": 4,
+    "headerLength": 20,
+    "totalLength": 150,
+    "timeToLive": 7,
+    "protocol": "TCP",
+    "headerChecksum": "0x89AB",
+    "sourceIP": "192.168.60.10",
+    "destinationIP": "192.168.1.20",
+    "payload": "Data transfer"
+  },
+  {
+    "version": 4,
+    "headerLength": 20,
+    "totalLength": 200,
+    "timeToLive": 9,
+    "protocol": "UDP",
+    "headerChecksum": "0xCD12",
+    "sourceIP": "192.168.70.20",
+    "destinationIP": "192.168.1.10",
+    "payload": "Request for UDP"
+  },
+  {
+    "version": 4,
+    "headerLength": 20,
+    "totalLength": 180,
+    "timeToLive": 1,
+    "protocol": "ICMP",
+    "headerChecksum": "0x6789",
+    "sourceIP": "192.168.80.30",
+    "destinationIP": "192.168.1.30",
+    "payload": "Discarded Datagram"
+  }
+]
