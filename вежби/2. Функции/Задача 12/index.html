@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Множење броеви</title>
+</head>
+<body>
+<script>
+    function multiply(a, b) {
+        return a * b
+    }
+
+    let a = parseInt(prompt("Прв Број:"))
+    let b = parseInt(prompt("Втор Број:"))
+    if (isNaN(a)) alert("Внесете цел број за вредноста на а.")
+    if (isNaN(b)) alert("Внесете цел број за вредноста на б.")
+    alert(multiply(a, b))
+</script>
+</body>
+</html>

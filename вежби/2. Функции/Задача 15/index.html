@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Промена на модел на автомобил</title>
+</head>
+<body>
+<script>
+    function changeModel(object, new_M){
+        object.Model = new_M // ова ќе ја смени вредноста на моделот на автомобилот
+        object = null // ова нема да направи ништо. Зошто?
+    }
+
+    const Car = {
+        brand: "VolksWagen",
+        Model: "Polo",
+        Year: "2001"
+    }
+
+    new_model = prompt("Внесете име на новиот модел:")
+    alert('Стариот модел: ' + Car.Model)
+    changeModel(Car, new_model)
+    alert('Новиот модел: ' + Car.Model)
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>John Doe</title>
+</head>
+<body>
+<script>
+    function createPerson(name = 'Џон', surname = 'Доу', age = 40){
+        alert(`Здраво јас сум ${name} ${surname} и имам ${age} години.`)
+    }
+
+    let name = prompt("Внесете име:")
+    let surname = prompt("Внесете презиме:")
+    let age = parseInt(prompt("Внесете возраст:"))
+    if (name!=='' && surname !== '' && !isNaN(age)){
+        createPerson(name, surname, age)
+    }else{
+        createPerson()
+    }
+
+</script>
+</body>
+</html>

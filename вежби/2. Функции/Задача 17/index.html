@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сума на сите аргументи</title>
+</head>
+<body>
+<script>
+    function sumAll(){
+        let sum = 0
+        for (let i = 0; i < arguments.length; i++) {
+            sum += arguments[i]
+        }
+        return sum
+    }
+
+    alert('Сума: ' + sumAll(1, 2, 4, 5))
+
+</script>
+</body>
+</html>

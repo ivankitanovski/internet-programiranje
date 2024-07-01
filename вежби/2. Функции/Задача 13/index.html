@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Име на функција</title>
+</head>
+<body>
+<script>
+    alert("Име на непознатата функција: " + nameOfUnknownFunction())
+    function nameOfUnknownFunction(){
+        return knownFunction()
+    }
+
+    function knownFunction(){
+        return arguments.callee.name
+    }
+</script>
+</body>
+</html>
