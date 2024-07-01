@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аритметички израз</title>
+  <style>
+    .block {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      display: inline-block;
+      border: 1px solid black;
+      padding: 5px;
+      text-align: center;
+    }
+
+    #resultBlock {
+      background-color: lightblue;
+    }
+
+    #inputs {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="inputs">
+  <label for="blockDropdown1">Блок 1:</label>
+  <select id="blockDropdown1">
+    <option value="block1">Блок 1</option>
+    <option value="block2">Блок 2</option>
+    <option value="block3">Блок 3</option>
+    <option value="block4">Блок 4</option>
+    <option value="block5">Блок 5</option>
+    <option value="block6">Блок 6</option>
+  </select>
+
+  <label for="operationDropdown">Операција:</label>
+  <select id="operationDropdown">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+  </select>
+
+  <label for="blockDropdown2">Блок 2:</label>
+  <select id="blockDropdown2">
+    <option value="block1">Блок 1</option>
+    <option value="block2">Блок 2</option>
+    <option value="block3">Блок 3</option>
+    <option value="block4">Блок 4</option>
+    <option value="block5">Блок 5</option>
+    <option value="block6">Блок 6</option>
+  </select>
+
+  <button onclick="calculate()">Пресметај</button>
+</div>
+
+<!-- Blocks with random numbers -->
+<div id="blocks">
+  <div id="block1" class="block">5</div>
+  <div id="block2" class="block">10</div>
+  <div id="block3" class="block">15</div>
+  <div id="block4" class="block">20</div>
+  <div id="block5" class="block">25</div>
+  <div id="block6" class="block">30</div>
+</div>
+
+<div id="resultBlock" class="block"></div>
+
+<script>
+  function calculate() {
+    var block1 = document.getElementById(document.getElementById("blockDropdown1").value).textContent;
+    var block2 = document.getElementById(document.getElementById("blockDropdown2").value).textContent;
+    var operation = document.getElementById("operationDropdown").value;
+
+    var result;
+    switch (operation) {
+      case '+':
+        result = parseInt(block1) + parseInt(block2);
+        break;
+      case '-':
+        result = parseInt(block1) - parseInt(block2);
+        break;
+      case '*':
+        result = parseInt(block1) * parseInt(block2);
+        break;
+      case '/':
+        result = parseInt(block1) / parseInt(block2);
+        break;
+      default:
+        result = "Невалидна операција";
+    }
+
+    document.getElementById("resultBlock").textContent = result;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Белешки</title>
+  <style>
+    #notes-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .note {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .delete-btn {
+      float: right;
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="notes-container">
+  <h2>Add a Note</h2>
+  <form id="note-form">
+    <label for="note-subject">Subject:</label><br>
+    <input type="text" id="note-subject" required><br>
+    <label for="note-body">Body:</label><br>
+    <textarea id="note-body" rows="4" required></textarea><br>
+    <button type="submit">Add Note</button>
+  </form>
+
+  <div id="notes-list"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const noteForm = document.getElementById('note-form');
+    const notesList = document.getElementById('notes-list');
+
+    noteForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const subject = document.getElementById('note-subject').value;
+      const body = document.getElementById('note-body').value;
+
+      if (subject.trim() === '' || body.trim() === '') {
+        alert('Please fill in both subject and body.');
+        return;
+      }
+
+      const note = createNoteElement(subject, body);
+      notesList.appendChild(note);
+
+      noteForm.reset();
+    });
+
+    function createNoteElement(subject, body) {
+      const noteDiv = document.createElement('div');
+      noteDiv.className = 'note';
+
+      const subjectHeading = document.createElement('h3');
+      subjectHeading.textContent = subject;
+      noteDiv.appendChild(subjectHeading);
+
+      const bodyPara = document.createElement('p');
+      bodyPara.textContent = body;
+      noteDiv.appendChild(bodyPara);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', function() {
+        noteDiv.remove();
+      });
+      noteDiv.appendChild(deleteBtn);
+
+      return noteDiv;
+    }
+  });
+</script>
+
+</body>
+</html>

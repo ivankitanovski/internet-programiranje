@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Табела</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: lightgray;
+        }
+        .selected-column td {
+            background-color: lightyellow;
+        }
+    </style>
+</head>
+<body>
+
+<select id="columnDropdown">
+    <option value="1">Колона 1</option>
+    <option value="2">Колона 2</option>
+    <option value="3">Колона 3</option>
+    <option value="4">Колона 4</option>
+    <option value="5">Колона 5</option>
+</select>
+
+<button onclick="doubleColumn()">Дуплирај Колона</button>
+
+<table id="myTable">
+    <thead>
+    <tr>
+        <th>Колона 1</th>
+        <th>Колона 2</th>
+        <th>Колона 3</th>
+        <th>Колона 4</th>
+        <th>Колона 5</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td>14</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+        <td>19</td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>21</td>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function doubleColumn() {
+        var colNum = parseInt(document.getElementById("columnDropdown").value);
+        var table = document.getElementById("myTable");
+        for (var i = 0; i < table.rows.length; i++) {
+            if (i !== 0) {
+                var cell = table.rows[i].cells[colNum - 1];
+                var cellValue = parseInt(cell.textContent);
+                cell.textContent = cellValue * 2;
+            }
+        }
+        var allColumns = document.querySelectorAll("td:nth-child(" + colNum + ")");
+        allColumns.forEach(function(column) {
+            column.style.backgroundColor = "lightyellow";
+        });
+    }
+</script>
+
+</body>
+</html>
