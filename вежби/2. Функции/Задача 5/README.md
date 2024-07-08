@@ -1,0 +1,2 @@
+- Function that takes in two values: upperBound, lowerBound. And generates a random number between those two values.
+- Потребно е да направите функција која прима два аргументи: upperBound, lowerBound. Потоа функцијата треба да изгенерира случен број меѓу тие две вредности.

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Palindrome Check</title>
+    <script>
+      function isPalindrome(lineData) {
+        let chars = lineData.split("");
+        let numChars = chars.length;
+        for (let i = 0; i < chars.length / 2; i++) {
+          if (chars[i] !== chars[numChars - 1 - i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>How Dirty is a Word?</title>
+    <script>
+      //Решение еден се базира на ASCII кодот на сите карактери кои се предвидени како можен влез.
+      function dirtyPercent_charCode(word) {
+        //Иницијализираме две променливи за број на букви и број на други карактери на 0.
+        let numLetters = 0;
+        let numOther = 0;
+        for (let i = 0; i < word.length; i++) {
+          //Во charCode ја земаме ASCII вредноста на карактерот на моменталната вредност на i
+          let charCode = word.charCodeAt(i);
+          //Користејќи ги ASCII вредностите за карактерите меѓу 65 - 97 и 97 - 122 (А - Z и a - z) соодветно, ја инкрементираме соодветната променлива
+          if (
+            (charCode >= 65 && charCode <= 90) ||
+            (charCode >= 97 && charCode <= 122)
+          ) {
+            numLetters++;
+          } else {
+            numOther++;
+          }
+        }
+        //За крај едноставно пресметуваме процент и користиме .toFixed(2) за да го одредиме бројот на децимали
+        console.log(
+          "Dirty percent is : " + ((numOther / word.length) * 100).toFixed(2),
+        );
+      }
+
+      //Второто решение користи regex (Regular Expression) за да провери дали моменталниот карактер "се совпаѓа" со regex-от
+      function dirtyPercent_regex(word) {
+        //Користиме сличен принцип како задача 2 и го делиме зборот во карактери.
+        let chars = word.split("");
+        let numLetters = 0;
+        let numOther = 0;
+        for (let i = 0; i < chars.length; i++) {
+          if (chars[i].match(/[a-zA-Z]/)) {
+            numLetters++;
+          } else {
+            numOther++;
+          }
+        }
+        //За крај едноставно пресметуваме процент и користиме .toFixed(2) за да го одредиме бројот на децимали
+        console.log(
+          "Dirty percent is : " + ((numOther / word.length) * 100).toFixed(2),
+        );
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

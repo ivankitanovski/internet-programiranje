@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Check Bracket Format</title>
+    <script>
+      //Едноставно решение со бројачи
+      function checkBracketFormat(line) {
+        let numOpen = 0;
+        let numClosed = 0;
+        let chars = line.split("");
+        for (let i = 0; i < chars.length; i++) {
+          if (chars[i] === "(") numOpen++;
+          else if (chars[i] === ")") numClosed++;
+        }
+        if (numOpen === numClosed)
+          console.log("The brackets are formatted correctly");
+        else console.log("The brackets are NOT formatted correctly");
+      }
+
+      //Решение со .pop() и .push() - Логика на стек
+      function checkBracketFormatStack(line) {
+        let chars = line.split("");
+        let stack = [];
+        for (let i = 0; i < chars.length; i++) {
+          let currChar = chars[i];
+          if (currChar === "(") stack.push(currChar);
+          if (currChar === ")") {
+            let otherChar = stack.pop();
+            if (otherChar !== "(") return false;
+          }
+        }
+        return stack.length === 0;
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

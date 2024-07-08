@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coin Flip</title>
+    <style>
+      p {
+        display: inline-block;
+        margin-right: 15px;
+      }
+
+      label {
+        font-weight: 400;
+        font-family: Arial, serif;
+        display: block;
+        font-size: 15px;
+        margin-bottom: 10px;
+      }
+
+      .number_of_times {
+        display: block;
+        font-weight: 600;
+        font-family: Arial, serif;
+        font-size: 25px;
+      }
+
+      button {
+        display: block;
+        margin-top: 15px;
+        font-size: 25px;
+      }
+    </style>
+    <script>
+      let Favor = 50;
+      let times_tails = 0,
+        times_heads = 0;
+
+      function boringCoinFlip(times_to_flip) {
+        Favor = document.getElementById("favor_setter").value;
+        if (Favor > 100) {
+          Favor = 100;
+          document.getElementById("favor_setter").value = "100";
+        }
+        while (times_to_flip !== 0) {
+          let num = generateRandomNumber(1, 100);
+          //Доколку бројот е поголем од предноста кој му ја даваме
+          //во процент, тогаш имаме петка, во спротивно глава.
+          if (num > Favor) {
+            let toChange = document.getElementById("times_tails");
+            toChange.innerText = (++times_tails).toString();
+          } else {
+            let toChange = document.getElementById("times_heads");
+            toChange.innerText = (++times_heads).toString();
+          }
+          times_to_flip--;
+        }
+      }
+
+      function generateRandomNumber(lowerBound, upperBound) {
+        let range = upperBound - lowerBound + 1;
+        return Math.floor(Math.random() * range) + lowerBound;
+      }
+
+      function reset() {
+        times_heads = 0;
+        times_tails = 0;
+        let toChange = document.getElementById("times_tails");
+        toChange.innerText = "0";
+        toChange = document.getElementById("times_heads");
+        toChange.innerText = "0";
+      }
+    </script>
+  </head>
+  <body>
+    <label for="favor_setter"> Set the unfair advantage to get heads</label>
+    <input type="number" id="favor_setter" min="1" max="100" value="50" />
+    <div>
+      <p class="number_of_times">
+        Number of times head: <span class="counter" id="times_heads">0</span>
+      </p>
+      <p class="number_of_times">
+        Number of times tails: <span class="counter" id="times_tails">0</span>
+      </p>
+    </div>
+    <button onclick="boringCoinFlip(1)">Flip coin once</button>
+    <button onclick="boringCoinFlip(100)">Flip coin 100 times</button>
+    <button onclick="boringCoinFlip(10000)">Flip coin 10000 times</button>
+    <button onclick="reset()">Reset</button>
+    <div id="add_content_here"></div>
+  </body>
+</html>

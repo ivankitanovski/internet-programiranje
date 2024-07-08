@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Count Vowels</title>
+    <script>
+      //Иницијализираме низа со сите самогласки
+      let vowels = ["a", "e", "i", "o", "u"];
+      function countVowels(input) {
+        //Прво мора за 'input' да го претвориме во низа од карактери
+        let chars = input.toLowerCase().split("");
+        //Иницијализираме бројач
+        let counter = 0;
+        for (let i = 0; i < chars.length; i++) {
+          //Користејќи готовата метода .includes провервуаме дали моменталниот
+          // карактер се наоѓа во низата на самогласки
+          if (vowels.includes(chars[i])) counter++;
+        }
+        return counter;
+      }
+      /**Забешека! - Поради користењето на " " наместо ' ' всушност и во chars и во vowels чуваме
+       * низа од стрингови кои се направени од еден карактер, а не конкретно примитивниот тип char. */
+    </script>
+  </head>
+  <body></body>
+</html>

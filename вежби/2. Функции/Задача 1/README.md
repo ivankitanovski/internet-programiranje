@@ -1,0 +1,2 @@
+- Function that takes in a natural number form 'window.prompt' input, and checks if number is divisible by 6.
+- Направете функција што за природен број внесен преку window.prompt, ќе провери дали е делив со 6.

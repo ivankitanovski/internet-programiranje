@@ -1,0 +1,2 @@
+- Function which checks if a word is a palindrome.
+- Направете функција што проверува дали даден стринг е палиндром.

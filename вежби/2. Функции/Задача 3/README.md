@@ -1,0 +1,2 @@
+- Function that calculate how "dirty" words in a string are. To calculate how dirty a word is we use percent and count how many chars aren't letters.
+- Направете функција што проверува колку некој збор е валкан. За да пресметате колку е валкан збор користиме порценти, поточно проверуаме колку од карактерите не се букви.

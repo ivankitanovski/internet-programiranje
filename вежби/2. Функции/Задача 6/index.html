@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Shapes Generator</title>
+    <script>
+      function generate() {
+        let newDiv = document.createElement("div");
+
+        newDiv.setAttribute("class", "special");
+
+        newDiv.style.backgroundColor =
+          "rgb(" +
+          getRandomColor() +
+          "," +
+          getRandomColor() +
+          ", " +
+          getRandomColor() +
+          ")";
+
+        console.log(newDiv);
+
+        let shape = getRandomShape();
+
+        let valid;
+        switch (shape) {
+          case 1:
+            //Square
+            valid = getRandomHeight();
+            newDiv.style.height = valid + "px";
+            newDiv.style.width = valid + "px";
+            break;
+          case 2:
+            //Circle
+            valid = getRandomHeight();
+            newDiv.style.height = valid + "px";
+            newDiv.style.width = valid + "px";
+            newDiv.style.borderRadius = 3000 + "px";
+            break;
+          case 3:
+            //Rectangle
+            newDiv.style.height = getRandomHeight() + "px";
+            newDiv.style.width = getRandomWidth() + "px";
+            break;
+          case 4:
+            //Triangle
+            valid = getRandomHeight().toFixed(0);
+            newDiv.style.backgroundColor = "white";
+            newDiv.style.width = "0px";
+            newDiv.style.height = "0px";
+            newDiv.style.borderRight =
+              (valid / 2).toFixed(0) + "px solid transparent";
+            newDiv.style.borderLeft =
+              (valid / 2).toFixed(0) + "px solid transparent";
+            newDiv.style.borderBottom =
+              valid +
+              "px solid rgb(" +
+              getRandomColor() +
+              "," +
+              getRandomColor() +
+              ", " +
+              getRandomColor() +
+              ")";
+            break;
+        }
+        console.log(newDiv);
+
+        newDiv.setAttribute("class", "special");
+
+        let toAppend = document.getElementById("place_to_add");
+        console.log(toAppend);
+        toAppend.append(newDiv);
+      }
+
+      //Како што е кажано во задачата вие треба само да имплементирате функциите кои даваат случајни вредности во зависност од што се бара вие само ја повикувате generateRandomNumber(lowerBound, upperBound) со соодветните потребни граници.
+
+      function getRandomWidth() {
+        return generateRandomNumber(0, 300);
+      }
+
+      function getRandomHeight() {
+        return generateRandomNumber(0, 300);
+      }
+
+      function getRandomShape() {
+        return generateRandomNumber(1, 4);
+      }
+
+      function getRandomColor() {
+        return generateRandomNumber(0, 255);
+      }
+      //Копија на функцијата од Задача 5
+      function generateRandomNumber(lowerBound, upperBound) {
+        let range = upperBound - lowerBound + 1;
+        return Math.floor(Math.random() * range) + lowerBound;
+      }
+    </script>
+    <style>
+      #generate_button {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: deepskyblue;
+        border: none;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        transition:
+          background-color 0.3s,
+          transform 0.2s;
+      }
+
+      #generate_button:hover {
+        background-color: dodgerblue;
+        transform: scale(1.05);
+      }
+
+      #generate_button:active {
+        background-color: royalblue;
+        transform: scale(0.95);
+      }
+
+      .special {
+        display: inline-block;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="generate_button" class="button" onclick="generate()">
+      Generate
+    </button>
+    <div id="place_to_add"></div>
+  </body>
+</html>
