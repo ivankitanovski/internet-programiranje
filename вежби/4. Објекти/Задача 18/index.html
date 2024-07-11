@@ -1,0 +1,52 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script type="text/javascript">
+    class Employee {
+        constructor(name, age, plata) {
+            this.name = name;
+            this.age = age;
+            this.plata = plata;
+        }
+
+        getDetails() {
+            return `Име: ${this.name}, Возраст: ${this.age}, Плата: ${this.plata}`;
+        }
+    }
+
+    class Manager extends Employee {
+        constructor(name, age, plata, oddel) {
+            super(name, age, plata);
+            this.oddel = oddel;
+        }
+
+        getDetails() {
+            return `Име: ${this.name}, Возраст: ${this.age}, Плата: ${this.plata}, Оддел: ${this.oddel}`;
+        }
+    }
+
+    class Developer extends Employee {
+        constructor(name, age, plata, programskiJazik, godiniIskustvo) {
+            super(name, age, plata);
+            this.programskiJazik = programskiJazik;
+            this.godiniIskustvo = godiniIskustvo;
+        }
+
+        getDetails() {
+            return `Име: ${this.name}, Возраст: ${this.age}, Плата: ${this.plata}, Програмски јазик: ${this.programskiJazik}, Години искуство: ${this.godiniIskustvo}`;
+        }
+    }
+
+    // Create instances of each class
+    const emp = new Employee("John Doe", 30, 50000);
+    const mgr = new Manager("Jane Smith", 45, 90000, "Marketing");
+    const dev = new Developer("Emily Davis", 25, 70000, "JavaScript", 3);
+
+    console.log(emp.getDetails());
+    console.log(mgr.getDetails());
+    console.log(dev.getDetails());
+</script>
+</body>
+</html>

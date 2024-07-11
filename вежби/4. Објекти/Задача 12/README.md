@@ -1,0 +1,44 @@
+# Задача
+
+Да се напише програма која ќе сортира низа објекти според бројот на атрибути што го имаат, враќајќи 2 вредности: прво сортирана низата од најмногу до најмалку атрибути а втората обратно.
+
+![img](img/screenshot.png)
+
+# Решение
+
+```html
+<!doctype html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<script type="text/javascript">
+  function sortSporedBrojNaAtributi(objects) {
+    // Се користи built-in sort функција, користејќи ја должината на листата на keys
+    // од секој објект што всушност ни го дава бројот на атрибути на објектите.
+    const sortedObjects = [...objects].sort((a, b) => {
+      const countA = Object.keys(a).length;
+      const countB = Object.keys(b).length;
+      return countB - countA;
+    });
+    // Се создава копија од sortedObjects, и се повикува built-in reverse функција,
+    // правејќи ја низата да е во спротивен редослед.
+    const reversedObjects = [...sortedObjects].reverse();
+    // Се враќаат двете вредности
+    return [sortedObjects, reversedObjects];
+  }
+
+  const obj1 = { a: 1, b: 2, c: 3 };
+  const obj2 = { a: 1 };
+  const obj3 = { a: 1, b: 2 };
+  const obj4 = { a: 1, b: 2, c: 3, d: 4 };
+
+  const objects = [obj1, obj2, obj3, obj4];
+
+  var [sortiranaNiza1, sortiranaNiza2] = sortSporedBrojNaAtributi(objects);
+  console.log(sortiranaNiza1);
+  console.log(sortiranaNiza2);
+</script>
+</body>
+</html>
+```
