@@ -1,0 +1,76 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script type="text/javascript">
+    // Се дефинира класата Book
+    class Book {
+        constructor(title, author, year) {
+            this.title = title;
+            this.author = author;
+            this.year = year;
+        }
+    }
+
+    // Се дефинира класата Shelf
+    class Shelf {
+        constructor() {
+            this.books = [];
+        }
+        // Ја користиме built-in функцијата push за да ги додадеме на низата од
+        // Book објекти
+        addBook(book) {
+            this.books.push(book);
+        }
+        // Ја користиме built-in функцијата push за да го најдеме соодветниот
+        // Book објект
+        findBookByTitle(title) {
+            return this.books.find(book => book.title === title);
+        }
+        // Итерираме низ сите Book објекти и печатиме нивните атрибути
+        displayBooks() {
+            this.books.forEach(book => {
+                console.log(`"${book.title}" - ${book.author}, ${book.year}`);
+            });
+        }
+        // Ја користиме built-in функцијата sort и дефинираме критериумите
+        // според вредноста на type аргументот.
+        sortBooks(type) {
+            switch(type) {
+                case 1:
+                    console.log(`Книги сортирани според нивниот наслов.`);
+                    this.books.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 2:
+                    console.log(`Книги сортирани според нивниот автор.`);
+                    this.books.sort((a, b) => a.author.localeCompare(b.author));
+                    break;
+                case 3:
+                    console.log(`Книги сортирани според годината на издавање.`);
+                    this.books.sort((a, b) => a.year - b.year);
+                    break;
+                default:
+                    return;
+            }
+            this.displayBooks();
+        }
+    }
+    // Иницијализираме Shelf објект и го користиме методот addBook() за да
+    // го пополниме со Book објекти.
+    const shelf = new Shelf();
+    shelf.addBook(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
+    shelf.addBook(new Book("1984", "George Orwell", 1949));
+    shelf.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
+    // Го тестираме displayBooks() методот.
+    shelf.displayBooks();
+    // Го тестираме findBookByTitle() методот.
+    const book = shelf.findBookByTitle("The Great Gatsby");
+        console.log(`\n"Книгата е најдена: ${book.title}" - ${book.author}, ${book.year}`);
+    // Ги тестираме сите sort криериуми.
+    shelf.sortBooks(1);
+    shelf.sortBooks(2);
+    shelf.sortBooks(3);
+</script>
+</body>
+</html>
