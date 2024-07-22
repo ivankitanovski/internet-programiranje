@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      let str = prompt("Внесете стринг:").toLowerCase().split(" ");
+      for (let i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+      }
+      alert("Стрингот форматиран со Title case е: " + str.join(" "));
+    </script>
+  </body>
+</html>
