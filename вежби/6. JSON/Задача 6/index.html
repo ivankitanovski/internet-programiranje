@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+        * {
+            font-family: 'Arial';
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 800px;
+            text-align: center;
+        }
+        .btn {
+            background-color: #425336;
+            padding: 10px 30px;
+            cursor: pointer;
+            color: white;
+            border: 0;
+            outline: 0;
+        }
+        .quote_wrapper {
+            background-color: #ad9567;
+            color: white;
+            padding: 20px 0;
+            margin-top: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <button onclick="generateQuote()" class="btn">Generate Quote</button>
+        <div class="quote_wrapper">
+            <p id="quote"></p>
+            <p id="author"></p>
+        </div>
+    </section>
+    <script>
+        let quotesData = [];
+        document.querySelector(".quote_wrapper").style.display = "none";
+
+        //превземање на податоците преку API повик
+        function fetchData() { 
+            fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/quotes.json`)
+            .then((response) => response.json())
+            .then((result) => quotesData = result)
+            .catch((error) => console.log(error))
+        }
+
+        //генерирање на нов цитат
+        function generateQuote() {
+            document.querySelector(".quote_wrapper").style.display = "block";
+            let randomNumber = Math.floor(Math.random() * 32) + 1;
+            document.getElementById("quote").innerHTML = quotesData[randomNumber].quote;
+            document.getElementById("author").innerHTML = "- " + quotesData[randomNumber].author + " - ";
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>

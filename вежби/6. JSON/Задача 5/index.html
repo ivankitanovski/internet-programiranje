@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+        * {
+            font-family: 'Arial';
+        }
+        p {
+            margin: 0;
+        }
+        .login_form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        input, select {
+            padding: 8px 16px;
+        }
+        .btn {
+            background-color: #425336;
+            padding: 10px 32px;
+            border: 0;
+            outline: 0;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+        #employeesInfo_container {
+            margin-top: 20px;
+        }
+        #employeesInfo_container > div > div {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .employee_container {
+            background-color: #e6e6e6;
+            border: 2px solid #979797;
+            margin-bottom: 12px;
+        }
+        .employee_name {
+            background-color: #eb6f33;
+            padding: 6px 18px;
+            color: white
+        }
+        .employee_role {
+            background-color: #1fb4ce;
+            padding: 6px 18px;
+            color: white;
+        }
+        .employee_tasks {
+            background-color: #495057;
+            padding: 8px 18px;
+            color: white;
+        }
+        .not_finished {
+            color: #9d112c;
+            font-weight: bold;
+        }
+        .completed {
+            color: #3bb77e;
+            font-weight: bold;
+        }
+        .employee_wrapper {
+            background-color: #6e7bd9;
+            padding: 20px;
+            color: white;
+        }
+
+        .employee_wrapper > button {
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <section class="login_form">
+        <div>
+            <input placeholder="Enter Your Username" id="usernameInput"/>
+            <input placeholder="Enter Your Password" type="password" id="passwordInput"/>
+            <button onclick="logIn()" class="btn">Log In</button>
+        </div>
+    </section>
+
+    <section id="manager_dashboard">
+        <h3>Manager</h3>
+        <select id="employeesOptions"></select>
+        <input placeholder="Task Description" id="taskDescriptionInput"/>
+        <button onclick="setTask()" class="btn">Set Task!</button>
+        <div id="employeesInfo_container"></div>
+    </section>
+
+    <section id="employee_dashboard">
+        <h1>Employee</h1>
+        <div id="tasks_container"></div>
+    </section>
+
+    <script>
+        document.querySelector('#manager_dashboard').style.display = "none";
+        document.querySelector('#employee_dashboard').style.display = "none";
+
+        //асинхрона функција за превземање на податоците од API линк
+        async function fetchData() {
+            await fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/employeeTasks.json`)
+            .then((response) => response.json())
+            .then((result) => { 
+                localStorage.setItem("employeesInfo", JSON.stringify(result));
+                let employeesOptions = document.querySelector("#employeesOptions");
+                result.forEach((element) => {
+                    employeesOptions.innerHTML += `<option value="${element.id}">${element.name}</option>`
+                })
+            });
+        }
+
+        //најава на корисник
+        function logIn() {
+            let usernameValue = document.getElementById("usernameInput").value;
+            let passwordValue = document.getElementById("passwordInput").value;
+            let usersData = getLocalData("employeesInfo");
+            let user;
+                usersData.forEach(element => {
+                    if(usernameValue === element.username && passwordValue === element.password) {
+                        user = element;
+                        return;
+                    }
+                });
+            if(user !== undefined) {
+                localStorage.setItem("userInfo", JSON.stringify(user));
+                showDashboard(user);
+            }
+            else {
+                alert("Wrong Username or Password!");
+            }
+        }
+
+        //приказ на управувачкиот панел во зависност од најавениот корисник
+        function showDashboard(user) {
+            if(user.role === "Manager") {
+                document.querySelector('#manager_dashboard').style.display = "block";
+                document.querySelector('#employee_dashboard').style.display = "none";
+                handleManagerDashboard();
+            }
+            else {
+                document.querySelector('#employee_dashboard').style.display = "block";
+                document.querySelector('#manager_dashboard').style.display = "none";
+                handleEmployeeDashboard(user);
+            }
+        }
+
+        //приказ на податоците соодветни за Менаџерот
+        function handleManagerDashboard() {
+            let employeesInfoContainer = document.querySelector("#employeesInfo_container");
+            employeesInfoContainer.innerHTML = "";
+            let employeesInfo = getLocalData("employeesInfo");
+            employeesInfo.forEach((element) => {
+                employeesInfoContainer.innerHTML += `
+                    <div class="employee_container">
+                        <div>
+                            <h4 class="employee_name">Employee Name: <span>${element.name}</span></h4>
+                            <h4 class="employee_role">Employee Role: <span>${element.role}</span></h4>
+                        </div>
+                        <div>
+                            ${element.task.map(task => `<div class="employee_tasks"><p>${task.description} ${checkTask(task.isFinished)}</p></div>`).join('')}
+                        </div>
+                    </div>
+                `;
+            })
+        }
+
+        //соодветен приказ на работната задача во однос дали таа е завршена или не
+        function checkTask(isFinished) {
+           return isFinished ? `<span class="completed">Completed</span>` : `<span class="not_finished">Not Finished</span>`;
+        }
+
+        //приказ на работните задачи за вработениот
+        function handleEmployeeDashboard(user) {
+           let tasksContainer = document.querySelector("#tasks_container");
+           tasksContainer.innerHTML = "";
+           user.task.forEach((element) => {
+                tasksContainer.innerHTML += `
+                    <div class="employee_wrapper">
+                        <p>${element.description}</p>
+                        <button class="btn" onclick="completeTask(this, '${user.id}','${element.description}')">Complete</button>
+                    </div>
+                `
+           })
+        }
+
+        //прави одредена работна задача да биде завршена за вработениот
+        function completeTask(e, user_id, description) {
+            let employeesInfo = getLocalData("employeesInfo");
+            let findEmployee = employeesInfo.find((employee) => employee.id == user_id);
+            let findTask = findEmployee.task.find((task) => task.description == description);
+            findTask.isFinished = true;
+            localStorage.setItem("employeesInfo", JSON.stringify(employeesInfo));
+            e.disabled = true;
+        }
+
+        //доделува нова работна задача на нов вработен
+        function setTask() {
+            let employeeID = parseInt(document.getElementById("employeesOptions").value);
+            let taskDescription = document.getElementById("taskDescriptionInput").value;
+            let employeesInfo = getLocalData("employeesInfo");
+            let findEmployee = employeesInfo.find((employee) => employee.id === employeeID);
+            let newTask = {
+                "description": taskDescription,
+                "isFinished": false,
+            }
+            findEmployee.task.push(newTask);
+            console.log(findEmployee);
+            localStorage.setItem("employeesInfo", JSON.stringify(employeesInfo));
+            handleManagerDashboard();
+        }
+
+        //превземање на локални податоци
+        function getLocalData(param) {
+            return JSON.parse(localStorage.getItem(param));
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>

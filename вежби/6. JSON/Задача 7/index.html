@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        width: 800px;
+        display: flex;
+        flex-direction: column;
+        background-color: #83bcb8;
+        padding: 40px 0;
+        border-radius: 4px;
+        text-align: center;
+      }
+      input {
+        width: 50%;
+        text-align: center;
+        margin: auto;
+        padding: 6px 20px;
+        box-sizing: border-box;
+      }
+      button {
+        width: 50%;
+        margin: auto;
+        margin-top: 16px;
+        padding: 10px 16px;
+        background-color: #323232;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container">
+      <p>BANK SYSTEM</p>
+      <input placeholder="Account Sender Number" id="accountSenderNumberInput"/>
+      <input placeholder="Account Receiver Number" id="accountReceiverNumberInput"/>
+      <input placeholder="Account Owner" id="accountOwnerInput" />
+      <input placeholder="Account CVV" id="accountCVVInput" type="password" />
+      <input placeholder="Money" id="moneyInput" />
+      <button onclick="submitRequest()">Submit</button>
+    </section>
+
+    <script>
+      //превземање на податоци и зачувување на истите локално во пребарувачот
+      function fetchData() {
+        fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/bankAccounts.json`)
+          .then((response) => response.json())
+          .then((result) => localStorage.setItem("bankAccounts", JSON.stringify(result)))
+          .catch((error) => console.log(error));
+      }
+
+      //поднесување на барање за трансакција со соодветни проверки за услови
+      function submitRequest() {
+        let accountsData = JSON.parse(localStorage.getItem("bankAccounts"));
+        let senderNumberValue = document.getElementById("accountSenderNumberInput").value;
+        let receiverNumberValue = document.getElementById("accountReceiverNumberInput").value;
+        let ownerValue = document.getElementById("accountOwnerInput").value;
+        let CVVValue = document.getElementById("accountCVVInput").value;
+        let moneyValue = document.getElementById("moneyInput").value;
+
+        if (
+          !senderNumberValue ||
+          !receiverNumberValue ||
+          !ownerValue ||
+          !CVVValue ||
+          !moneyValue
+        ) {
+          alert("Fill all fields!");
+          return;
+        }
+
+        if (senderNumberValue == receiverNumberValue) {
+          alert("You can't send to yourself!");
+          return;
+        }
+
+        if (moneyValue <= 0) {
+          alert("You can't send negative money!");
+          return;
+        }
+
+        let senderAccount = accountsData.find(
+          (element) =>
+            element.account == senderNumberValue &&
+            element.owner == ownerValue &&
+            element.CVV == CVVValue
+        );
+        let receiverAccount = accountsData.find(
+          (element) => element.account == receiverNumberValue
+        );
+
+        if (!senderAccount) {
+          alert("Wrong details!");
+        } else {
+          senderAccount.balance = senderAccount.balance - parseInt(moneyValue);
+          receiverAccount.balance = receiverAccount.balance + parseInt(moneyValue);
+          localStorage.setItem("bankAccounts", JSON.stringify(accountsData));
+          alert("Success!");
+          resetValues();
+        }
+      }
+
+      //ресетирање на вредности откако ќе се изврши трансакцијата
+      function resetValues() {
+        document.getElementById("accountSenderNumberInput").value = "";
+        document.getElementById("accountReceiverNumberInput").value = "";
+        document.getElementById("accountOwnerInput").value = "";
+        document.getElementById("accountCVVInput").value = "";
+        document.getElementById("moneyInput").value = "";
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

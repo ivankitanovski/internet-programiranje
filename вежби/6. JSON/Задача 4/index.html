@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+        * {
+            font-family: 'Arial';
+        }
+        .modal {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%;
+        }
+        .btn {
+            outline: 0;
+            border: 0;
+            color: white;
+            padding: 10px 40px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .topRight {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+        }
+        .title {
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .cars_container > div, .cars_top{
+            display: flex;
+            justify-content: space-around;
+            background-color: #323232;
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+        .cars_container > div > p, .cars_top > p {
+            flex: 1;
+        }
+        .primaryBg {
+            background-color: #153641;
+        }
+        .secondaryBg {
+            background-color: #4caf50;
+        }
+        input {
+            padding: 6px 12px;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0 0 20px 0;
+            border: 1px solid #153641;
+        }
+        .all_cars_table td, .for_rent_table td{
+            background-color: #323232;
+            color: white;
+            padding: 6px 20px;
+            text-align: center;
+        }
+        .d-flex {
+            display: flex;
+        }
+        .d-flex > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="toHide">
+        <h3 class="title">Rent A Car</h3>
+        <button onclick="showForm()" class="btn topRight primaryBg">Log In</button>
+        <div class="cars_top primaryBg">
+            <p>Brand</p>
+            <p>Model</p>
+            <p>Year</p>
+            <p>Horsepower</p>
+            <p>Torque</p>
+            <p>Transmission</p>
+            <p>Fuel Type</p>
+            <p>Price</p>
+            <p></p>
+        </div>
+        <div class="cars_container">
+
+        </div>
+    </section>
+
+    <div class="modal toHide">
+        <input placeholder="Enter Your Name and Surname" id="rentOwnerInput"/>
+        <input placeholder="Enter Rent Time" id="rentTimeInput"/>
+        <button class="btn primaryBg" onclick="handleBack()">Go Back</button>
+        <button onclick="rentCar()" class="btn secondaryBg">Ask For Rent!</button>
+    </div>
+
+    <div class="login_container">
+        <h3>Log In Form</h3>
+        <input placeholder="Enter Username" id="usernameInput" value="Frenkie"/>
+        <input placeholder="Enter Password" id="passwordInput" type="password" value="frenKIE"/>
+        <button class="btn primaryBg" onclick="handleBack()">Go Back</button>
+        <button onclick="login()" class="btn secondaryBg">Log In</button>
+    </div>
+
+    <section class="admin_dashboard">
+        <h1>Dashboard</h1>
+        <button onclick="logOut()" class="btn primaryBg">Log Out</button>
+        <div class="d-flex">
+            <div class="all_cars_dashboard">
+                <h3>All Cars</h3>
+                 <table class="all_cars_table">
+                     <tr>
+                         <td>Car Code</td>
+                         <td>Is Rented</td>
+                         <td>Client</td>
+                         <td>Total Rent</td>
+                     </tr>
+                 </table>
+             </div>
+             <div class="for_rent_dashboard">
+                 <h3>Cars For Rent</h3>
+                 <table class="for_rent_table">
+                     <tr>
+                         <td>Car Code</td>
+                         <td>Client</td>
+                         <td>Time</td>
+                         <td></td>
+                     </tr>
+                 </table>
+             </div>
+        </div>
+    </section>
+
+    <script>
+
+        let carsForRent = getLocalData("carsForRent") || [];
+        document.querySelector(".login_container").style.display = "none";
+        document.querySelector(".admin_dashboard").style.display = "none";
+
+        //функција со GET API барање
+        function getData() {
+            fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/vehicles.json`)
+            .then((response) => response.json())
+            .then((result) => {
+                setLocalData("carsData", result)
+                result.forEach(car => {
+                    fillData(car)
+                });
+            })
+        }
+
+        //потполнување содржината со податоци
+        function fillData(carData){
+            let carBox = document.createElement("div");
+            let carDataProperties = ["brand", "model", "year", "horsepower", "torque", "transmission", "fuelType", "price"];
+            carDataProperties.forEach(property => {
+                carBox.appendChild(createParagraph(carData[property]));
+            });
+            let button = document.createElement("button");
+            button.innerHTML = "Rent This Car";
+            button.classList.add("secondaryBg", "btn");
+            button.addEventListener("click", () => showModal(carData.id, carData.code));
+            carData.isRented ? button.disabled = true :  button.disabled = false;
+            carBox.appendChild(button);
+            document.querySelector(".cars_container").appendChild(carBox);
+        }
+
+        //изнајмување на нов автомобил, податоците се зачувуваат локално во пребарувачот
+        function rentCar() {
+            let carID = parseInt(document.querySelector(".modal").getAttribute("car_id"));
+            let carCode = document.querySelector(".modal").getAttribute("car_code");
+            let rentOwner = document.getElementById("rentOwnerInput").value;
+            let rentTime = document.getElementById("rentTimeInput").value;
+            let newRent = {
+                owner: rentOwner,
+                time: rentTime,
+                car: carID,
+                code: carCode
+            }
+            carsForRent.push(newRent);
+            setLocalData("carsForRent", carsForRent)
+        }
+
+        //асинхрона функција за најава на корисник во системот за изнајмување на автомобили
+        async function login(){
+            let usersData;
+            await fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/users.json`)
+            .then((response) => response.json())
+            .then((result) => usersData = result);
+            let usernameValue = document.getElementById("usernameInput").value;
+            let passwordValue = document.getElementById("passwordInput").value;
+            let findUser = usersData.filter((user) => user.username === usernameValue && user.password === passwordValue);
+            findUser.length === 0 ? alert("Wrong username or password!") : showDashboardData();
+        }
+
+        //приказ на админ панелот на корисникот откако ќе се најави
+        function showDashboardData() {
+            document.querySelector(".login_container").style.display = "none";
+            document.querySelector(".admin_dashboard").style.display = "block";
+            let allCarsContainer = document.querySelector(".all_cars_table");
+            let forRentContainer = document.querySelector(".for_rent_table");
+            let carsData = getLocalData("carsData");
+            let forRentData = getLocalData("carsForRent");
+            allCarsContainer.innerHTML = "";
+            forRentContainer.innerHTML = "";
+            carsData.forEach(element => {
+                allCarsContainer.innerHTML += `
+                    <tr>
+                        <td>${element.code}</td>
+                        <td>${element.isRented}</td>
+                        <td>${element.rentOwner}</td>
+                        <td>${element.rentTotal}</td>
+                    </tr>
+                `
+            });
+
+            forRentData.forEach(element => {
+                forRentContainer.innerHTML += `
+                    <tr>
+                        <td>${element.code}</td>
+                        <td>${element.owner}</td>
+                        <td>${element.time}</td>
+                        <td><button onclick="approveRent('${element.code}', '${element.owner}')" class="btn secondaryBg">Approve</button></td>
+                    </tr>
+                `
+            })
+        }
+
+        //одобрување на соодветен автомобил за изнајмување
+        function approveRent(code, owner) {
+            let carsData = getLocalData("carsData");
+            let forRentData = getLocalData("carsForRent");
+            let findCar = carsData.find((car) =>  car.code === code);
+            let findRentCar = forRentData.find((car) => car.owner === owner && car.code === code);
+            forRentData = forRentData.filter((car) => car.owner !== owner || car.code !== code);
+            findCar.rentTotal = 0;
+            findCar.isRented = true;
+            findCar.rentOwner = findRentCar.owner;
+            findCar.rentTime = parseInt(findRentCar.time);
+            findCar.rentTotal = parseInt(findRentCar.time) * parseInt(findCar.price);
+            setLocalData("carsData", carsData);
+            setLocalData("carsForRent", forRentData);
+            showDashboardData();
+        }
+
+        //приказ на формата за логирање
+        function showForm() {
+            let hideElements = document.querySelectorAll(".toHide");
+            for(let i = 0; i < hideElements.length; i++) {
+                hideElements[i].style.display = "none";
+            }
+            document.querySelector(".login_container").style.display = "block";
+        }
+
+        //приказ на модалниот прозорец
+        function showModal(carID, code){
+            document.querySelector(".modal").style.display = "block";
+            document.querySelector(".modal").setAttribute("car_code", code);
+            document.querySelector(".modal").setAttribute("car_id", carID);
+            document.querySelector(".cars_container").style.display = "none";
+            document.querySelector(".cars_top").style.display = "none";
+        }
+
+        //креирање на нов параграф таг 
+        function createParagraph(text) {
+            let p = document.createElement("p");
+            p.innerHTML = text;
+            return p;
+        };
+
+        //превземање на локални податоци со даден param String
+        function getLocalData(param) {
+            return JSON.parse(localStorage.getItem(param));
+        }
+
+        //сетирање на локални податоци со даден param String и податоците што треба да се зачуват
+        function setLocalData(param, data) {
+            localStorage.setItem(param, JSON.stringify(data));
+        }
+
+        //одлогирање на корисникот
+        function logOut() {
+            document.querySelector(".admin_dashboard").style.display = "none";
+            document.querySelector(".toHide").style.display = "block";
+            document.querySelector(".cars_container").style.display = "block";
+        }
+
+        //навраќање наназад на корисникот
+        function handleBack() {
+            document.querySelector(".modal").style.display = "none";
+            document.querySelector(".admin_dashboard").style.display = "none";
+            document.querySelector(".login_container").style.display = "none";
+            document.querySelector(".toHide").style.display = "block";
+            document.querySelector(".cars_container").style.display = "block";
+            document.querySelector(".cars_top").style.display = "flex";
+        }
+
+        getData();
+    </script>
+</body>
+</html>
