@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+        * {
+            font-family: 'Arial';
+        }
+        .container {
+            width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+        }
+        .flights_container {
+            background-color: #f0e8dd;
+            color: white;
+            padding: 26px 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .flight_wrapper {
+            display: flex;
+            justify-content: space-around;
+            background-color: #153641;
+            gap: 6px;
+            padding: 0 12px;
+        }
+        .flight_info {
+            flex: 1;
+            background-color: #2374e1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        input {
+            padding: 8px 12px;
+        }
+        button {
+            background-color: #4a9691;
+            border: 0;
+            outline: 0;
+            padding: 10px 30px;
+            color: white;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <div class="input_container">
+            <input id="fromDestinationInput"/>
+            <input id="toDestinationInput"/>
+            <button onclick="searchFlight()">Search Flight</button>
+        </div>
+        <div class="flights_container"></div>
+    </section>
+    <script>
+
+        document.querySelector(".flights_container").style.display = "none";
+        
+        //асинхрона функција за пребарување на лет
+        async function searchFlight() {
+            let DATA;
+            await fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/destinations.json`)
+            .then((response) => response.json())
+            .then((result) => DATA = result)
+
+            let fromDestinationValue = document.getElementById("fromDestinationInput").value;
+            let toDestinationValue = document.getElementById("toDestinationInput").value;
+            let fromCity = DATA.find((element) => element.tag.toLowerCase() == fromDestinationValue.toLowerCase());
+            if(fromCity === undefined) { //летот од почетниот град не постои
+                alert("Flight is not found!");
+                return;
+            }
+            let toCity = fromCity.flights.filter((element) => element.tag.toLowerCase() == toDestinationValue.toLowerCase());
+            if(toCity.length === 0) { //летот од почетниот до дестинацискиот град не постои
+                alert("Flight is not found!");
+                return;
+            }
+            let flightsContainer = document.querySelector(".flights_container");
+            flightsContainer.style.display = "block";
+            flightsContainer.innerHTML = ""
+            toCity.map((element) => { //приказ на сите летови од почетниот до дестинацискиот град
+                flightsContainer.innerHTML += `
+                    <div class="flight_wrapper">
+                        <p class="flight_info">${fromCity.tag}</p>
+                        <p class="flight_info">${element.tag}</p>
+                        <p class="flight_info">${element.price}$</p>
+                        <p class="flight_info">${element.duration}</p>
+                        <p class="flight_info">${element.route}</p>
+                    </div>
+                `;
+            })
+        }
+    </script>
+</body>
+</html>

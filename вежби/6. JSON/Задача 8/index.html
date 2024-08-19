@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+        * {
+            font-family: 'Arial';
+        }
+        .album_thumbnail {
+            width: 120px;
+            height: 120px;
+        }
+        #albums_container > div {
+            background-color: #94a3b8;
+            text-align: center;
+            padding-top: 8px;
+        }
+        .album_wrapper {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            text-align: center;
+            background: #dba889;
+            padding: 20px;
+        }
+        .songs_wrapper {
+            display: flex;
+            gap: 20px;
+        }
+        .song_inner {
+            background-color: #feefea;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <div id="albums_container"></div>
+    </section>
+    <script>
+
+        //асинхрона функција за превземање на податоците и прикажување на екранот
+        async function fetchData() {
+            await fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/albums.json`)
+            .then((response) => response.json())
+            .then((result) => {
+                let container = document.getElementById("albums_container");
+                result.forEach((element) => {
+                    container.innerHTML += `
+                        <div>
+                            <h2>${element.artist}</h2>
+                            ${element.albums.map((album) => `
+                                    <div class="album_wrapper">
+                                        <div>
+                                        <img class="album_thumbnail" src="${album.thumbnail}"/>
+                                        <p>${album.name}</p>
+                                    </div>
+                                    <div class="songs_wrapper">
+                                        ${album.songs.map((item) => `<p class="song_inner">${item.name}</p>`).join("")}
+                                    </div>
+                                    </div>
+                                `).join("")}
+                        </div>`
+                })
+            });
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>

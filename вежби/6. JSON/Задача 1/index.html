@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+      li {
+        list-style-type: none;
+      }
+      .nav {
+        margin-top: 24px;
+      }
+      .nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .nav ul li {
+        border: 1px solid black;
+        padding: 8px 16px;
+        cursor: pointer;
+      }
+      table {
+        margin: auto;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      table th,
+      table td {
+        padding: 12px 20px;
+        border: 1px solid black;
+      }
+      .cancel_btn {
+        background-color: #9d112c;
+      }
+      .cancel_btn button,
+      .reviewed_btn button {
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+      }
+      .reviewed_btn {
+        background-color: #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <ul>
+        <li onclick="showAppointments(`all`)">Сите термини</li>
+        <li onclick="showAppointments(`canceled`)">Откажани термини</li>
+        <li onclick="showAppointments(`reviewed`)">Прегледани термини</li>
+      </ul>
+    </nav>
+
+    <section>
+      <div id="all_appointments_container">
+        <table id="all_appointments_table">
+          <tr>
+            <th>Име</th>
+            <th>Презиме</th>
+            <th>Болест</th>
+            <th>Доктор</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </table>
+      </div>
+      <div id="canceled_appointments_container">
+        <table id="canceled_appointments_table">
+          <tr>
+            <th>Име</th>
+            <th>Презиме</th>
+            <th>Болест</th>
+            <th>Доктор</th>
+          </tr>
+        </table>
+      </div>
+      <div id="reviewed_appointments_container">
+        <table id="reviewed_appointments_table">
+          <tr>
+            <th>Име</th>
+            <th>Презиме</th>
+            <th>Болест</th>
+            <th>Доктор</th>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <script>
+      showAppointments("all");
+      let canceledPatientsData = [];
+      let reviewedPatientsData = [];
+      let patientsData;
+
+      //функција која што прави GET повик до API
+      function getData() {
+        fetch(
+          "https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/patients.json"
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            patientsData = result;
+            let allAppointmentsTable = document.getElementById(
+              "all_appointments_table"
+            );
+            result.forEach((element) => {
+              allAppointmentsTable.innerHTML += `
+                    <tr id="${element.id}">
+                        <td>${element.name}</td>
+                        <td>${element.surname}</td>
+                        <td>${element.disease}</td>
+                        <td>${element.doctor}</td>
+                        <td class="cancel_btn"><button onclick="cancel(this)">Откажи</button></td>
+                        <td class="reviewed_btn"><button onclick="reviewed(this)">Прегледан</button></td>
+                    </tr>
+                    `;
+            });
+          })
+          .catch((error) => console.log(error));
+      }
+
+      //функција за откажување на терминот на пациентот
+      function cancel(patient) {
+        let patientID = findPatientID(patient);
+        let foundPatient = findPatient(patientID);
+        canceledPatientsData.push(foundPatient);
+        changeRowBackground(patient);
+        var row = getRow(patient);
+        var reviewedBtn = row.querySelector(".reviewed_btn button");
+        reviewedBtn.disabled = "true";
+        patient.disabled = "true";
+        let canceled_appointments_table = document.getElementById(
+          "canceled_appointments_table"
+        );
+        fillApointmentsTable(canceled_appointments_table, canceledPatientsData);
+      }
+
+      //функција за терминот на пациентот дека е прегледан
+      function reviewed(patient) {
+        let patientID = findPatientID(patient);
+        let foundPatient = findPatient(patientID);
+        reviewedPatientsData.push(foundPatient);
+        changeRowBackground(patient);
+        var row = getRow(patient);
+        var cancelBtn = row.querySelector(".cancel_btn button");
+        cancelBtn.disabled = "true";
+        patient.disabled = "true";
+        let reviewed_appointments_table = document.getElementById(
+          "reviewed_appointments_table"
+        );
+        fillApointmentsTable(reviewed_appointments_table, reviewedPatientsData);
+      }
+
+      //функција за приказ на податоците во табела
+      function fillApointmentsTable(table, data) {
+        table.innerHTML = `
+        <tr>
+              <th>Име</th>
+              <th>Презиме</th>
+              <th>Болест</th>
+              <th>Доктор</th>
+            </tr>
+        `;
+        data.forEach((element) => {
+          table.innerHTML += `
+                    <tr id="${element.id}">
+                        <td>${element.name}</td>
+                        <td>${element.surname}</td>
+                        <td>${element.disease}</td>
+                        <td>${element.doctor}</td>
+                    </tr>
+                    `;
+        });
+      }
+
+      //функција за наоѓање на соодветен пациент
+      function findPatient(patientID) {
+        return patientsData.filter((item) => item.id == patientID)[0];
+      }
+
+      //функција за наоѓање на ID-то на соодветен пациент
+      function findPatientID(patient) {
+        return patient.parentNode.parentNode.getAttribute("id");
+      }
+
+      //промена на позадинската боја
+      function changeRowBackground(patient) {
+        return (patient.parentNode.parentNode.style.background = "#cecece");
+      }
+
+      //превземање на редот каде што се наоѓа пациентот
+      function getRow(patient) {
+        return patient.parentNode.parentNode;
+      }
+
+      //манипулација со табелите
+      function showAppointments(type) {
+        if (type === "all") {
+          document.getElementById("all_appointments_container").style.display =
+            "block";
+          document.getElementById(
+            "canceled_appointments_container"
+          ).style.display = "none";
+          document.getElementById(
+            "reviewed_appointments_container"
+          ).style.display = "none";
+        } else if (type === "canceled") {
+          document.getElementById("all_appointments_container").style.display =
+            "none";
+          document.getElementById(
+            "canceled_appointments_container"
+          ).style.display = "block";
+          document.getElementById(
+            "reviewed_appointments_container"
+          ).style.display = "none";
+        } else {
+          document.getElementById("all_appointments_container").style.display =
+            "none";
+          document.getElementById(
+            "canceled_appointments_container"
+          ).style.display = "none";
+          document.getElementById(
+            "reviewed_appointments_container"
+          ).style.display = "block";
+        }
+      }
+
+      //повик до функцијата за превземање на податоци
+      getData();
+    </script>
+  </body>
+</html>

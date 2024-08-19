@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+        * {
+            font-family: 'Arial';
+        }
+        p {
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            border: 1px solid black;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        .cash_box {
+            border: 1px solid teal;
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: teal;
+            color: white;
+        }
+        .tables_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .table {
+            border: 1px solid black;
+            width: 300px;
+            margin-top: 20px;
+            padding: 20px 0;
+        }
+        .add_order_box {
+            background-color: antiquewhite;
+            padding: 20px 40px;
+        }
+        .table_order {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <div>
+            <div class="cash_box">
+                <p><span id="cashNumber">10000</span>den</p>
+            </div>
+            <h4>Management</h4>
+            <div class="tables_container"></div>
+        </div>
+       <div>
+            <div class="add_order_box">
+                <p>Table number: <select id="table_option"></select></p>
+                <p>Product: <select id="product_option"></select></p>
+                <p>Quantity: <input id="quantityInput"/></p>
+                <button onclick="addOrder()">Add Order</button>
+            </div>
+            <div class="order_box">
+                <p>Order List for Table number: <span id="orderList_number"></span></p>
+                <table class="table_order"></table>
+            </div>
+       </div>
+    </section>
+<script>
+        //функција со API повик и ги зачувува податоците локално во пребарувачот
+        function getData() {
+            fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/tables.json`)
+            .then((response) => response.json())
+            .then((result) => { localStorage.setItem("tables", JSON.stringify(result)); fillTables(result); fillOptions();})
+            .catch((error) => console.log(error));
+
+            fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/products.json`)
+            .then((response) => response.json())
+            .then((result) => localStorage.setItem("products", JSON.stringify(result)))
+            .catch((error) => console.log(error));
+        }
+
+        //потполнува табели со податоци
+        function fillTables(data) {
+            document.querySelector(".tables_container").innerHTML = "";
+            data.forEach(element => {
+                let tablesContainer = document.querySelector(".tables_container");
+                tablesContainer.innerHTML += `
+                    <div class="table" table_id=${element.id}>
+                        <p>Table Number: ${element.number}</p>
+                        <p>Chairs: ${element.chairs}</p>
+                        <p>Order Price: ${element.price}</p>
+                        <button onclick="viewOrder(this)">View Order</button>
+                    </div>`
+            });
+        }
+
+        //потполнува опции за селектирање со вредности
+        function fillOptions() {
+            let tablesOption = document.querySelector("#table_option");
+            let productsOption = document.querySelector("#product_option");
+            let tablesData = JSON.parse(localStorage.getItem("tables"));
+            let productsData = JSON.parse(localStorage.getItem("products"));
+            for(let table of tablesData) {
+                tablesOption.innerHTML += `<option value=${table.id}>${table.id}</option>`
+            }
+            for(let product of productsData) {
+                productsOption.innerHTML += `<option value=${product.id} price=${product.price}>${product.name}</option>`
+            }
+        }
+
+        //додавање на нарачка на соодветна маса
+        function addOrder() {
+            let tableID = document.querySelector("#table_option").value;
+            let productID = document.querySelector("#product_option").value;
+            let quantityValue = document.querySelector("#quantityInput").value;
+            let tablesData = JSON.parse(localStorage.getItem("tables"));
+            let productsData = JSON.parse(localStorage.getItem("products"));
+            let newData = productsData[productID - 1];
+            newData.quantity = parseInt(quantityValue);
+            let orderExist = tablesData[tableID - 1].order.find((order) => order.id == productID);
+            if(orderExist === undefined) {
+                tablesData[tableID - 1].order.push(newData);
+            }
+            else {
+                orderExist.quantity = parseInt(orderExist.quantity) + parseInt(quantityValue);
+            }
+            let totalPrice = 0;
+            tablesData[tableID - 1].order.map((order) => totalPrice = totalPrice + (order.price * order.quantity));
+            tablesData[tableID - 1].price = totalPrice;
+            localStorage.setItem("tables", JSON.stringify(tablesData));
+            fillTables(tablesData);
+        }
+
+        //приказ на нарачката за соодветна маса
+        function viewOrder(e) {
+            let tableID = e.parentNode.getAttribute("table_id");
+            let tablesData = JSON.parse(localStorage.getItem("tables"));
+            let productsData = tablesData[tableID - 1].order;
+            document.querySelector(".table_order").innerHTML = "";
+            let tableOrderContainer = document.querySelector(".table_order");
+            document.getElementById("orderList_number").innerHTML = tableID;
+            productsData.forEach((product) => (
+                tableOrderContainer.innerHTML += `
+                    <tr>
+                        <td>Name: ${product.name}
+                    </td>
+                    <td>
+                        Quantity: ${product.quantity}
+                        </td>
+                    </tr>
+                `   
+            ))
+            tableOrderContainer.innerHTML += `<button onclick="payOrder(${tableID - 1})">Pay order</button>`
+        }
+
+        //плаќање на нарачката за соодветна маса ID
+        function payOrder(tableID) {
+            let tablesData = JSON.parse(localStorage.getItem("tables"));
+            let cashNumber = parseInt(document.querySelector("#cashNumber").innerHTML)
+            document.querySelector("#cashNumber").innerHTML = cashNumber + tablesData[tableID].price;
+            tablesData[tableID].order = [];
+            tablesData[tableID].price = 0;
+            localStorage.setItem("tables", JSON.stringify(tablesData));
+            fillTables(tablesData);
+            document.querySelector(".table_order").innerHTML = "";
+            document.getElementById("orderList_number").innerHTML = "";
+        }
+
+        //повик до функцијата со GET API барање
+        getData();
+    </script>
+</body>
+</html>

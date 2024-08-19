@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Интернет програмирање на клиентска страна</title>
+    <style>
+      .container {
+        display: flex;
+        margin: 40px auto;
+        width: 1200px;
+        border: 1px solid black;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .all_matches_container,
+      .ticket_container {
+        flex-basis: 40%;
+        text-align: center;
+      }
+
+      .match {
+        border: 1px solid black;
+        padding: 20px 0;
+        margin-top: 12px;
+      }
+      .match > p {
+        display: inline-block;
+      }
+      .match_date {
+        display: block;
+      }
+      .quota_home {
+        background-color: #83bcb8;
+        margin-right: 12px;
+      }
+      .quota_away {
+        background-color: #405189;
+      }
+      .quota_x {
+        background-color: #425336;
+        margin-right: 12px;
+      }
+
+      .quota_away,
+      .quota_home,
+      .quota_x {
+        color: white;
+        padding: 8px 20px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+
+      select {
+        padding: 8px 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container">
+      <div class="all_matches_container">
+        <h4>Сите натпревари</h4>
+        <select onchange="sortMatches()" id="selectOption">
+          <option value="all">All</option>
+          <option value="England">England</option>
+          <option value="Spain">Spain</option>
+          <option value="Germany">Germany</option>
+          <option value="Italy">Italy</option>
+          <option value="France">France</option>
+        </select>
+        <div class="all_matches_wrapper">
+        </div>
+      </div>
+      <div class="ticket_container">
+        <h4>Одбрани натпревари</h4>
+        <div class="ticket_wrapper">
+        </div>
+        <div class="stake_box">
+            <p>Влог: <input id="stakeInput"/></p>
+            <button onclick="checkTicket()">Внеси тикет</button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let matchesData;
+      let selectedMatchesData = [];
+      document.querySelector(".stake_box").style.display = "none";
+
+      //функција со API повик
+      function getData() {
+        fetch(`https://raw.githubusercontent.com/kitanovskiviktor/IPKS/main/IPKS%20-%20JSON/footballMatches.json`)
+          .then((response) => response.json())
+          .then((result) => {
+            matchesData = result
+            fillData(result)
+           })
+          .catch((error) => console.log(error));
+      }
+
+      //сортирање на утакмиците според даден критериум
+      function sortMatches() {
+        let selectedOption = document.querySelector("#selectOption");
+        let selectedValue = selectedOption.value;
+        if(selectedValue != "all") {
+            let filterData = matchesData.filter((match) => match.league == selectedValue);
+            fillData(filterData);
+        }
+        else {
+            getData();
+       }
+      }
+
+      //приказ на податоците
+      function fillData(data) { 
+        document.querySelector(".all_matches_wrapper").innerHTML = "";
+        data.forEach(element => {
+            let allMatchesContainer = document.querySelector(".all_matches_wrapper");
+
+            let box = document.createElement("div");
+            box.classList.add("match");
+
+            let date = document.createElement("span");
+            date.innerHTML = element.date + " " + element.time;
+            date.classList.add("match_date");
+
+            let home = document.createElement("p");
+            home.innerHTML = element.home + " - ";
+
+            let away = document.createElement("p");
+            away.innerHTML = "- " + element.away;
+
+            let quotaContainer = document.createElement("div");
+
+            let quotaHome = document.createElement("button");
+            quotaHome.innerHTML = element.quota_home;
+            quotaHome.classList.add("quota_home");
+
+            let quotaAway = document.createElement("button");
+            quotaAway.innerHTML = element.quota_away;
+            quotaAway.classList.add("quota_away");
+
+            let quotaX = document.createElement("button");
+            quotaX.innerHTML = element.quota_x;
+            quotaX.classList.add("quota_x");
+
+            quotaAway.addEventListener("click", addMatch);
+            quotaX.addEventListener("click", addMatch);
+            quotaHome.addEventListener("click", addMatch);
+
+            quotaAway.setAttribute("type", "away");
+            quotaX.setAttribute("type", "x");
+            quotaHome.setAttribute("type", "home");
+
+            box.appendChild(date);
+            box.appendChild(home);
+            box.appendChild(away);
+            quotaContainer.appendChild(quotaHome);
+            quotaContainer.appendChild(quotaX);
+            quotaContainer.appendChild(quotaAway);
+            box.appendChild(quotaContainer);
+            box.setAttribute("id", element.id);
+            allMatchesContainer.appendChild(box);
+        });
+      }
+
+      //додавање на утакмица во тикетот
+      function addMatch(e) {
+        let matchID = e.target.parentNode.parentNode.getAttribute("id");
+        let findMatch = matchesData.find((match) => match.id == matchID);
+        let matchType = e.target.getAttribute("type");
+        findMatch.type = matchType;
+        selectedMatchesData = [...selectedMatchesData, findMatch];
+        document.querySelector(".stake_box").style.display = "block";
+        
+        let ticketWrapper = document.querySelector('.ticket_wrapper');
+
+        let box = document.createElement("div");
+        box.classList.add("match");
+
+        let date = document.createElement("span");
+        date.innerHTML = findMatch.date + " " + findMatch.time;
+        date.classList.add("match_date");
+
+        let home = document.createElement("p");
+        home.innerHTML = findMatch.home + " - ";
+
+        let away = document.createElement("p");
+        away.innerHTML = "- " + findMatch.away;
+
+        let type = document.createElement("div");
+        type.innerHTML = "Type: " + matchType;
+
+        box.appendChild(date);
+        box.appendChild(home);
+        box.appendChild(away);
+        box.appendChild(type);
+        ticketWrapper.appendChild(box);
+
+        let parent = e.target.parentNode.children;
+        for(let child of parent) { child.disabled = "true"; }
+      }
+
+      //проверка на тикетот
+      function checkTicket() {
+        let totalQuota = 0;
+        let stakeValue = document.getElementById("stakeInput").value;
+        if(!stakeValue || !parseFloat(stakeValue) || stakeValue <= 0) {
+            alert("Внесете соодветен влог!");
+            return;
+        }
+        for(let match of selectedMatchesData) {
+            let result = checkResult(match).split(" ");
+            let resultType = result[0];
+            let resultQuota = result[1];
+            if(resultType == match.type) {
+                totalQuota += parseFloat(resultQuota);
+            }
+            else {
+                alert("Тикетот не е добитен!");
+                return;
+            }
+        }
+        let totalProfit = parseFloat(stakeValue) * totalQuota;
+        alert("Честитки, тикетот е добитен!" + " " + totalProfit.toFixed(2) + "ден");
+        getData();
+        document.querySelector('.ticket_wrapper').innerHTML = "";
+        document.querySelector(".stake_box").style.display = "none";
+        document.getElementById("stakeInput").value = "";
+      }
+
+      //проверка на резултатот за дадена утакмица
+      function checkResult(match) {
+        let splitString = match.result.split("-");
+        let homeResult = parseInt(splitString[0]);
+        let awayResult = parseInt(splitString[1]);
+        if(homeResult > awayResult) {
+            return "home" + " " + match.quota_home;
+        }
+        else if(homeResult < awayResult) {
+            return "away" + " " + match.quota_away;
+        }
+        else {
+            return "x" + " " + match.quota_x;
+        }
+      }
+
+      //повик до функција
+      getData();
+    </script>
+  </body>
+</html>
